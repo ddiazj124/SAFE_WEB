@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroVisita.jsp">
+            <a class="nav-link" href="./registroCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
               <p>Mostrar Capacitaciones</p>
             </a>

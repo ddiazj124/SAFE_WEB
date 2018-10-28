@@ -22,7 +22,7 @@ public class Conexion {
     private Conexion(){
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "portaf", "portaf");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@safe.cntcrqqeguzf.us-east-2.rds.amazonaws.com:1521:orcl", "safe1", "safesafe");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
