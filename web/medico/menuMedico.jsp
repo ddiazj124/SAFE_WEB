@@ -60,7 +60,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarAtenciones.jsp">
+            <a class="nav-link" href="./buscarAtencionMedica.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Atencion</p>
             </a>
@@ -122,12 +122,12 @@
                     <i class="material-icons">content_copy</i>
                   </div>
                   <p class="card-category">Registro Atenciones</p>
-                  <h3 class="card-title"><a id="re" href="./registroAtenciones.jsp">Entrar</a>
+                  <h3 class="card-title"><a id="re" href="./listarAtenciones.jsp">Entrar</a>
                   </h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
+                    <a href="./buscarAtencionMedica.jspjsp"></a>
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@
                     <i class="material-icons">store</i>
                   </div>
                   <p class="card-category">Administrar Atenciones</p>
-                  <h3 class="card-title" href="./administrarAtenciones.jsp"><a href="./administrarAtenciones.jsp">Entrar</a></h3>
+                  <h3 class="card-title" href="./buscarAtencionMedica.jsp"><a href="./buscarAtencionMedica.jsp">Entrar</a></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">

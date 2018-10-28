@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class DAOAtencionMedica {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
+    private static String sql_buscar = "SELECT * FROM VISITA_MED WHERE ID_VISITA=? AND RUT_TRABAJADOR =? AND RUT_MEDICO = ?";
     
     
     private static Conexion objConn = Conexion.InstanciaConn();
@@ -45,6 +46,37 @@ public class DAOAtencionMedica {
             objConn.Cerrar();
         }
         return null;  
+    }
+    
+    public Atencion Buscar(int v_nvisita, String v_rutTrabajador, String v_rutMedico){
+        
+        PreparedStatement pst = null;
+        
+        Atencion a = new Atencion();
+        try {
+            pst = objConn.getConn().prepareStatement(sql_buscar);
+            
+            pst.setInt(1, v_nvisita);
+            pst.setString(2, v_rutTrabajador);
+            pst.setString(3, v_rutMedico);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                a = new Atencion(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado"),rs.getString("receta"));
+                return a;
+            }
+            else
+            {
+                return a;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOAtencionMedica.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        
+        return null;
     }
     
     

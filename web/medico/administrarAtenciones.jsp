@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarAtenciones.jsp">
+            <a class="nav-link" href="./buscarAtencionMedica.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Atencion</p>
             </a>
@@ -112,7 +112,7 @@
           </div>
         </div>
       </nav>
-      <jsp:include page="../ServMostrarAtenciones" flush="true"></jsp:include>
+      <jsp:include page="../ServBuscarAtencionMedica" flush="true"></jsp:include>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
@@ -126,53 +126,40 @@
                 <div class="card-body">
                     <form action="" method="post">
                     <div class="row">
-                        
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT EMPRESA</label>
-                           <select id="sRutEmpresa">
-                            <c:forEach items="${datosEmpresa}" var="u">
-                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                            </c:forEach>
-                           </select> 
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">FECHA</label>
-                           <input type="text" class="form-control" id="txtFechaExamen"> 
-                        </div>
-                      </div>
                       
                       
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label>
-                          
-                          <input type="text" class="form-control">
+                            <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
+                          <select id="sRutTrabajador" disabled>
+                            <c:forEach items="${datosAtencion}" var="u">
+                                <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
+                            </c:forEach>
+                           </select> 
                         </div>
                       </div>  
-                      
+                      <!--
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID VISITA</label>
                             <input type="text" class="form-control" id="txtIdVisita" disable>
                         </div>
                       </div>
-                      
+                      -->
                         
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">FECHA EXAMEN</label>
-                           <input type="text" class="form-control" id="txtFechaExamen"> 
+                          <label class="bmd-label-floating">FECHA VISITA</label>
+                          <c:forEach items="${datosAtencion}" var="u">
+                            <input type="text" class="form-control" text="${u.fecha_visita}" name="txtFechaVisita" id="txtFechaVisita">
+                           </c:forEach>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                             <label class="bmd-label-floating">RESULTADO</label>
+                             <label class="bmd-label-floating">DIAGNOSTICO</label>
                             <textarea rows="4" cols="50" id="txtResultado"></textarea> 
                             </div>
                         </div>  
@@ -182,6 +169,15 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">OBSERVACIONES</label>
                            <textarea rows="4" cols="50" id="txtObservaciones"></textarea> 
+                        </div>
+                      </div>
+                                            
+                    </div>
+                        <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">RECETA</label>
+                           <textarea rows="4" cols="50" id="txtReceta"></textarea> 
                         </div>
                       </div>
                                             

@@ -127,8 +127,8 @@
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Se ingreso Correctamente ¿Deseas Ingresar otro examen?</label>
-                          <a href="./administrarAtenciones.jsp">Ingresar Otra</a>                          
+                          <label class="bmd-label-floating">No se Encontraron los Datos Solicitados ¿Deseas Ingresar nuevamente?</label>
+                          <a href="./buscarAtencionMedica.jsp">Ingresar Otra</a>                          
                         </div>
                       </div>
                     </div>

@@ -1,10 +1,10 @@
 <%-- 
-    Document   : aministrarExamenes
-    Created on : 21-oct-2018, 22:22:28
+    Document   : administrarAtenciones
+    Created on : 21-oct-2018, 22:22:19
     Author     : Diego
 --%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -112,6 +112,7 @@
           </div>
         </div>
       </nav>
+      <jsp:include page="../ServMostrarTrabajador" flush="true"></jsp:include>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
@@ -119,30 +120,34 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Administrar Atencion Medica</h4>
-                  <p class="card-category">Selecciona Siguiente Paso</p>
+                  <h4 class="card-title">Administrar Atenciones</h4>
+                  <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form  method="post">
+                    <form action="../ServBuscarAtencionMedica" method="post">
                     <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Se ingreso Correctamente ¿Deseas Ingresar otro examen?</label>
-                          <a href="./administrarAtenciones.jsp">Ingresar Otra</a>                          
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Volver al Menú</label>
-                          <a href="./menuMedico.jsp">Volver al Menú</a>
-                        </div>
-                      </div>
-                    </div>
-                      
                         
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">ID VISITA</label>
+                            <input type="text" class="form-control" name="txtIdVisita">
+                        </div>
+                      </div>
                       
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
+                          <select id="sRutTrabajador">
+                            <c:forEach items="${datosTrabajador}" var="u">
+                                <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
+                            </c:forEach>
+                           </select> 
+                        </div>
+                      </div>  
+                                            
+                    </div>
+                      <button type="submit" class="btn btn-primary pull-right">Buscar Visita Medica</button>
+                    <div class="clearfix"></div>
                   </form>
                 </div>
               </div>

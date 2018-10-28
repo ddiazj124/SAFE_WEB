@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarAtenciones.jsp">
+            <a class="nav-link" href="./buscarAtencionMedica.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Atencion</p>
             </a>
