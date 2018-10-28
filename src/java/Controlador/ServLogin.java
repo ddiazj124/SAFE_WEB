@@ -102,32 +102,31 @@ public class ServLogin extends HttpServlet {
                 sesion.setAttribute("datosUsuario", u);
                 if(u.getId_perfil()==1)
                 {
-                    request.getRequestDispatcher("supervisor/menuSupervisor.jsp").forward(request, response);
+                    response.sendRedirect("supervisor/menuSupervisor.jsp");
                 }
                 if(u.getId_perfil()==2)
                 {
-                    request.getRequestDispatcher("cliente/menuCliente.jsp").forward(request, response);
+                    response.sendRedirect("cliente/menuCliente.jsp");
                 }
                 if(u.getId_perfil()==3)
                 {
-                    request.getRequestDispatcher("trabajador/menuTrabajador.jsp").forward(request, response);
+                    response.sendRedirect("trabajador/menuTrabajador.jsp");
                 }
                 if(u.getId_perfil()==4)
                 {
-                    RequestDispatcher rs = request.getRequestDispatcher("tecnico/menuTecnico.jsp");
-                    rs.forward(request, response);
+                    response.sendRedirect("tecnico/menuTecnico.jsp");
                 }
                 if(u.getId_perfil()==5)
                 {
-                    request.getRequestDispatcher("ingeniero/menuIngeniero.jsp").forward(request, response);
+                    response.sendRedirect("ingeniero/menuIngeniero.jsp");
                 }
                 if(u.getId_perfil()==6)
                 {
-                    request.getRequestDispatcher("administrador/menuAdministrador.jsp").forward(request, response);
+                    response.sendRedirect("administrador/menuAdministrador.jsp");
                 }
                 if(u.getId_perfil()==7)
                 {
-                    request.getRequestDispatcher("medico/menuMedico.jsp").forward(request, response);
+                    response.sendRedirect("medico/menuMedico.jsp");
                 }
                 
                 
@@ -136,14 +135,14 @@ public class ServLogin extends HttpServlet {
             {
                 String error = "Contraseña no coincide, reintente";
                 request.setAttribute("error",error);
-                request.getRequestDispatcher("./index.jsp").forward(request, response);
+                response.sendRedirect("index.jsp");
             }
             }        
             catch(Exception ex)
             {
                 String error = "Usuario no existe";
                 request.setAttribute("error", error);
-                request.getRequestDispatcher("./index.jsp").forward(request, response);
+                response.sendRedirect("index.jsp");
             } 
         
     }

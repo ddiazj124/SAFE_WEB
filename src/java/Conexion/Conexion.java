@@ -21,6 +21,7 @@ public class Conexion {
     
     private Conexion(){
         try {
+            //Ahora conecta
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection("jdbc:oracle:thin:@safe.cntcrqqeguzf.us-east-2.rds.amazonaws.com:1521:orcl", "safe1", "safesafe");
         } catch (ClassNotFoundException ex) {
@@ -46,3 +47,4 @@ public class Conexion {
     }
     
 }
+

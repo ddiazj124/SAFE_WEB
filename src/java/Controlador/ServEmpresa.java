@@ -53,7 +53,7 @@ public class ServEmpresa extends HttpServlet {
         
         DAOEmpresa e = new DAOEmpresa();
         ArrayList<Empresa> Listemp = e.TraerTodos();
-        session.setAttribute("CargarCombo", Listemp);
+        session.setAttribute("datosEmpresa", Listemp);
     }
 
     /**

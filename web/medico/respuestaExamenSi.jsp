@@ -1,11 +1,11 @@
 <%-- 
-    Document   : listarAtenciones
-    Created on : 22-oct-2018, 11:26:46
+    Document   : aministrarExamenes
+    Created on : 21-oct-2018, 22:22:28
     Author     : Diego
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -119,67 +119,30 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Listar Atenciones</h4>
-                  <p class="card-category">Ingresa La Fecha</p>
+                  <h4 class="card-title">Administrar Examenes</h4>
+                  <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <jsp:include page="../ServMostrarAtenciones" flush="true"></jsp:include>
-                    <form action="" method="post">
-                        <table>
-                            <tr>
-                                <label class="bmd-label-floating">RUT EMPRESA</label>
-                                <select id="sRutEmpresa">
-                                    <c:forEach items="${datosEmpresa}" var="u">
-                                        <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                                    </c:forEach>
-                                </select>
-                           </select> 
-                            </tr>
-                            <tr>
-                                 <label class="bmd-label-floating">FECHA</label>
-                                 
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <label class="bmd-label-floating">N° VISITA </label>
-                                <td>
-                                    <input type="text" class="form-control" name="txtNVisita" disabled> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">FECHA </label>
-                                <td>
-                                    <input type="text" class="form-control" name="txtFechaHora" disabled> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">MOTIVO CONSULTA </label>
-                                
-                    
-                                <c:forEach items="${datosAtencion}" var="a">
-                                    <td>
-                                        <input type="text" class="form-control" text="${a.motivo_consulta}" name="txtFechaHora" disabled> 
-                                    </td>
-                                </c:forEach>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">NOMBRE EMPRESA </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">NOMBRE TRABAJADOR </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">ACEPTAR </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">RECHAZAR </label>
-                                <td></td>
-                            </tr>
-                        </table>
+                    <form  method="post">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Se ingreso Correctamente ¿Deseas Ingresar otro examen?</label>
+                          <a href="./administrarExamenes.jsp">Ingresar Otro</a>                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Volver al Menú</label>
+                          <a href="./menuMedico.jsp">Volver al Menú</a>                          
+                        </div>
+                      </div>
+                    </div>
+                      
+                        
+                      
                   </form>
                 </div>
               </div>

@@ -12,12 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="./ServUsuario" flush="true"></jsp:include>
+        <jsp:include page="./ServMostrarAtenciones" flush="true"></jsp:include>
         <label>Usuario</label>
     <select class="form-control" name="ddlTipo">
     <option value="0">Seleccione</option>
-    <c:forEach items="${CargarCombo}" var="u">
-            <option value="${u.id_usuario}">${u.nombre_usuario}</option>
+    <c:forEach items="${datosAtencion}" var="u">
+        <option value="${u.rut_medico}"><c:out value="${u.observaciones}"/></option>
     </c:forEach>
     </select>
     </body>

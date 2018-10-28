@@ -43,11 +43,10 @@ public class ServAdministrarExamenMedico extends HttpServlet {
             Examen e = new Examen(0, observaciones, resultado, fechaExamen, idVisita);
             
             eDao.Insertar(e);
-            
-            request.getRequestDispatcher("../tecnico/menuTecnico.jsp").forward(request, response);
+            response.sendRedirect("./medico/respuestaExamenSi.jsp");
         }catch(Exception e)
         {
-            
+            response.sendRedirect("./medico/respuestaExamenNo.jsp");
         }
     }
 

@@ -4,7 +4,7 @@
     Author     : Diego
 --%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -112,6 +112,7 @@
           </div>
         </div>
       </nav>
+      <jsp:include page="../ServMostrarAtenciones" flush="true"></jsp:include>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
@@ -130,7 +131,9 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">RUT EMPRESA</label>
                            <select id="sRutEmpresa">
-                            <option value="20385652-9">EMPRESA INDEPENDIENTE</option>
+                            <c:forEach items="${datosEmpresa}" var="u">
+                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
+                            </c:forEach>
                            </select> 
                         </div>
                       </div>
@@ -146,6 +149,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">RUT TRABAJADOR</label>
+                          
                           <input type="text" class="form-control">
                         </div>
                       </div>  
@@ -182,7 +186,7 @@
                       </div>
                                             
                     </div>
-                      <button type="submit" class="btn btn-primary pull-right">Registrar Evaluacio</button>
+                      <button type="submit" class="btn btn-primary pull-right">Actualizar Visita Medica</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>

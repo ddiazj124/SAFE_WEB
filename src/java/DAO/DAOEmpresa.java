@@ -52,8 +52,6 @@ public class DAOEmpresa {
     public static void main(String[] args) {
         
         DAOEmpresa dao = new DAOEmpresa();
-        
-        dao.TraerTodos();
         System.out.println(dao.TraerTodos());
         
             

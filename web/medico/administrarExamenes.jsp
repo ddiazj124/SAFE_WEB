@@ -157,7 +157,7 @@
                       </div>
                                             
                     </div>
-                      <button type="submit" class="btn btn-primary pull-right">Registrar Evaluacio</button>
+                      <button type="submit" class="btn btn-primary pull-right">Registrar Examen</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
