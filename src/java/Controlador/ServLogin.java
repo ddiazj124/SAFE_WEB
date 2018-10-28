@@ -92,8 +92,8 @@ public class ServLogin extends HttpServlet {
             String pass = request.getParameter("txtPass");
             DAOUsuario uDao = new DAOUsuario();
             
-            //String md5 = getMD5(pass);
-            String md5 = pass;
+            String md5 = getMD5(pass);
+            //String md5 = pass;
             Usuario u = uDao.Autenticacion(user, md5);
             
             if(u.getNombre_usuario().equals(user) && u.getContrasena().equals(md5))
