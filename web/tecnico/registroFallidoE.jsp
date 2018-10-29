@@ -1,10 +1,12 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : menuTecnico
-    Created on : 21-oct-2018, 0:42:19
+    Document   : registroFallidoE
+    Created on : 28-oct-2018, 22:35:35
     Author     : Diego
 --%>
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
 <!DOCTYPE html>
@@ -25,11 +27,10 @@
   <!-- CSS Files -->
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
-    
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -121,54 +122,20 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registro Evalucaion en Terreno</h4>
+                  <h4 class="card-title">Registro Evaluacion Personal</h4>
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServRegistroEvaluacionTecnico" method="post">
+                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">RUT EMPRESA</label>
-                          <select class="form-control" name="sRutEmpresa">
-                          <c:forEach items="${datosEmpresa}" var="u">
-                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                            </c:forEach>                               
-                          </select>                            
-                        </div>
-                      </div>
-                      
-                        
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">TIPO EVALUACION</label>
-                           <select name="sTipoEvaluacion">
-                             <option value="1">Evaluacion Electrica</option>
-                             <option value="2">Evaluacion Infraestructura</option>
-                             <option value="3">Evaluacion Personal</option>
-                           </select> 
+                          <label class="bmd-label-floating">Registro Fallido</label>
+                          <a href="registroEvaluaciones.jsp"> Volver a Intentar</a>
+                          <a href="menuTecnico.jsp">Volver al Menú</a>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                             <label class="bmd-label-floating">TITULO EVALUACION</label>
-                            <input type="text" class="form-control" name="txtTitulo">
-                            </div>
-                        </div>  
-                    </div>  
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION</label>
-                           <textarea rows="4" cols="50" name="txtDescripcion"></textarea> 
-                        </div>
-                      </div>
-                      
-                      
-                    </div>
-                      <button type="submit" class="btn btn-primary pull-right">Registrar Evaluacio</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -183,7 +150,7 @@
                 </div>
                 <div class="card-body">
                   <h6 class="card-category text-gray">Técnico</h6>
-                  <h4 class="card-title">Tecnico</h4>
+                  <h4 class="card-title">Técnico</h4>
                 </div>
               </div>
             </div>
@@ -195,33 +162,18 @@
           <nav class="float-left">
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
+                <a href="#">
+                  SAFE - Prevencion de Riesgos
                 </a>
               </li>
-              <li>
-                <a href="https://creative-tim.com/presentation">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license">
-                  Licenses
-                </a>
-              </li>
+              
             </ul>
           </nav>
           <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script>
           </div>
         </div>
       </footer>
@@ -263,3 +215,4 @@
 </body>
 
 </html>
+
