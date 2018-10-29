@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class DAOAtencionMedica {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
     private static String sql_buscar = "SELECT * FROM VISITA_MED WHERE ID_VISITA=? AND RUT_TRABAJADOR =? AND RUT_MEDICO = ?";
-    private static String sql_update = "UPDATE visita_med SET fecha_visita = ?, observaciones = ?, diagnostico = ?, receta = ? WHERE id_visita = ?;";
+    private static String sql_update = "UPDATE visita_med SET fecha_visita = ?, observaciones = ?, diagnostico = ?, receta = ? WHERE id_visita = ?";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;

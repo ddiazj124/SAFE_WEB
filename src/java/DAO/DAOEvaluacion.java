@@ -22,6 +22,7 @@ public class DAOEvaluacion {
  
     private static String sql_selectAll = "SELECT * FROM EVALUACION";
     private static String sql_insertarProcedimiento = "CALL ADM_EVALUACION_TECNICO_I(?,?,?,?)";
+    private static String sql_contarCantidadEvaluacion = "SELECT COUNT(*) FROM EVALUACION";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -48,11 +49,15 @@ public class DAOEvaluacion {
         return false;
     }
     
+    
+    
     public static void main(String[] args) {
         
         //Evaluacion e = new Evaluacion("PruebaDesdeJava", 2, "20385652-9", "Prueba");
         //DAOEvaluacion Dev = new DAOEvaluacion();
         //Dev.Insertar(e);
+        
+        
         
     }
     

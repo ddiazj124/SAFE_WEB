@@ -51,7 +51,7 @@
           <li class="nav-item ">
             <a class="nav-link" href="./menuCliente.jsp">
               <i class="material-icons">person</i>
-              <p>Menú</p>
+              <p>Perfil</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -216,3 +216,4 @@
 </body>
 
 </html>
+
