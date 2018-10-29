@@ -124,7 +124,7 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="../ServAdministrarAtencionMedica" method="post">
                     <div class="row">
                       
                       
@@ -137,7 +137,16 @@
                             </c:forEach>
                            </select> 
                         </div>
-                      </div>  
+                      </div>
+                        
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">ID VISITA</label><br>
+                            <c:forEach items="${datosAtencion}" var="u">
+                                <input type="text" class="form-control" value="${u.id_visita}" name="txtIdVisita" id="txtIdVisita">
+                            </c:forEach>
+                        </div>
+                      </div> 
                       <!--
                       <div class="col-md-5">
                         <div class="form-group">
@@ -151,7 +160,7 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">FECHA VISITA</label>
                           <c:forEach items="${datosAtencion}" var="u">
-                            <input type="text" class="form-control" text="${u.fecha_visita}" name="txtFechaVisita" id="txtFechaVisita">
+                            <input type="text" class="form-control" value="${u.fecha_visita}" name="txtFechaVisita" id="txtFechaVisita">
                            </c:forEach>
                         </div>
                       </div>
@@ -160,7 +169,11 @@
                         <div class="col-md-3">
                             <div class="form-group">
                              <label class="bmd-label-floating">DIAGNOSTICO</label>
-                            <textarea rows="4" cols="50" id="txtResultado"></textarea> 
+                            <c:forEach items="${datosAtencion}" var="u">
+                                <textarea rows="4" cols="50" name="txtDiagnostico" id="txtDiagnostico">
+                                    ${u.diagnostico}
+                                </textarea> 
+                            </c:forEach>
                             </div>
                         </div>  
                     </div>  
@@ -168,7 +181,11 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">OBSERVACIONES</label>
-                           <textarea rows="4" cols="50" id="txtObservaciones"></textarea> 
+                           <c:forEach items="${datosAtencion}" var="u">
+                                <textarea rows="4" cols="50" name="txtObservaciones" id="txtObservaciones">
+                                    ${u.observaciones}
+                                </textarea> 
+                            </c:forEach>
                         </div>
                       </div>
                                             
@@ -177,7 +194,11 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">RECETA</label>
-                           <textarea rows="4" cols="50" id="txtReceta"></textarea> 
+                           <c:forEach items="${datosAtencion}" var="u">
+                                <textarea rows="4" cols="50" name="txtReceta" id="txtReceta">
+                                    ${u.receta}
+                                </textarea> 
+                            </c:forEach>
                         </div>
                       </div>
                                             

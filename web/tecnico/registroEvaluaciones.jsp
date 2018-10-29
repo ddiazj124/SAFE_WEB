@@ -4,7 +4,7 @@
     Created on : 21-oct-2018, 0:42:19
     Author     : Diego
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">

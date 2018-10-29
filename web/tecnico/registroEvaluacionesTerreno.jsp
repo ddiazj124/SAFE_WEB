@@ -3,6 +3,7 @@
     Created on : 21-oct-2018, 21:12:18
     Author     : Diego
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -81,6 +82,7 @@
       </div>
     </div>
     <div class="main-panel">
+        <jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
@@ -119,7 +121,7 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registro Evaluacion Personal</h4>
+                  <h4 class="card-title">Registro Evaluacion Terreno</h4>
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
@@ -136,17 +138,20 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">EMPRESA</label>
-                          <select name="sRutEmpresa">
-                            <option value="20385652-9">EMPRESA INDEPENDIENTE</option>
+                          <select id="sRutTrabajador">
+                            <c:forEach items="${datosEmpresa}" var="u">
+                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
+                            </c:forEach>
                            </select> 
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">TIPO EVALUACION</label>
-                           <select name="sTipoEvaluacion">
-                             <option value="1">Evaluacion Electrica</option>
-                           </select> 
+                            <select id="sTipoEvaluacion" name="sTipoEvaluacion">
+                                <option value="1">Evaluacion Electrica</option>
+                                <option value="2">Evaluacion Infraestructura</option>
+                            </select> 
                         </div>
                       </div>
                     </div>

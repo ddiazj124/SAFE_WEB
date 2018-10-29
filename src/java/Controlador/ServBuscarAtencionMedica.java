@@ -57,7 +57,7 @@ public class ServBuscarAtencionMedica extends HttpServlet {
             response.sendRedirect("./medico/administrarAtenciones.jsp");
         }catch(Exception e)
         {
-            response.sendRedirect("./medico/administrarAtencionesNo.jsp");
+            response.sendRedirect("./medico/AdministrarAtencionesNo.jsp");
         }
         
     }

@@ -42,10 +42,10 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             
             eDao.Insertar(e);
             
-            request.getRequestDispatcher("../tecnico/menuTecnico.jsp").forward(request, response);
+            response.sendRedirect("./tecnico/registroExitoso.jsp");
         }catch(Exception e)
         {
-            
+            response.sendRedirect("./tecnico/registroFallidoT.jsp");
         }
     }
 

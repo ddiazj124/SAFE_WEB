@@ -1,8 +1,9 @@
 <%-- 
-    Document   : registroEvaluacionesPersonal
-    Created on : 21-oct-2018, 21:11:56
+    Document   : registroExitoso
+    Created on : 28-oct-2018, 21:56:04
     Author     : Diego
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -129,55 +130,12 @@
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Titulo Evaluacion</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" disabled>
+                          <label class="bmd-label-floating">Registro Fallido</label>
+                          <a href="registroEvaluacionesTerreno.jsp"> Volver a Intentar</a>
+                          <a href="menuTecnico.jsp">Volver al Menú</a>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="sRutTrabajador">
-                            <c:forEach items="${datosEmpresa}" var="u">
-                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                            </c:forEach>
-                           </select> 
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">TIPO EVALUACION</label>
-                            <select id="sTipoEvaluacion" name="sTipoEvaluacion">
-                                <option value="3">Evaluacion Personal</option>
-                            </select> 
-                            
-                        </div>
-                      </div>
-                    </div>
-                      
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
-                          <select id="txtRutTrabajador" name="txtRutTrabajador">
-                            <c:forEach items="${datosTrabajador}" var="u">
-                                <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
-                            </c:forEach>
-                           </select> 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION</label>
-                           <textarea rows="4" cols="50" name="txtDescripcion"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary pull-right">Registrar Evaluación</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>

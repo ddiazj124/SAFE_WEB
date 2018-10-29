@@ -21,10 +21,36 @@ import java.util.logging.Logger;
 public class DAOAtencionMedica {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
     private static String sql_buscar = "SELECT * FROM VISITA_MED WHERE ID_VISITA=? AND RUT_TRABAJADOR =? AND RUT_MEDICO = ?";
-    
+    private static String sql_update = "UPDATE visita_med SET fecha_visita = ?, observaciones = ?, diagnostico = ?, receta = ? WHERE id_visita = ?;";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
+    
+    
+    public boolean Actualizar(int v_nvisita, String v_fecha_visita, String v_observaciones, String v_diagnostico,String v_receta){
+        
+        PreparedStatement pst = null;
+        try {
+            pst = objConn.getConn().prepareStatement(sql_update);
+            
+            
+            pst.setString(1, v_fecha_visita);
+            pst.setString(2, v_observaciones);
+            pst.setString(3, v_diagnostico);
+            pst.setString(4, v_receta);
+            pst.setInt(5, v_nvisita);
+            rs = pst.executeQuery();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOAtencionMedica.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        
+        return false;
+    }
     
     public ArrayList<Atencion> TraerTodos() {
         try {
@@ -78,6 +104,7 @@ public class DAOAtencionMedica {
         
         return null;
     }
+    
     
     
     public static void main(String[] args) {

@@ -5,22 +5,31 @@
  */
 package Controlador;
 
-import DAO.DAOAtencionMedica;
-import Entidades.Atencion;
+import DAO.DAOEmpresa;
+import DAO.DAOEvaluacion;
+import DAO.DAOEvaluacionPersonal;
+import DAO.DAOTipoEvaluacion;
+import DAO.DAOTrabajador;
+import Entidades.Empresa;
+import Entidades.EvaluacionPersonal;
+import Entidades.TipoEvaluacion;
+import Entidades.Trabajador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Diego
  */
-@WebServlet(name = "ServAdministrarAtencionMedica", urlPatterns = {"/ServAdministrarAtencionMedica"})
-public class ServAdministrarAtencionMedica extends HttpServlet {
+@WebServlet(name = "ServMostrarRegistroEvaluacionesPersonal", urlPatterns = {"/ServMostrarRegistroEvaluacionesPersonal"})
+public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,19 +43,38 @@ public class ServAdministrarAtencionMedica extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String v_fecha_visita = request.getParameter("txtFechaVisita");
-        String v_observaciones = request.getParameter("txtObservaciones");
-        String v_diagnostico = request.getParameter("txtDiagnostico");
-        String v_receta = request.getParameter("txtReceta");
-        int v_nvisita = Integer.parseInt(request.getParameter("txtIdVisita"));
-        
-        DAOAtencionMedica amDao = new DAOAtencionMedica();
-                    
-        amDao.Actualizar(v_nvisita,v_fecha_visita,v_observaciones,v_diagnostico,v_receta);
-        
-        response.sendRedirect("medico/menuMedico.jsp");
+        try
+            {
+                
+                HttpSession session = request.getSession();
+                
+                //Empresas
+                DAOEmpresa e = new DAOEmpresa();
+                ArrayList<Empresa> Listemp = e.TraerTodos();
+                session.setAttribute("datosEmpresa", Listemp);
+                
+                //Tipo Evaluacion
+                DAOTipoEvaluacion teDao = new DAOTipoEvaluacion();
+                ArrayList<TipoEvaluacion> ListTipoEval = teDao.TraerTodos();
+                session.setAttribute("datosTipoEvaluacion", ListTipoEval);
+                
+                //Trabajador
+                DAOTrabajador tr = new DAOTrabajador();
+                ArrayList<Trabajador> Listtr = tr.TraerTodos();
+                session.setAttribute("datosTrabajador", Listtr);
+                
+                
+                
+                //response.sendRedirect("medico/administrarAtenciones.jsp");
+                //request.getRequestDispatcher("medico/administrarAtenciones.jsp").forward(request, response);
+            }catch (Exception ex)
+            {
+                String error;
+                error = ex.toString();
+            }
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
