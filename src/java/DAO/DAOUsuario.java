@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class DAOUsuario {
     private static String sql_selectAll = "SELECT * FROM USUARIO";
     private static String sql_autenticacion = "SELECT * FROM USUARIO WHERE nombre_usuario = ? AND contrasena = ?";
-    
+    private static String sql_selectUsuarioId = "SELECT * FROM USUARIO WHERE id_usuario = ?";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
