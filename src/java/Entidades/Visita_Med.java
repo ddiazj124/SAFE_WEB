@@ -9,7 +9,7 @@ package Entidades;
  *
  * @author Sebastian
  */
-public class Visita_med {
+public class Visita_Med {
     private int id_visita;
     private String rut_medico;
     private String rut_trabajador;
@@ -20,10 +20,10 @@ public class Visita_med {
     private boolean estado;
     private String receta;
 
-    public Visita_med() {
+    public Visita_Med() {
     }
 
-    public Visita_med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, boolean estado, String receta) {
+    public Visita_Med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, boolean estado, String receta) {
         this.id_visita = id_visita;
         this.rut_medico = rut_medico;
         this.rut_trabajador = rut_trabajador;
