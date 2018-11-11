@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class DAOVisita_Med {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
-    private static String sql_selectAllFecha = "SELECT * FROM VISITA_MED WHERE FECHA_VISITA LIKE '%?%' ";
+    private static String sql_selectAllFecha = "SELECT * FROM VISITA_MED WHERE FECHA_VISITA LIKE ?";
     private static String sql_buscarVisita = "SELECT * FROM VISITA_MED WHERE ID_VISITA = ?";
     
     private static Conexion objConn = Conexion.InstanciaConn();
@@ -39,7 +39,7 @@ public class DAOVisita_Med {
             
             while(rs.next()){
                 //Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
-                Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getString("fecha_visita"), rs.getBoolean("estado"), rs.getString("receta")));
+                Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
             }
             return Lvisita; 
         
@@ -52,19 +52,19 @@ public class DAOVisita_Med {
     }
     
     
-    public ArrayList<Visita_Med> TraerTodosPorFecha(Timestamp tiempo) {
+    public ArrayList<Visita_Med> TraerTodosPorFecha(String fecha) {
         try {
             ArrayList<Visita_Med> Lvisita = new ArrayList<>();
             PreparedStatement ps;
             
 
             ps = objConn.getConn().prepareStatement(sql_selectAllFecha);
-            ps.setTimestamp(1, tiempo);
+            ps.setString(1, fecha);
             rs = ps.executeQuery();
             
             while(rs.next()){
                 //Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
-                Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getString("fecha_visita"), rs.getBoolean("estado"), rs.getString("receta")));
+                Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
             }
             return Lvisita; 
         
@@ -88,7 +88,8 @@ public class DAOVisita_Med {
             
             if(rs.next()){
             //v = new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta"));
-            v = new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getString("fecha_visita"), rs.getBoolean("estado"), rs.getString("receta"));
+            //v = new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getString("fecha_visita"),rs.getString("receta"));
+            v = new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta"));
             return v;
             }
             
@@ -110,20 +111,28 @@ public class DAOVisita_Med {
         
         System.out.println("Cantidad Objetos: " + Listvis.size());
         System.out.println("-----------------------------------------------------");
-        
-        
-        for (Visita_Med Listvi : Listvis) {
-            System.out.println(Listvi.getId_visita());
-            System.out.println(Listvi.getRut_medico());
-            System.out.println(Listvi.getRut_trabajador());
-            System.out.println(Listvi.getEstado());
-            System.out.println(Listvi.getFecha_visita());
-        }
         */
-        DAOVisita_Med vism = new DAOVisita_Med();
-        ArrayList<Visita_Med> Listvis = vism.TraerTodosPorFecha(Timestamp.valueOf("2020-10-20 18:00:00.000"));
         
-        System.out.println("Cantidad Fechas dia 2020-10-20 18:00:00.000 : "+Listvis.size());
+        DAOVisita_Med vism = new DAOVisita_Med();
+        ArrayList<Visita_Med> Listvis = vism.TraerTodosPorFecha("20/10/2018");
+        
+        System.out.println("Cantidad de Objetos: " + Listvis.size());
+        
+        System.out.println("------------------------------------------");
+        
+        
+        for (Visita_Med obj : Listvis) {
+              System.out.println(obj.getId_visita());
+              System.out.println(obj.getRut_medico());
+              System.out.println(obj.getRut_trabajador());
+              System.out.println(obj.getMotivo_consulta());
+              System.out.println(obj.getObservaciones());
+              System.out.println(obj.getDiagnostico());
+              System.out.println(obj.getFecha_visita());
+              System.out.println(obj.getEstado());
+              System.out.println(obj.getReceta());
+              System.out.println("------------------------------------------");
+        }
         
     }
 }

@@ -83,7 +83,7 @@ public class DAOUsuario {
         
         DAOUsuario dao = new DAOUsuario();
         Usuario u = new Usuario();
-        u = dao.Autenticacion("diazj", "diazj");
+        u = dao.Autenticacion("diazj", "f725e8472e0cd2da0541f3bf81004a26");
         System.out.println(u.getId_usuario());
         System.out.println(u.getNombre_usuario());
         

@@ -17,13 +17,13 @@ public class Visita_Med {
     private String observaciones;
     private String diagnostico;
     private String fecha_visita;
-    private boolean estado;
+    private char estado;
     private String receta;
 
     public Visita_Med() {
     }
 
-    public Visita_Med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, boolean estado, String receta) {
+    public Visita_Med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, char estado, String receta) {
         this.id_visita = id_visita;
         this.rut_medico = rut_medico;
         this.rut_trabajador = rut_trabajador;
@@ -33,6 +33,10 @@ public class Visita_Med {
         this.fecha_visita = fecha_visita;
         this.estado = estado;
         this.receta = receta;
+    }
+
+    public Visita_Med(int id_visita) {
+        this.id_visita = id_visita;
     }
 
     public int getId_visita() {
@@ -91,11 +95,11 @@ public class Visita_Med {
         this.fecha_visita = fecha_visita;
     }
 
-    public boolean isEstado() {
+    public char getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(char estado) {
         this.estado = estado;
     }
 
@@ -106,6 +110,8 @@ public class Visita_Med {
     public void setReceta(String receta) {
         this.receta = receta;
     }
+    
+    
     
     
 }
