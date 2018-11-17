@@ -38,7 +38,6 @@ public class DAOVisita_Med {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                //Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
                 Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
             }
             return Lvisita; 
@@ -63,7 +62,6 @@ public class DAOVisita_Med {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                //Lvisita.add(new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
                 Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
             }
             return Lvisita; 
@@ -87,8 +85,6 @@ public class DAOVisita_Med {
             rs = pst.executeQuery();
             
             if(rs.next()){
-            //v = new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getTimestamp("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta"));
-            //v = new Visita_Med(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("trabajador"), rs.getString("motivo_consulta"), rs.getString("observaciones"), rs.getString("diagnostico"), rs.getString("fecha_visita"),rs.getString("receta"));
             v = new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta"));
             return v;
             }
@@ -98,7 +94,6 @@ public class DAOVisita_Med {
         }finally{
             objConn.Cerrar();
         }
-        
         return null;
     }
     

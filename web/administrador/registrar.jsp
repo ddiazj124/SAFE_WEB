@@ -1,9 +1,8 @@
 <%-- 
-    Document   : listarAtenciones
-    Created on : 22-oct-2018, 11:26:46
+    Document   : menuAdministrador
+    Created on : 22-oct-2018, 10:21:29
     Author     : Diego
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,76 +22,40 @@
   <!-- CSS Files -->
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="./menuMedico.jsp" class="simple-text logo-normal">
+        <a href="./menuIngeniero.jsp" class="simple-text logo-normal">
           Menu
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <a class="nav-link" href="./menuSupervisor.jsp">
+            <a class="nav-link" href="./menuAdministrador.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./menuSupervisor.jsp">
+            <a class="nav-link" href="./menuAdministrador.jsp">
               <i class="material-icons">person</i>
               <p>Menú</p>
             </a>
-          </li>
+          </li>   
           <li class="nav-item ">
-            <a class="nav-link" href="./registroVisita.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Estado de Visitas Medicas</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroCapacitacion.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Mostrar Capacitaciones</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroCapacitacion.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Generar Capacitacion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">content_paste</i>
-              <p>Listar Asistentes</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroAsistente.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Integrar Asistentes</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="">
-              <i class="material-icons">content_paste</i>
-              <p>Generar Certificado</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">content_paste</i>
-              <p>Generar Informe Evaluacion</p>
+            <a class="nav-link" href="./registrar.jsp">
+              <i class="material-icons">person</i>
+              <p>Registrar</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -109,7 +72,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuMedico.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuAdministrador.jsp">Inicio</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -139,54 +102,40 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Capacitaciones</h4>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                  <p class="card-category">Administras desde Escritorio</p>
+                  <h3 class="card-title"><a id="re" href="#">Entrar</a>
+                  </h3>
                 </div>
-                <div class="card-body">
-                    <form action="" method="post">
-                        <table>
-                            <thead>
-                                  <th>ID</th>
-                                  <th>NOMBRE</th>
-                                  <th>FECHA TÉRMINO</th>
-                                  <th>FECHA INICIO</th>
-                                  <th>AREA</th>
-                                  <th>PLAN</th>                                
-                              </thead>
-                              <tbody>
-                                  <td></td>
-                              </tbody>                              
-                        </table>
-                                        
-                    </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Supervisor</h6>                 
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="#"></a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
       <footer class="footer">
         <div class="container-fluid">
-          
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#Diego">
+                  SAFE - Prevencion de Riesgos
+                </a>
+              </li>              
+            </ul>
+          </nav>
           <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script> <i class="material-icons">favorite</i>
+            </script>
           </div>
         </div>
       </footer>
@@ -212,19 +161,7 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>
+

@@ -35,6 +35,16 @@ public class Atencion {
         this.receta = receta;
     }
 
+    public Atencion(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String fecha_visita) {
+        this.id_visita = id_visita;
+        this.rut_medico = rut_medico;
+        this.rut_trabajador = rut_trabajador;
+        this.motivo_consulta = motivo_consulta;
+        this.fecha_visita = fecha_visita;
+    }
+    
+    
+
     public int getId_visita() {
         return id_visita;
     }

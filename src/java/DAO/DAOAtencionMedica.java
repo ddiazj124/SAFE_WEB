@@ -62,7 +62,7 @@ public class DAOAtencionMedica {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                LAtencion.add(new Atencion(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado"),rs.getString("receta")));
+                LAtencion.add(new Atencion(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"),rs.getString("fecha_visita")));
             }
             return LAtencion; 
         
@@ -109,8 +109,13 @@ public class DAOAtencionMedica {
     
     public static void main(String[] args) {
         
-        DAOAtencionMedica dao = new DAOAtencionMedica();
-        System.out.println(dao.TraerTodos());
+        
+        DAOAtencionMedica atm = new DAOAtencionMedica();
+        ArrayList<Atencion> ListAtencion = atm.TraerTodos();
+        
+        System.out.println("Cantidad Objetos: " + ListAtencion.size());
+        System.out.println("-----------------------------------------------------");
+        
         
         
         

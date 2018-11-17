@@ -4,10 +4,10 @@
     Author     : Diego
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -26,8 +26,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
 </head>
-
 <body class="">
+    <jsp:include page="../ServListarAtencionMed" flush="true"></jsp:include>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -116,84 +116,45 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Listar Atenciones</h4>
-                  <p class="card-category">Ingresa La Fecha</p>
+                  <h4 class="card-title ">Atenciones Medicas.</h4>
+                  <p class="card-category">Listado de las atenciones Medicas.</p>
                 </div>
                 <div class="card-body">
-                    <jsp:include page="../ServMostrarAtenciones" flush="true"></jsp:include>
-                    <form action="" method="post">
-                        <table>
-                            <tr>
-                                <label class="bmd-label-floating">RUT EMPRESA</label>
-                                <select id="sRutEmpresa">
-                                    <c:forEach items="${datosEmpresa}" var="u">
-                                        <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                                    </c:forEach>
-                                </select>
-                           </select> 
-                            </tr>
-                            <tr>
-                                 <label class="bmd-label-floating">FECHA</label>
-                                 
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <label class="bmd-label-floating">N° VISITA </label>
-                                <td>
-                                    <input type="text" class="form-control" name="txtNVisita" disabled> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">FECHA </label>
-                                <td>
-                                    <input type="text" class="form-control" name="txtFechaHora" disabled> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">MOTIVO CONSULTA </label>
-                                
-                    
-                                <c:forEach items="${datosAtencion}" var="a">
-                                    <td>
-                                        <input type="text" class="form-control" text="${a.motivo_consulta}" name="txtFechaHora" disabled> 
-                                    </td>
-                                </c:forEach>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">NOMBRE EMPRESA </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">NOMBRE TRABAJADOR </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">ACEPTAR </label>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <label class="bmd-label-floating">RECHAZAR </label>
-                                <td></td>
-                            </tr>
-                        </table>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Medico</h6>
-                  <h4 class="card-title">Medico</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          ID
+                        </th>
+                        <th>
+                          Rut Medico
+                        </th>
+                        <th>
+                          Rut Trabajador
+                        </th>
+                        <th>
+                          Motivo Consulta
+                        </th>
+                        <th>
+                          Fecha Visita
+                        </th>
+                      </thead>
+                      <tbody>
+                          <c:forEach items="${datosAtencion}" var="atm">
+                              <tr>
+                              <td>${atm.id_visita}</td>
+                              <td>${atm.rut_medico}</td>
+                              <td>${atm.rut_trabajador}</td>
+                              <td>${atm.motivo_consulta}</td>
+                              <td>${atm.fecha_visita}</td>
+                              </tr>
+                          </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +163,6 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          
           <div class="copyright float-right">
             &copy;
             <script>
@@ -233,19 +193,178 @@
 
     });
   </script>
-  
   <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+            $('.fixed-plugin .dropdown').addClass('open');
+          }
+
+        }
+
+        $('.fixed-plugin a').click(function(event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function() {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function() {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function() {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
+

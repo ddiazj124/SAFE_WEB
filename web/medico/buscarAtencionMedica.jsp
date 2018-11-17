@@ -170,7 +170,6 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          
           <div class="copyright float-right">
             &copy;
             <script>
