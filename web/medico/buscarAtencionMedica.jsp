@@ -124,27 +124,24 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServBuscarAtencionMedica" method="post">
+                    <form class="form-group" action="../ServBuscarAtencionMedica" method="post">
                     <div class="row">
-                        
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">ID VISITA</label>
-                            <input type="text" class="form-control" name="txtIdVisita">
-                        </div>
-                      </div>
-                      
                       <div class="col-md-6">
                         <div class="form-group">
                             <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
-                          <select id="sRutTrabajador">
+                            <select id="sRutTrabajador" class="form-control">
                             <c:forEach items="${datosTrabajador}" var="u">
                                 <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
                             </c:forEach>
                            </select> 
                         </div>
-                      </div>  
-                                            
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">ID VISITA</label>
+                            <input type="text" class="form-control" name="txtIdVisita">
+                        </div>
+                      </div>                      
                     </div>
                       <button type="submit" class="btn btn-primary pull-right">Buscar Visita Medica</button>
                     <div class="clearfix"></div>
