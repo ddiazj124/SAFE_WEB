@@ -1,8 +1,9 @@
 <%-- 
-    Document   : listarAtenciones
-    Created on : 22-oct-2018, 11:26:46
+    Document   : menuSupervisor
+    Created on : 21-oct-2018, 14:41:00
     Author     : Diego
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,19 +24,19 @@
   <!-- CSS Files -->
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../customcss/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="./menuMedico.jsp" class="simple-text logo-normal">
+        <a href="./menuTecnico.jsp" class="simple-text logo-normal">
           Menu
         </a>
       </div>
@@ -47,14 +48,14 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="./registroVisita.jsp">
               <i class="material-icons">content_paste</i>
               <p>Solicitar Visita Medica</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./mostrarCapacitacion.jsp">
+            <a class="nav-link" href="./registroVisita.jsp">
               <i class="material-icons">content_paste</i>
               <p>Mostrar Capacitaciones</p>
             </a>
@@ -71,7 +72,7 @@
               <p>Listar Asistentes</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="./registroAsistente.jsp">
               <i class="material-icons">content_paste</i>
               <p>Integrar Asistentes</p>
@@ -103,7 +104,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuMedico.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTecnico.jsp">Inicio</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -133,76 +134,72 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registrar de Visitas Medicas</h4>
-                  <p class="card-category">Podrás registrar una visita Medica</p>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                  <p class="card-category">Solicitar Visita</p>
+                  <h3 class="card-title"><a id="re" href="./registroVisita.jsp">Entrar</a>
+                  </h3>
                 </div>
-                <div class="card-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          <select name="sTipoEvaluacion" class="form-control">
-                              <option value="Seleccione">SELECCIONE EMPRESA</option>
-                             <option value="1">Evaluacion Electrica</option>
-                           </select>                            
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label>
-                            <select name="sTipoEvaluacion" class="form-control">
-                              <option value="Seleccione">SELECCIONE RUT</option>
-                              <option value="19526762-6">19526762-6</option>
-                            </select>                            
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label>
-                            <select name="sTipoEvaluacion" class="form-control">
-                              <option value="Seleccione">SELECCIONE RUT</option>
-                              <option value="19526762-6">19526762-6</option>
-                            </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">FECHA CONSULTA</label>
-                          <input type="text" class="form-control" value="10/11/2018" disabled="">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Motivo Consulta</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary pull-right">Registrar</button>
-                    <div class="clearfix"></div>
-                  </form>
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="./registroEvaluaciones.jsp"></a>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">store</i>
+                  </div>
+                  <p class="card-category">Registrar Capacitaciones</p>
+                  <h3 class="card-title" href="./registroCapacitacion.jsp"><a href="./registroCapacitacion.jsp">Entrar</a></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                  </div>
+                  <p class="card-category">Registro de Asistencia </p>
+                  <h3 class="card-title"><a href="./registroAsistente.jsp">Entra</a></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
-        </div>
-      </div>
+          
       <footer class="footer">
         <div class="container-fluid">
-          
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#Diego">
+                  SAFE - Prevencion de Riesgos
+                </a>
+              </li>              
+            </ul>
+          </nav>
           <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script> <i class="material-icons"></i>
+            </script>
           </div>
         </div>
       </footer>
@@ -228,19 +225,7 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>
+

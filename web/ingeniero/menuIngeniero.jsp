@@ -49,13 +49,6 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./menuIngeniero.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          
-          <li class="nav-item ">
             <a class="nav-link" href="./administrarEvaluaciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Evaluaciones</p>
@@ -112,9 +105,8 @@
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Administrar Evaluaciones</p>
-                  <h3 class="card-title"><a id="re" href="./administrarEvaluaciones.jsp">Entrar</a>
-                  </h3>
+                  <p class="card-category">Cantidad de Evaluaciones en Terreno</p>
+                  <h3 class="card-title">60</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -123,11 +115,7 @@
                 </div>
               </div>
             </div>
-            
-            
-            
           </div>
-          
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">

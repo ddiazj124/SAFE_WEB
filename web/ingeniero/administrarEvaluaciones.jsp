@@ -43,20 +43,13 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuIngeniero.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuIngeniero.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="./administrarEvaluaciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Evaluaciones</p>
@@ -116,7 +109,7 @@
                 <div class="card-body">
                     <form action="" method="post">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">RUT EMPRESA</label>
                           <select class="form-control" name="sRutEmpresa">
@@ -127,34 +120,14 @@
                           </select>                            
                         </div>
                       </div>
-                      
-                        
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">TIPO EVALUACION</label>
-                           <select name="sTipoEvaluacion">
+                          <select name="sTipoEvaluacion" class="form-control">
                              <option value="1">Evaluacion Electrica</option>
-                           </select> 
+                           </select>                            
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                             <label class="bmd-label-floating">TITULO CAPACITACION</label>
-                             <input type="text" class="form-control" name="txtTitulo" disabled>
-                            </div>
-                        </div>  
-                    </div>  
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION</label>
-                           <textarea rows="4" cols="50" name="txtDescripcion"></textarea> 
-                        </div>
-                      </div>
-                      
-                      
                     </div>
                       <button type="submit" class="btn btn-primary pull-right">Buscar Evaluación</button>
                     <div class="clearfix"></div>
@@ -162,54 +135,63 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
+          </div>         
+        </div>
+    <div class="col-md-12">
+             <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Evaluaciones en Terreno.</h4>
+                    <p class="card-category">Listado de las evaluaciones en terreno.</p>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-category text-gray">Ingeniero</h6>
-                  <h4 class="card-title">Ingeniero</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Número de informe
+                        </th>
+                        <th>
+                          Fecha
+                        </th>
+                        <th>
+                          Descripcion Informe
+                        </th>
+                        <th>
+                          Comentario Ingeniero
+                        </th>
+                        <th>
+                          Ver
+                        </th>
+                      </thead>
+                      <tbody>
+                          <c:forEach items="${datosEvaluacion}" var="e">
+                              <tr>
+                              <td>1</td>
+                              <td>10/11/2018</td>
+                              <td>Mantención</td>
+                              <td>(Sin Comentario)</td>
+                              <td>
+                                  <form action="#" method="POST">
+                                    <input type="hidden" name="id_eval" value="${e.id_ev}"/>
+                                    <input type="submit" name="btnVerEva" class="btn btn-primary pull" value="Ver"/>
+                                  </form>
+                              </td>
+                              </tr>
+                          </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="https://creative-tim.com/presentation">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
           <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> <i class="material-icons"></i>
           </div>
         </div>
       </footer>

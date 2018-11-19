@@ -40,19 +40,13 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuSupervisor.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuSupervisor.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./registroVisita.jsp">
               <i class="material-icons">content_paste</i>
               <p>Solicitar Visita Medica</p>
@@ -76,7 +70,7 @@
               <p>Listar Asistentes</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="./registroAsistente.jsp">
               <i class="material-icons">content_paste</i>
               <p>Integrar Asistentes</p>
