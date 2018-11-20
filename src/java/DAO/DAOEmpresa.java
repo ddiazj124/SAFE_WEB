@@ -36,7 +36,6 @@ public class DAOEmpresa {
             
             while(rs.next()){
                 Lusu.add(new Empresa(rs.getString("rut_empresa"), rs.getString("razon_social"), rs.getInt("id_perfil"), rs.getString("direccion")));
-                
             }
             return Lusu; 
         
@@ -51,12 +50,8 @@ public class DAOEmpresa {
     
     public static void main(String[] args) {
         
-        DAOEmpresa dao = new DAOEmpresa();
-        System.out.println(dao.TraerTodos());
-        
-            
-        
-                
+              DAOEmpresa dao = new DAOEmpresa();
+              System.out.println(dao.TraerTodos().size());
     }
     
 }

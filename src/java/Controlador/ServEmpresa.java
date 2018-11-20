@@ -51,9 +51,9 @@ public class ServEmpresa extends HttpServlet {
         HttpSession session = request.getSession();
         
         
-        DAOEmpresa e = new DAOEmpresa();
-        ArrayList<Empresa> Listemp = e.TraerTodos();
-        session.setAttribute("datosEmpresa", Listemp);
+        DAOEmpresa emp = new DAOEmpresa();
+        ArrayList<Empresa> ListEmp = emp.TraerTodos();
+        session.setAttribute("datosEmpresa", ListEmp);
     }
 
     /**

@@ -79,14 +79,42 @@ public class DAOUsuario {
         return null;
     }
     
-    public static void main(String[] args) {
+    public boolean ValidarUsuario(String v_usuario, String v_contrasena){
         
+        PreparedStatement pst = null;
+        try {
+            pst = objConn.getConn().prepareStatement(sql_autenticacion);
+            
+            pst.setString(1, v_usuario);
+            pst.setString(2, v_contrasena);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        /*
         DAOUsuario dao = new DAOUsuario();
         Usuario u = new Usuario();
         u = dao.Autenticacion("diazj", "f725e8472e0cd2da0541f3bf81004a26");
         System.out.println(u.getId_usuario());
         System.out.println(u.getNombre_usuario());
+        */
         
+        DAOUsuario dao = new DAOUsuario();
+        dao.ValidarUsuario("diazj", "f725e8472e0cd2da0541f3bf81004a26");
+        
+        System.out.println(dao.ValidarUsuario("diazj", "f725e8472e0cd2da0541f3bf81004a26"));
         
         
         

@@ -40,13 +40,13 @@
                                         
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Usuario es requerido">
 						<span class="label-input100">Usuario</span>
-                                                    <input class="input100" type="text" name="txtUser" placeholder="Ingresa tu usuario">
+                                                    <input class="input100" type="text" name="txtUser" id="txtUser" placeholder="Ingresa tu usuario">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Contraseña es requerido">
 						<span class="label-input100">Contraseña</span>
-                                                    <input class="input100" type="password" name="txtPass" placeholder="ingresa tu contraseña">
+                                                    <input class="input100" type="password" name="txtPass" id="txtPass" placeholder="ingresa tu contraseña">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					

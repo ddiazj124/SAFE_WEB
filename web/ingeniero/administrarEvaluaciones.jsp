@@ -4,7 +4,7 @@
     Author     : Diego
 --%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,9 +26,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
 </head>
-
 <body class="">
-    
+    <jsp:include page="../ServEmpresa" flush="true"></jsp:include>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -111,12 +110,11 @@
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">RUT EMPRESA</label>
+                          <label class="bmd-label-floating">NOMBRE EMPRESA</label>
                           <select class="form-control" name="sRutEmpresa">
-                          <!-- <c:forEach items="${CargarCombo}" var="e">
+                          <c:forEach items="${datosEmpresa}" var="e">
                                     <option value="${e.rut_empresa}">${e.razon_social}</option>
-                            </c:forEach> -->
-                                <option value="20385652-9">Empresa Independiente</option>
+                          </c:forEach>
                           </select>                            
                         </div>
                       </div>

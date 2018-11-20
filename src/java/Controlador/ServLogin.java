@@ -80,15 +80,62 @@ public class ServLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String txtUser = request.getParameter("txtUser");
+        String txtPass = request.getParameter("txtPass");
+        
+        
+        DAOUsuario dao = new DAOUsuario();
+        
+        if(dao.ValidarUsuario(txtUser, getMD5(txtPass))){
+              
+         DAOUsuario uDao = new DAOUsuario();
+         
+         Usuario u = uDao.Autenticacion(txtUser, getMD5(txtPass));
+            System.out.println(u.getId_perfil());
+         HttpSession sesion = request.getSession(true);
+                    sesion.setAttribute("datosUsuario", u);
+                    
+                    if(u.getId_perfil()==1)
+                    {
+                        response.sendRedirect("supervisor/menuSupervisor.jsp");
+                    }
+                    if(u.getId_perfil()==2)
+                    {
+                        response.sendRedirect("cliente/menuCliente.jsp");
+                    }
+                    if(u.getId_perfil()==3)
+                    {
+                        response.sendRedirect("trabajador/menuTrabajador.jsp");
+                    }
+                    if(u.getId_perfil()==4)
+                    {
+                        response.sendRedirect("tecnico/menuTecnico.jsp");
+                    }
+                    if(u.getId_perfil()==5)
+                    {
+                        response.sendRedirect("ingeniero/menuIngeniero.jsp");
+                    }
+                    if(u.getId_perfil()==6)
+                    {
+                        response.sendRedirect("administrador/menuAdministrador.jsp");
+                    }
+                    if(u.getId_perfil()==7)
+                    {
+                        response.sendRedirect("medico/menuMedico.jsp");
+                    }
+        }
+        
+        
+        
+        /*
         try{
-            String user = request.getParameter("txtUser");
-            String pass = request.getParameter("txtPass");
             DAOUsuario uDao = new DAOUsuario();
             
-            String md5 = getMD5(pass);
-            //String md5 = pass;
-            Usuario u = uDao.Autenticacion(user, md5);
             
+            Usuario u = uDao.Autenticacion(txtUser, getMD5(txtPass));
+            
+            
+            /*
             if(u.getNombre_usuario().equals(user) && u.getContrasena().equals(md5))
             {
                 HttpSession sesion = request.getSession(true);
@@ -136,7 +183,8 @@ public class ServLogin extends HttpServlet {
                 String error = "Usuario no existe";
                 request.setAttribute("error", error);
                 response.sendRedirect("index.jsp");
-            } 
+            }
+            */
         
     }
 
