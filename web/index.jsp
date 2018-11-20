@@ -35,18 +35,18 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('custom/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
+                            <form class="login100-form validate-form" action="ServLogin" method="POST">
 					<!--<span class="login100-form-title p-b-49">Login</span>--->
                                         
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Usuario es requerido">
 						<span class="label-input100">Usuario</span>
-                                                    <input class="input100" type="text" name="username" placeholder="Ingresa tu usuario">
+                                                    <input class="input100" type="text" name="txtUser" placeholder="Ingresa tu usuario">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Contraseña es requerido">
 						<span class="label-input100">Contraseña</span>
-                                                    <input class="input100" type="password" name="pass" placeholder="ingresa tu contraseña">
+                                                    <input class="input100" type="password" name="txtPass" placeholder="ingresa tu contraseña">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
@@ -57,7 +57,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-                                                            <button class="login100-form-btn" type="submit" name="Iniciar Sesion">Ingresar</button>
+                                                        <button class="login100-form-btn" type="submit">Iniciar Sesion</button>
 						</div>
 					</div>
 				</form>
