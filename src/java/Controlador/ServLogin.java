@@ -123,6 +123,8 @@ public class ServLogin extends HttpServlet {
                     {
                         response.sendRedirect("medico/menuMedico.jsp");
                     }
+        }else{
+            System.out.println("USUARIO Y CONTRASEÑA INCORRECTO");
         }
         
         

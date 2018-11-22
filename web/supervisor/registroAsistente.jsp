@@ -41,25 +41,25 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="./menuSupervisor.jsp">
+            <a class="nav-link" href="menuSupervisor.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./registroVisita.jsp">
+            <a class="nav-link" href="registroVisita.jsp">
               <i class="material-icons">content_paste</i>
               <p>Solicitar Visita Medica</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroVisita.jsp">
+            <a class="nav-link" href="registroVisita.jsp">
               <i class="material-icons">content_paste</i>
               <p>Mostrar Capacitaciones</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroCapacitacion.jsp">
+            <a class="nav-link" href="registroCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
               <p>Generar Capacitacion</p>
             </a>
@@ -71,7 +71,7 @@
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./registroAsistente.jsp">
+            <a class="nav-link" href="registroAsistente.jsp">
               <i class="material-icons">content_paste</i>
               <p>Integrar Asistentes</p>
             </a>
@@ -102,7 +102,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuSupervisor.jsp">Inicio</a>
+            <a class="navbar-brand" href="menuSupervisor.jsp">Inicio</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
