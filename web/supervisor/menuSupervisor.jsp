@@ -43,37 +43,37 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active">
-            <a class="nav-link" href="./menuSupervisor.jsp">
+            <a class="nav-link" href="menuSupervisor.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./registroVisita.jsp">
+            <a class="nav-link" href="registroVisita.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Solicitar Visita Medica</p>
+              <p>Registrar Visita Medica</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroVisita.jsp">
+            <a class="nav-link" href="mostrarCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
               <p>Mostrar Capacitaciones</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroCapacitacion.jsp">
+            <a class="nav-link" href="registroCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Generar Capacitacion</p>
+              <p>Registrar Capacitacion</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="">
               <i class="material-icons">content_paste</i>
               <p>Listar Asistentes</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./registroAsistente.jsp">
+            <a class="nav-link" href="registroAsistente.jsp">
               <i class="material-icons">content_paste</i>
               <p>Integrar Asistentes</p>
             </a>

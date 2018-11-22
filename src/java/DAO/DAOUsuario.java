@@ -65,10 +65,6 @@ public class DAOUsuario {
                 u = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("contrasena"), rs.getInt("id_perfil"));
                 return u;
             }
-            else
-            {
-                return u;
-            }
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);

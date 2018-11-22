@@ -44,16 +44,10 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuTecnico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -62,13 +56,13 @@
               <p>Registrar Evaluacion</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
