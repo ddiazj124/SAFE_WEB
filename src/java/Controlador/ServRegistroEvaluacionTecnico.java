@@ -40,14 +40,14 @@ public class ServRegistroEvaluacionTecnico extends HttpServlet {
             String Titulo = request.getParameter("txtTitulo");
             String Descipcion = request.getParameter("txtDescripcion");
             DAOEvaluacion eDao = new DAOEvaluacion();
-            Evaluacion e = new Evaluacion(0, Titulo, tipoEvaluacion, empresa, Descipcion);
-            
+            //Evaluacion e = new Evaluacion(0, Titulo, tipoEvaluacion, empresa, Descipcion);
+              Evaluacion e = new Evaluacion();
             eDao.Insertar(e);
             
-            response.sendRedirect("./tecnico/registroExitoso.jsp");
+            response.sendRedirect("tecnico/registroExitoso.jsp");
         }catch(Exception e)
         {
-            response.sendRedirect("./tecnico/registroFallidoE.jsp");
+            response.sendRedirect("tecnico/registroFallidoE.jsp");
         }
     }
 

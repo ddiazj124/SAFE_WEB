@@ -15,23 +15,18 @@ public class Evaluacion {
     private int id_tipo;
     private String rut_empresa;
     private String descripcion;
+    private char estado;
 
     public Evaluacion() {
     }
 
-    public Evaluacion(int id_ev, String titulo, int id_tipo, String rut_empresa, String descripcion) {
+    public Evaluacion(int id_ev, String titulo, int id_tipo, String rut_empresa, String descripcion, char estado) {
         this.id_ev = id_ev;
         this.titulo = titulo;
         this.id_tipo = id_tipo;
         this.rut_empresa = rut_empresa;
         this.descripcion = descripcion;
-    }
-
-    public Evaluacion(String titulo, int id_tipo, String rut_empresa, String descripcion) {
-        this.titulo = titulo;
-        this.id_tipo = id_tipo;
-        this.rut_empresa = rut_empresa;
-        this.descripcion = descripcion;
+        this.estado = estado;
     }
 
     public int getId_ev() {
@@ -73,6 +68,17 @@ public class Evaluacion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public char getEstado() {
+        return estado;
+    }
+
+    public void setEstado(char estado) {
+        this.estado = estado;
+    }
+    
+    
+    
     
     
     

@@ -5,14 +5,7 @@
  */
 package Controlador;
 
-import DAO.DAOEmpresa;
-import DAO.DAOEvaluacion;
-import DAO.DAOEvaluacionPersonal;
-import DAO.DAOTipo_Eval;
 import DAO.DAOTrabajador;
-import Entidades.Empresa;
-import Entidades.EvaluacionPersonal;
-import Entidades.Tipo_Eval;
 import Entidades.Trabajador;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Diego
+ * @author Sebastian
  */
-@WebServlet(name = "ServMostrarRegistroEvaluacionesPersonal", urlPatterns = {"/ServMostrarRegistroEvaluacionesPersonal"})
-public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
+@WebServlet(name = "SevListTrabxEmpresa", urlPatterns = {"/SevListTrabxEmpresa"})
+public class SevListTrabxEmpresa extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,38 +35,23 @@ public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+      
+            String rut_empresa = request.getParameter("empresa");
+            System.out.println(request.getParameter("empresa"));
+            
+            
+            DAOTrabajador dao = new DAOTrabajador();
+            ArrayList<Trabajador> Listtrab = dao.TraerTodosxEmpresa(rut_empresa);
+            
+            for (Trabajador obj : Listtrab)
             {
-                
-                HttpSession session = request.getSession();
-                
-                //Empresas
-                DAOEmpresa e = new DAOEmpresa();
-                ArrayList<Empresa> Listemp = e.TraerTodos();
-                session.setAttribute("datosEmpresa", Listemp);
-                
-                //Tipo Evaluacion
-                DAOTipo_Eval teDao = new DAOTipo_Eval();
-                ArrayList<Tipo_Eval> ListTipoEval = teDao.TraerTodos();
-                session.setAttribute("datosTipoEvaluacion", ListTipoEval);
-                
-                //Trabajador
-                DAOTrabajador tr = new DAOTrabajador();
-                ArrayList<Trabajador> Listtr = tr.TraerTodos();
-                session.setAttribute("datosTrabajador", Listtr);
-                
-                
-                
-                //response.sendRedirect("medico/administrarAtenciones.jsp");
-                //request.getRequestDispatcher("medico/administrarAtenciones.jsp").forward(request, response);
-            }catch (Exception ex)
-            {
-                String error;
-                error = ex.toString();
+                out.println("<option value="+obj.getRut_trabajador()+">"+obj.getNombre()+ " "+obj.getApellido()+"</option>");
             }
+            
+        }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

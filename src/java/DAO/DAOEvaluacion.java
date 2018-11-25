@@ -36,6 +36,7 @@ public class DAOEvaluacion {
             ps.setInt(2, e.getId_tipo());
             ps.setString(3, e.getRut_empresa());
             ps.setString(4, e.getDescripcion());
+            ps.setString(5, String.valueOf(e.getEstado()));
             
             if(ps.executeUpdate()>0){
                 return true;

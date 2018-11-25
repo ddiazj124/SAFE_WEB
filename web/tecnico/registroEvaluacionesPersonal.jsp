@@ -50,12 +50,6 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluaciones.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Evaluacion</p>
-            </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
@@ -124,49 +118,40 @@
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Titulo Evaluacion</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" disabled>
+                          <input type="text" name="txtEvaluacion" class="form-control">
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="sRutTrabajador">
-                            <c:forEach items="${datosEmpresa}" var="u">
-                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
+                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control">
+                            <c:forEach items="${datosEmpresa}" var="e">
+                                <option value="${e.rut_empresa}">${e.razon_social}</option>
                             </c:forEach>
                            </select> 
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">TIPO EVALUACION</label>
-                            <select id="sTipoEvaluacion" name="sTipoEvaluacion">
-                                <option value="3">Evaluacion Personal</option>
-                            </select> 
-                            
-                        </div>
-                      </div>
-                    </div>
-                      
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
-                          <select id="txtRutTrabajador" name="txtRutTrabajador">
-                            <c:forEach items="${datosTrabajador}" var="u">
-                                <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
+                          <label class="bmd-label-floating">RUT TRABAJADOR</label>
+                          <select id="ddlTrabajador" name="ddlTrabajador" class="form-control">
+                            <option value="0">Seleccione</option>
+                            <c:forEach items="${datosTrabajador}" var="t">
+                                <c:if test="${e.rut_empresa == t.rut_empresa}">
+                                            ${t.rut_trabajador}
+                                </c:if>
                             </c:forEach>
                            </select> 
                         </div>
-                      </div>
+                      </div>  
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">DESCRIPCION</label>
-                           <textarea rows="4" cols="50" name="txtDescripcion"></textarea>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion"></textarea>
                         </div>
                       </div>
                     </div>
@@ -174,19 +159,6 @@
                     <button type="submit" class="btn btn-primary pull-right">Registrar Evaluación</button>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Técnico</h6>
-                  <h4 class="card-title">Técnico</h4>
                 </div>
               </div>
             </div>
@@ -237,16 +209,18 @@
   </script>
   
   <script>
+      
 		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
+				$('#ddlEmpresa').change(function(){
+                                var empresa = $(this).val();
+                                console.log("RUT EMPRESA: "+empresa);
+                        $.post( "../SevListTrabxEmpresa", { empresa: empresa})
+                        .done(function(data) {
+                        $("#ddlTrabajador").append(data);
+                        
+                        });
+                    });
+                });
 </script>
 </body>
 

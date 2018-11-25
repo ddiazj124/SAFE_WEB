@@ -49,12 +49,6 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluaciones.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Evaluacion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>

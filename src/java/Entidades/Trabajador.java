@@ -14,17 +14,17 @@ public class Trabajador {
     private int id_perfil;
     private String rut_empresa;
     private String nombre;
-    private String Apellido;
+    private String apellido;
 
     public Trabajador() {
     }
 
-    public Trabajador(String rut_trabajador, int id_perfil, String rut_empresa, String nombre, String Apellido) {
+    public Trabajador(String rut_trabajador, int id_perfil, String rut_empresa, String nombre, String apellido) {
         this.rut_trabajador = rut_trabajador;
         this.id_perfil = id_perfil;
         this.rut_empresa = rut_empresa;
         this.nombre = nombre;
-        this.Apellido = Apellido;
+        this.apellido = apellido;
     }
 
     public String getRut_trabajador() {
@@ -60,11 +60,12 @@ public class Trabajador {
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
+
     
 }

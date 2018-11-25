@@ -48,12 +48,6 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluaciones.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Evaluacion</p>
-            </a>
-          </li>
           <li class="nav-item active">
             <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
@@ -124,37 +118,36 @@
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Titulo Evaluacion</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" disabled>
+                          <input type="text" name="txtTitulo" class="form-control">
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="sRutTrabajador">
-                            <c:forEach items="${datosEmpresa}" var="u">
-                                <option value="${u.rut_empresa}"><c:out value="${u.razon_social}"/></option>
-                            </c:forEach>
-                           </select> 
+                          <label class="bmd-label-floating">NOMBRE EMPRESA</label>
+                          <select class="form-control" name="sRutEmpresa">
+                          <c:forEach items="${datosEmpresa}" var="e">
+                                    <option value="${e.rut_empresa}">${e.razon_social}</option>
+                          </c:forEach>
+                          </select>                            
                         </div>
-                      </div>
+                      </div>    
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">TIPO EVALUACION</label>
-                            <select id="sTipoEvaluacion" name="sTipoEvaluacion">
+                          <select id="sTipoEvaluacion" name="sTipoEvaluacion" class="form-control">
                                 <option value="1">Evaluacion Electrica</option>
                                 <option value="2">Evaluacion Infraestructura</option>
-                            </select> 
+                          </select> 
                         </div>
                       </div>
                     </div>
-                    
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">DESCRIPCION</label>
-                           <textarea rows="4" cols="50" name="txtDescripcion"></textarea>
+                          <textarea rows="4" cols="50" name="txtDescripcion" class="form-control"></textarea>
                         </div>
                       </div>
                     </div>
@@ -162,19 +155,6 @@
                     <button type="submit" class="btn btn-primary pull-right">Registrar Evaluacion</button>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Técnico</h6>
-                  <h4 class="card-title">Técnico</h4>
                 </div>
               </div>
             </div>
@@ -223,19 +203,6 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>

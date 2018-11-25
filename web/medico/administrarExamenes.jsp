@@ -131,8 +131,6 @@
                             <input type="text" class="form-control" name="txtIdVisita">
                         </div>
                       </div>
-                      
-                        
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">FECHA EXAMEN</label>
