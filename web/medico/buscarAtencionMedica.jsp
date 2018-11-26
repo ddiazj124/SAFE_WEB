@@ -4,6 +4,8 @@
     Author     : Diego
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,6 +27,8 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  <link href="../customcss/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
+  
 </head>
 
 <body class="">
@@ -42,25 +46,19 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuMedico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuMedico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Visualizar Atenciones Medicas</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="./buscarAtencionMedica.jsp">
               <i class="material-icons">content_paste</i>
               <p>Administrar Atencion</p>
@@ -124,41 +122,18 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form class="form-group" action="../ServBuscarAtencionMedica" method="post">
+                    <form action="#" method="post">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-5">
                         <div class="form-group">
-                            <label class="bmd-label-floating">RUT TRABAJADOR</label><br>
-                            <select id="sRutTrabajador" class="form-control">
-                            <c:forEach items="${datosTrabajador}" var="u">
-                                <option value="${u.rut_trabajador}"><c:out value="${u.rut_trabajador}"/></option>
-                            </c:forEach>
-                           </select> 
+                          <label class="bmd-label-floating">FECHA ATENCION MEDICA</label>
+                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">ID VISITA</label>
-                            <input type="text" class="form-control" name="txtIdVisita">
-                        </div>
-                      </div>                      
                     </div>
-                      <button type="submit" class="btn btn-primary pull-right">Buscar Visita Medica</button>
+                    <button type="submit" class="btn btn-primary pull-right">Buscar Atencion</button>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Medico</h6>
-                  <h4 class="card-title">Medico</h4>
                 </div>
               </div>
             </div>
@@ -190,6 +165,15 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="../customcss/datepicker/js/locales/bootstrap-datepicker.es.js" type="text/javascript"></script>
+  <script src="../customcss/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+     $('#divMiCalendario').datetimepicker({
+          format: 'YYYY-MM-DD HH:mm'       
+      });
+      $('#divMiCalendario').data("DateTimePicker").show();
+   </script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -197,19 +181,6 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>

@@ -42,19 +42,13 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuMedico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuMedico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Visualizar Atenciones Medicas</p>
