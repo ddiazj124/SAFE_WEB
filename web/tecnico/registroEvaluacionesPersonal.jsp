@@ -4,6 +4,9 @@
     Author     : Diego
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -117,8 +120,14 @@
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Titulo Evaluacion</label>
+                          <label class="bmd-label-floating">TITULO EVALUACION</label>
                           <input type="text" name="txtEvaluacion" class="form-control">
+                        </div>
+                      </div>
+                        <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Fecha</label>
+                          <input type="text" name="txtEvaluacion" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>
@@ -126,11 +135,13 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control">
+                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control" required>
+                                <option value="0">Seleccione</option>
                             <c:forEach items="${datosEmpresa}" var="e">
                                 <option value="${e.rut_empresa}">${e.razon_social}</option>
                             </c:forEach>
-                           </select> 
+                           </select>
+                          <input type="hidden" name="valorDefectoEmpresa" value="${t.rut_trabajador}"/>
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -143,19 +154,27 @@
                                             ${t.rut_trabajador}
                                 </c:if>
                             </c:forEach>
-                           </select> 
+                           </select>
+                          <input type="hidden" name="valorDefectoTrabajdor" value="${t.rut_trabajador}"/>
                         </div>
                       </div>  
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION</label>
+                          <label class="bmd-label-floating">DESCRIPCION EVALUACION</label>
                           <textarea class="form-control" rows="4" cols="50" name="txtDescripcion"></textarea>
                         </div>
                       </div>
                     </div>
-                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">COMENTARIO</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionPersona"></textarea>
+                        </div>
+                      </div>
+                    </div>    
                     <button type="submit" class="btn btn-primary pull-right">Registrar Evaluación</button>
                     <div class="clearfix"></div>
                   </form>
@@ -212,12 +231,13 @@
       
 		$(document).ready(function(){
 				$('#ddlEmpresa').change(function(){
-                                var empresa = $(this).val();
-                                console.log("RUT EMPRESA: "+empresa);
+                                var empresa = "";
+                                empresa = $(this).val();
+                                
                         $.post( "../SevListTrabxEmpresa", { empresa: empresa})
                         .done(function(data) {
                         $("#ddlTrabajador").append(data);
-                        
+                        console.log(data);
                         });
                     });
                 });

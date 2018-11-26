@@ -45,32 +45,20 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="./menuTecnico.jsp">
+          <li class="nav-item">
+            <a class="nav-link" href="menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuTecnico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluaciones.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Evaluacion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
+          <li class="nav-item">
+            <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
+            <a class="nav-link" href="registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
             </a>
@@ -122,8 +110,7 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registro Evaluacion Personal</h4>
-                  <p class="card-category">Completa el Formulario</p>
+                  <h4 class="card-title">Fallido</h4>
                 </div>
                 <div class="card-body">
                     <form action="../ServRegistroEvalPersonalTecnico" method="post">
@@ -138,19 +125,6 @@
                     </div>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Técnico</h6>
-                  <h4 class="card-title">Técnico</h4>
                 </div>
               </div>
             </div>

@@ -14,17 +14,28 @@ public class Evaluacion {
     private String titulo;
     private int id_tipo;
     private String rut_empresa;
+    private String fecha_eval;
     private String descripcion;
     private int evaluacion_estado_id;
 
     public Evaluacion() {
     }
 
-    public Evaluacion(int id_ev, String titulo, int id_tipo, String rut_empresa, String descripcion, int evaluacion_estado_id) {
+    public Evaluacion(int id_ev, String titulo, int id_tipo, String rut_empresa, String fecha_eval, String descripcion, int evaluacion_estado_id) {
         this.id_ev = id_ev;
         this.titulo = titulo;
         this.id_tipo = id_tipo;
         this.rut_empresa = rut_empresa;
+        this.fecha_eval = fecha_eval;
+        this.descripcion = descripcion;
+        this.evaluacion_estado_id = evaluacion_estado_id;
+    }
+
+    public Evaluacion(String titulo, int id_tipo, String rut_empresa, String fecha_eval, String descripcion, int evaluacion_estado_id) {
+        this.titulo = titulo;
+        this.id_tipo = id_tipo;
+        this.rut_empresa = rut_empresa;
+        this.fecha_eval = fecha_eval;
         this.descripcion = descripcion;
         this.evaluacion_estado_id = evaluacion_estado_id;
     }
@@ -61,6 +72,14 @@ public class Evaluacion {
         this.rut_empresa = rut_empresa;
     }
 
+    public String getFecha_eval() {
+        return fecha_eval;
+    }
+
+    public void setFecha_eval(String fecha_eval) {
+        this.fecha_eval = fecha_eval;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -76,6 +95,8 @@ public class Evaluacion {
     public void setEvaluacion_estado_id(int evaluacion_estado_id) {
         this.evaluacion_estado_id = evaluacion_estado_id;
     }
+
+    
     
     
 }

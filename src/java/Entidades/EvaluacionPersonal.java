@@ -25,6 +25,12 @@ public class EvaluacionPersonal {
         this.rut_trabajador = rut_trabajador;
     }
 
+    public EvaluacionPersonal(String descripcion, int id_tipo, String rut_trabajador) {
+        this.descripcion = descripcion;
+        this.id_tipo = id_tipo;
+        this.rut_trabajador = rut_trabajador;
+    }
+
     public int getId() {
         return id;
     }

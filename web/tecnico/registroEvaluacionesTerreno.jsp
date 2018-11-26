@@ -3,6 +3,9 @@
     Created on : 21-oct-2018, 21:12:18
     Author     : Diego
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,19 +46,19 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="./menuTecnico.jsp">
+            <a class="nav-link" href="menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
+            <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
+            <a class="nav-link" href="registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
             </a>
@@ -70,7 +73,6 @@
       </div>
     </div>
     <div class="main-panel">
-        <jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
@@ -107,52 +109,56 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <div class="card">
+            <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registro Evaluacion Terreno</h4>
+                  <h4 class="card-title">Registro Evaluacion en Terreno</h4>
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                  <form action="../ServRegistroEvalTerrenoTecnico" method="post">
+                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Titulo Evaluacion</label>
-                          <input type="text" name="txtTitulo" class="form-control">
+                          <label class="bmd-label-floating">TITULO EVALUACION</label>
+                          <input type="text" name="txtEvaluacion" class="form-control" required="true">
+                        </div>
+                      </div>
+                        <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Fecha</label>
+                          <input type="text" name="txtEvaluacion" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">NOMBRE EMPRESA</label>
-                          <select class="form-control" name="sRutEmpresa">
-                          <c:forEach items="${datosEmpresa}" var="e">
-                                    <option value="${e.rut_empresa}">${e.razon_social}</option>
-                          </c:forEach>
-                          </select>                            
-                        </div>
-                      </div>    
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">TIPO EVALUACION</label>
-                          <select id="sTipoEvaluacion" name="sTipoEvaluacion" class="form-control">
-                                <option value="1">Evaluacion Electrica</option>
-                                <option value="2">Evaluacion Infraestructura</option>
-                          </select> 
+                          <label class="bmd-label-floating">EMPRESA</label>
+                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control" required="true">
+                            <c:forEach items="${datosEmpresa}" var="e">
+                                <option value="${e.rut_empresa}">${e.razon_social}</option>
+                            </c:forEach>
+                           </select>
+                        </div>
+                      </div>  
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">DESCRIPCION DE EVALUACION</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true"></textarea>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION</label>
-                          <textarea rows="4" cols="50" name="txtDescripcion" class="form-control"></textarea>
+                          <label class="bmd-label-floating">COMENTARIO</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionEmpresa" required="true"></textarea>
                         </div>
                       </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary pull-right">Registrar Evaluacion</button>
+                    </div>    
+                        <input type="submit" class="btn btn-primary pull-right" value="Registrar Evaluación"/>
                     <div class="clearfix"></div>
                   </form>
                 </div>

@@ -5,10 +5,14 @@
  */
 package Controlador;
 
+import DAO.DAOEvaluacion;
 import DAO.DAOEvaluacionPersonal;
+import Entidades.Evaluacion;
 import Entidades.EvaluacionPersonal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,24 +35,7 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try{
-            int tipoEvaluacion = Integer.parseInt(request.getParameter("sTipoEvaluacion"));
-            String Descipcion = request.getParameter("txtDescripcion");
-            String rut_empleado = request.getParameter("txtRutTrabajador");
-            DAOEvaluacionPersonal eDao = new DAOEvaluacionPersonal();
-            EvaluacionPersonal e = new EvaluacionPersonal(0, Descipcion,tipoEvaluacion,rut_empleado);
-            
-            eDao.Insertar(e);
-            
-            response.sendRedirect("./tecnico/registroExitoso.jsp");
-        }catch(Exception e)
-        {
-            response.sendRedirect("./tecnico/registroFallido.jsp");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,7 +49,6 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
@@ -76,7 +62,36 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try{
+            //DATOS DEL FORMULARIO
+            String titulo = request.getParameter("txtEvaluacion");
+            String rut_empresa = request.getParameter("ddlEmpresa");
+            String rut_trabajador = request.getParameter("ddlTrabajador");
+            String descripcion_evaluacion = request.getParameter("");
+            String descripcion_evaluacionP = request.getParameter("txtDescripcionPersona");
+            int tipo_eval = 7;
+            int id_estado = 1;
+            
+            //FECHA
+            String fecha_eval = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+            
+            //DAO
+            DAOEvaluacion dao = new DAOEvaluacion();
+            DAOEvaluacionPersonal eDao = new DAOEvaluacionPersonal();
+            
+            
+            Evaluacion ev = new Evaluacion(titulo, tipo_eval, rut_empresa,fecha_eval, descripcion_evaluacion, id_estado);
+            EvaluacionPersonal e = new EvaluacionPersonal(descripcion_evaluacionP,tipo_eval,rut_trabajador);
+            
+            dao.Insertar(ev);
+            eDao.Insertar(e);
+            
+            response.sendRedirect("./tecnico/registroExitoso.jsp");
+        }catch(Exception e)
+        {
+            response.sendRedirect("./tecnico/registroFallido.jsp");
+        }
     }
 
     /**

@@ -39,11 +39,12 @@ public class SevListTrabxEmpresa extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
       
             String rut_empresa = request.getParameter("empresa");
-            System.out.println(request.getParameter("empresa"));
             
             
             DAOTrabajador dao = new DAOTrabajador();
             ArrayList<Trabajador> Listtrab = dao.TraerTodosxEmpresa(rut_empresa);
+            
+            System.out.println("CANTIDAD DE OBJETOS: "+Listtrab.size());
             
             for (Trabajador obj : Listtrab)
             {
