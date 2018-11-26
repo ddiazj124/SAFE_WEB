@@ -121,7 +121,7 @@
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txtEvaluacion" class="form-control">
+                          <input type="text" name="txtEvaluacion" class="form-control" required>
                         </div>
                       </div>
                         <div class="col-md-5">
@@ -163,7 +163,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">DESCRIPCION EVALUACION</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion"></textarea>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required></textarea>
                         </div>
                       </div>
                     </div>
@@ -171,7 +171,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">COMENTARIO</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionPersona"></textarea>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionPersona" required></textarea>
                         </div>
                       </div>
                     </div>    
