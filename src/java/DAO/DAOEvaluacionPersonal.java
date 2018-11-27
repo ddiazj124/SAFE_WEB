@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class DAOEvaluacionPersonal {
  
     private static String sql_selectAll = "SELECT * FROM EVAL_TERRENO";
-    private static String sql_insertarProcedimiento = "CALL ADM_EVAL_PERS_TECNICO_I(?,?,?)";
+    private static String sql_insertarProcedimiento = "CALL INSERT_EVAL_PERS(?,?,?)";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -32,8 +32,8 @@ public class DAOEvaluacionPersonal {
             
             ps = objConn.getConn().prepareStatement(sql_insertarProcedimiento);
             ps.setString(1, e.getDescripcion());
-            ps.setString(2, e.getRut_trabajador());
-            ps.setInt(3, e.getId_tipo());
+            ps.setInt(2, e.getId_tipo());
+            ps.setString(3, e.getRut_trabajador());
             
             if(ps.executeUpdate()>0){
                 return true;

@@ -30,6 +30,8 @@ public class EvaluacionPersonal {
         this.id_tipo = id_tipo;
         this.rut_trabajador = rut_trabajador;
     }
+    
+    
 
     public int getId() {
         return id;
