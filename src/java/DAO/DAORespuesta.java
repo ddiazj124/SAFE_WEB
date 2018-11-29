@@ -6,6 +6,7 @@
 package DAO;
 
 import Conexion.Conexion;
+import Entidades.Respuesta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,14 +23,14 @@ public class DAORespuesta {
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
     
-    public boolean Insertar(int idRespuesta,int idPregunta,String detalleRespuesta) {
+    public boolean Insertar(Respuesta resp) {
         try {
             PreparedStatement ps;
             
             ps = objConn.getConn().prepareStatement(sql_insertar);
-            ps.setInt(1, idRespuesta);
-            ps.setInt(2, idPregunta);
-            ps.setString(3, detalleRespuesta);
+            ps.setInt(1, resp.getIdRespuesta());
+            ps.setInt(2, resp.getIdPregunta());
+            ps.setString(3, resp.getDetalleRespuesta());
             
             if(ps.executeUpdate()>0){
                 return true;

@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../ServMostrarPreguntas" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -115,7 +116,7 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
+                    <form action="../ServRegistroRespuestas" method="post">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
@@ -134,11 +135,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control" required="true">
-                            <c:forEach items="${datosEmpresa}" var="e">
-                                <option value="${e.rut_empresa}">${e.razon_social}</option>
-                            </c:forEach>
-                           </select>
+                          
                         </div>
                       </div>  
                     </div>
@@ -153,8 +150,20 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">COMENTARIO</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionEmpresa" required="true"></textarea>
+                          <label class="bmd-label-floating"></label>
+                          <c:forEach items="${datosPreguntas}" var="p">
+                              <table>
+                                  <tr>
+                                  <br>
+                                      <label>${p.detallePregunta}</label>
+                                  </tr>
+                                  <tr>
+                                      <textarea class="form-control" rows="4" cols="50" name="txtrespuesta${p.idPregunta}" required="true"></textarea>
+                                  </tr>
+                              </table>
+                                
+                                
+                            </c:forEach>
                         </div>
                       </div>
                     </div>    
