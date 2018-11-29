@@ -19,24 +19,24 @@ import java.util.logging.Logger;
  * @author Diego
  */
 public class DAOPregunta {
-    private static String sql_selectAll = "SELECT * FROM PERFIL";
+    private static String sql_selectAll = "SELECT * FROM PREGUNTA where id_ev = ?";
 
     
 private static Conexion objConn = Conexion.InstanciaConn();
 private ResultSet rs;
 
-public ArrayList<Pregunta> TraerTodos() {
+public ArrayList<Pregunta> TraerPreguntasEval(int idEval) {
         try {
             ArrayList<Pregunta> Lpregunta = new ArrayList<>();
             PreparedStatement ps;
             
 
             ps = objConn.getConn().prepareStatement(sql_selectAll);
+            ps.setInt(1, idEval);
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Lpregunta.add(new Pregunta(rs.getInt("id_pregunta"),rs.getInt("id_ev") ,rs.getString("detalle_pregunta")));
-                
+                Lpregunta.add(new Pregunta(rs.getInt("id_pregunta"),rs.getInt("id_ev") ,rs.getString("detalle_pregunta")));                
             }
             return Lpregunta; 
         
@@ -46,5 +46,18 @@ public ArrayList<Pregunta> TraerTodos() {
             objConn.Cerrar();
         }
         return null;  
+    }
+
+public static void main(String[] args) {
+        
+       DAOPregunta dao1 = new DAOPregunta();
+       ArrayList<Pregunta> Listvis = dao1.TraerPreguntasEval(23);
+        System.out.println("Cantidad de objetos: " + Listvis.size());
+        
+        for (Pregunta obj : Listvis) {
+            System.out.println("ID Pregunta: "+obj.getIdEv()+ " Detalle: " + obj.getDetallePregunta());
+        }
+        
+        System.out.println("---------------------------------");
     }
 }
