@@ -38,7 +38,6 @@ public ArrayList<Trabajador> TraerTodos() {
             
             while(rs.next()){
                 Ltrabajador.add(new Trabajador(rs.getString("rut_trabajador"), rs.getInt("id_perfil"),rs.getString("rut_empresa"),rs.getString("nombre"),rs.getString("apellido")));
-                
             }
             return Ltrabajador; 
         

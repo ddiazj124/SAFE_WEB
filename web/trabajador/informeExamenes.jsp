@@ -1,7 +1,7 @@
 <%-- 
-    Document   : menuTrabajador
-    Created on : 22-oct-2018, 10:21:09
-    Author     : Diego
+    Document   : informeExamenes
+    Created on : 28-nov-2018, 20:21:09
+    Author     : Cristian
 --%>
 
 
@@ -51,31 +51,30 @@
           <li class="nav-item ">
             <a class="nav-link" href="./menuTrabajador.jsp">
               <i class="material-icons">person</i>
-              <p>Menú</p>
+              <p>Men&uacute;</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Generar Informe Capacitacion</p>
+              <p>Generar Informe Capacitaci&oacute;n</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeVisita.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Visitas Medicas</p>
+              <p>Informe de Visitas M&eacute;dicas</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./generarInformeVisita.jsp">
+            <a class="nav-link" href="./informeExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Ex&aacute;amenes</p>
+              <p>Informe de Ex&aacute;menes</p>
             </a>
-          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Cerrar Sesión</p>
+              <p>Cerrar Sesi&oacute;n</p>
             </a>
           </li>
         </ul>
@@ -86,7 +85,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Ex&aacute;menes</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -116,50 +115,19 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-12 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Generar Informe Capacitacion</p>
-                  <h3 class="card-title"><a id="re" href="./generarInformeCapacitacion.jsp">Entrar</a>
+                  <p class="card-category"></p>
+                  <h3 class="card-title"><a id="re" href="./generarInformeCapacitacion.jsp"></a>
                   </h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
                     <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Visitas Medicas</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Ex&aacute;menes</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
                   </div>
                 </div>
               </div>

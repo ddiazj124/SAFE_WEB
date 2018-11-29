@@ -158,4 +158,46 @@ public class CapacitacionDAO implements CRUDCapacitacion{
         return salida;
     }
     
+    
+    //Buscar por rut
+    public List listarRut(String rut) {
+        PreparedStatement ps;
+        List<CapacitacionVO> listado = new ArrayList();
+        String sql =    "SELECT " +
+                        "    CAP.ID_CAPACITACION        AS ID " +
+                        "   ,CAP.NOMBRE_CAPACITACION    AS NOMBRE_CAPACITACION " +
+                        "   ,CAP.FECHA_TERMINO          AS FECHA_TERMINO " +
+                        "   ,CAP.FECHA_INICIO           AS FECHA_INICIO " +
+                        "   ,CAP.ID_AREA                AS ID_AREA " +
+                        "   ,ARE.NOMBRE_AREA            AS NOMBRE_AREA " +
+                        "   ,CAP.ID_PLAN                AS ID_PLAN " +
+                        "   ,PLA.DESCRIPCION            AS NOMBRE_PLAN " +
+                        "FROM        CAPACITACION CAP " +
+                        "INNER JOIN  AREA         ARE ON CAP.ID_AREA = ARE.ID_AREA " +
+                        "INNER JOIN  PLAN_ANUAL   PLA ON CAP.ID_PLAN = PLA.ID_PLAN " +
+                        "Where rut_trabajador = ?" +
+                        "ORDER BY CAP.ID_CAPACITACION ASC ";
+        try {
+            ps = objConn.getConn().prepareStatement(sql);
+            ps.setString(1, rut);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CapacitacionVO capacitacionVO = new CapacitacionVO();
+                capacitacionVO.setId_capacitacion(rs.getInt("ID"));
+                capacitacionVO.setNombre_capacitación(rs.getString("NOMBRE_CAPACITACION"));
+                capacitacionVO.setFecha_termino(rs.getDate("FECHA_TERMINO"));
+                capacitacionVO.setFecha_inicio(rs.getDate("FECHA_INICIO"));
+                capacitacionVO.setId_area(rs.getInt("ID_AREA"));
+                capacitacionVO.setArea(rs.getString("NOMBRE_AREA"));
+                capacitacionVO.setId_plan(rs.getInt("ID_PLAN"));
+                capacitacionVO.setPlan(rs.getString("NOMBRE_PLAN"));
+                listado.add(capacitacionVO);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar Capacitaciones");
+        }
+        return listado;
+    }
+    
 }

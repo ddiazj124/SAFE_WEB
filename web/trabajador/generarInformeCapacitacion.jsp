@@ -3,7 +3,14 @@
     Created on : 22-oct-2018, 10:21:09
     Author     : Diego
 --%>
-
+<%@page import="java.sql.Date"%>
+<%@page import="VO.PlanVO"%>
+<%@page import="VO.AreaVO"%>
+<%@page import="Entidades.Area"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="VO.CapacitacionVO"%>
+<%@page import="DAO.*"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +22,7 @@
   <link rel="icon" type="image/png" href="../customcss/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Safe - Prevención
+    Safe - Prevenci&oacute;n
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -51,19 +58,19 @@
           <li class="nav-item ">
             <a class="nav-link" href="./menuTrabajador.jsp">
               <i class="material-icons">person</i>
-              <p>Menú</p>
+              <p>Men&uacute;</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Generar Informe Capacitacion</p>
+              <p>Generar Informe Capacitaci&oacute;n</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeVisita.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Visitas Medicas</p>
+              <p>Informe de Visitas M&eacute;dicas</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -71,11 +78,10 @@
               <i class="material-icons">content_paste</i>
               <p>Informe de Ex&aacute;amenes</p>
             </a>
-          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Cerrar Sesión</p>
+              <p>Cerrar Sesi&oacute;n</p>
             </a>
           </li>
         </ul>
@@ -86,7 +92,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Capacitaciones</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -113,58 +119,61 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="content">
+<div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category">Generar Informe Capacitacion</p>
-                  <h3 class="card-title"><a id="re" href="./generarInformeCapacitacion.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
             
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Visitas Medicas</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Ex&aacute;menes</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
+            <section>
+              <div class="table-responsive" style="border-top:1px solid #dee2e6;">
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE CAPACITACIÓN</th>
+                        <th bgcolor="#D4E6F1" class="text-center">FECHA TERMINO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">FECHA INICIO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE AREA</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE PLAN</th>
+                    </tr>
+                </thead>
+                <%
+                    CapacitacionDAO             dao             = new CapacitacionDAO();
+                    List<CapacitacionVO>        list            = dao.listar();
+                    Iterator<CapacitacionVO>    iter            =list.iterator();
+                    CapacitacionVO              capacitacionVO  = null;
+                    while (iter.hasNext()) {
+                            capacitacionVO = iter.next();                    
+                %> 
+                <tbody>
+                    <tr>
+                        <td class="text-center"><%= capacitacionVO.getNombre_capacitación() %></td>
+                        <td class="text-center"><%= capacitacionVO.getFecha_termino() %></td>
+                        <td class="text-center"><%= capacitacionVO.getFecha_inicio() %></td>
+                        <td class="text-center"><%= capacitacionVO.getArea() %></td>
+                        <td class="text-center"><%= capacitacionVO.getPlan() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    </section>
           </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
           
       <footer class="footer">
         <div class="container-fluid">
@@ -208,5 +217,19 @@
     });
   </script>
 </body>
+    <script type="text/javascript">
+        function exportTableToExcel() {                
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
 
+                    var table = 'tblReporte';
+                    var name = 'nombre_hoja_calculo';
+
+                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                     var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                     window.location.href = uri + base64(format(template, ctx))
+                };
+    </script>
 </html>
