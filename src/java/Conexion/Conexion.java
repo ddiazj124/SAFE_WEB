@@ -19,7 +19,7 @@ public class Conexion {
     public static Conexion InstaConn;
     private Connection conn;
     
-    private Conexion(){
+    public Conexion(){
         try {
             //Ahora conecta
             Class.forName("oracle.jdbc.driver.OracleDriver");

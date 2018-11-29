@@ -36,7 +36,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="./menuTecnico.jsp" class="simple-text logo-normal">
+        <a href="" class="simple-text logo-normal">
           Menu
         </a>
       </div>
@@ -47,49 +47,14 @@
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registroVisita.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Visita Medica</p>
-            </a>
-          </li>
+          </li>          
           <li class="nav-item ">
-            <a class="nav-link" href="mostrarCapacitacion.jsp">
+            <a class="nav-link" href="Capacitaciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Mostrar Capacitaciones</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="registroCapacitacion.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Registrar Capacitacion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="">
-              <i class="material-icons">content_paste</i>
-              <p>Listar Asistentes</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registroAsistente.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Integrar Asistentes</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="">
-              <i class="material-icons">content_paste</i>
-              <p>Generar Certificado</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">content_paste</i>
-              <p>Generar Informe Evaluacion</p>
-            </a>
-          </li>
+          
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
@@ -104,7 +69,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTecnico.jsp">Inicio</a>
+            <a class="navbar-brand" href="">Inicio</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -134,53 +99,7 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category">Solicitar Visita</p>
-                  <h3 class="card-title"><a id="re" href="./registroVisita.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroEvaluaciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Registrar Capacitaciones</p>
-                  <h3 class="card-title" href="./registroCapacitacion.jsp"><a href="./registroCapacitacion.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Registro de Asistencia </p>
-                  <h3 class="card-title"><a href="./registroAsistente.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
+             
             
           </div>
           
