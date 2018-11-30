@@ -73,6 +73,7 @@ public class Prueba extends HttpServlet {
             //Image imagen = Image.getInstance();
             
             //Pagina 1
+            //Añadir contenido de identificación PDF
             document.addTitle("Reporte Visitas Medicas");
             document.addSubject("Generando Pdf Visitas.");
             document.addKeywords("Safe");
@@ -80,19 +81,13 @@ public class Prueba extends HttpServlet {
             document.addCreator("SAFE - Asesoria Empresarial");
             
             //Contenido PDF
-            Chunk chunk = new Chunk("This is the title", chapterFont);
+            Chunk chunk = new Chunk("Titulo", chapterFont);
             //chunk.setBackground(BaseColor.GRAY);
             Chapter chapter = new Chapter(new Paragraph(chunk), 1);
             chapter.setNumberDepth(0);
-            chapter.add(new Paragraph("This is the paragraph", paragraphFont));
-            Image image;
-            try {
-                image = Image.getInstance(RutaImagen);  
-                image.setAbsolutePosition(2, 150);
-                chapter.add(image);
-            } catch (BadElementException ex) {
-                System.out.println("Error en la imagen" +  ex);
-            }
+            chapter.add(new Paragraph("Subtitulo", paragraphFont));
+            
+                
             
             document.add(chapter);
             document.close();
