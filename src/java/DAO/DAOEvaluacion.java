@@ -21,8 +21,9 @@ import java.util.logging.Logger;
 public class DAOEvaluacion {
  
     private static String sql_selectAll = "SELECT * FROM EVALUACION";
-    private static String sql_insertarProcedimiento = "CALL INSERT_EVAL(?,?,?,?,?,?)";
+    private static String sql_insertarProcedimiento = "CALL INSERT_EVAL(?,?,?,?,?)";
     private static String sql_contarCantidadEvaluacion = "SELECT COUNT(*) FROM EVALUACION";
+    private static String sql_EvaluacionesTecnico = "SELECT * FROM EVALUACION where rut_tecnico = ?";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -33,11 +34,10 @@ public class DAOEvaluacion {
             
             ps = objConn.getConn().prepareStatement(sql_insertarProcedimiento);
             ps.setString(1, e.getTitulo());
-            ps.setInt(2, e.getId_tipo());
-            ps.setString(3, e.getRut_empresa());
-            ps.setString(4, e.getFecha_eval());
-            ps.setString(5, e.getDescripcion());
-            ps.setInt(6, e.getEvaluacion_estado_id());
+            ps.setString(2, e.getRut_empresa());
+            ps.setString(3, e.getFecha_eval());
+            ps.setString(4, e.getDescripcion());
+            ps.setInt(5, e.getEvaluacion_estado_id());
             
             if(ps.executeUpdate()>0){
                 return true;
@@ -50,6 +50,28 @@ public class DAOEvaluacion {
         }
         return false;
     }
+
+    public ArrayList<Evaluacion> TraerEvaluacionesTecnico(String rut_tecnico) {
+        try {
+            ArrayList<Evaluacion> Levaluacion = new ArrayList<>();
+            PreparedStatement ps;
+            
+            ps = objConn.getConn().prepareStatement(sql_EvaluacionesTecnico);
+            ps.setString(1,rut_tecnico);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Levaluacion.add(new Evaluacion(rs.getInt("ID_EV"),rs.getString("TITULO") ,rs.getString("RUT_EMPRESA"),rs.getString("FECHA_EVAL"),rs.getString("DESCRIPCION"),rs.getInt("EVALUACION_ESTADO_ID"),rs.getString("RUT_TECNICO"),rs.getString("RUT_INGENIERO")));                
+            }
+            return Levaluacion; 
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
     
     
     
@@ -58,7 +80,15 @@ public class DAOEvaluacion {
         //Evaluacion e = new Evaluacion("PruebaDesdeJava", 2, "20385652-9", "Prueba");
         //DAOEvaluacion Dev = new DAOEvaluacion();
         //Dev.Insertar(e);
+        DAOEvaluacion dao1 = new DAOEvaluacion();
+        ArrayList<Evaluacion> Listvis = dao1.TraerEvaluacionesTecnico("16200739-4");
+        System.out.println("Cantidad de objetos: " + Listvis.size());
         
+        for (Evaluacion obj : Listvis) {
+            System.out.println("ID Evaluacion: "+obj.getId_ev()+ " Descripcion: " + obj.getDescripcion());
+        }
+        
+        System.out.println("---------------------------------");
         
         
     }
