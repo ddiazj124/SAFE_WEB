@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+<body>    
         <%
         HttpSession z = request.getSession(true);
         Usuario u = (Usuario)z.getAttribute("datosUsuario");
@@ -44,12 +44,17 @@
                     response.sendRedirect("../index.jsp");   
                 break;
                 
-                case 7:   
+                case 7:
+                %> 
+                
+                <h1>Hola</h1>
+                <% out.println("Bienvenido Usuario: " + u.getNombre_usuario());%>
+                
+                
+                <%
                 break;
             }
         }
         %>
-        <%out.println("Bienvenido Usuario: " + u.getNombre_usuario());%>
-        
-    </body>
+</body>
 </html>
