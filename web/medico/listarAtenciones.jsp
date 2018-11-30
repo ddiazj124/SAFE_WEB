@@ -4,6 +4,7 @@
     Author     : Diego
 --%>
 
+<%@page import="Entidades.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +28,40 @@
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 <body class="">
-    <jsp:include page="../ServListarAtencionMed" flush="true"></jsp:include>
+            <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                %> 
+                <jsp:include page="../ServListarAtencionMed" flush="true"></jsp:include>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -364,6 +398,11 @@
       });
     });
   </script>
+                <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>
