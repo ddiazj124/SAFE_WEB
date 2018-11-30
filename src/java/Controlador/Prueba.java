@@ -91,9 +91,7 @@ public class Prueba extends HttpServlet {
                 image.setAbsolutePosition(2, 150);
                 chapter.add(image);
             } catch (BadElementException ex) {
-                System.out.println("Image BadElementException" +  ex);
-            } catch (IOException ex) {
-                System.out.println("Image IOException " +  ex);
+                System.out.println("Error en la imagen" +  ex);
             }
             
             document.add(chapter);
