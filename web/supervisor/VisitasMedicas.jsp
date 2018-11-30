@@ -24,7 +24,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <title>VISITAS MEDICAS</title>
     
-    <link rel="stylesheet" type="text/css" href="CSS.css"> 
+    <!--<link rel="stylesheet" type="text/css" href="CSS.css"> -->
     <style type="text/css"> 
         .preloader {
             background-color    : #D2D2D2;
@@ -46,15 +46,17 @@
         <img src="img/loading.gif" width="80" height="80" alt="" style="position: fixed; top: 50%; left: 50%; " />
     </div>
     <!--<div class="preloader"></div>-->
-    </br>&nbsp;&nbsp;
-        <button id="btnMenu"
-            type="button" 
-            class="btn btn-lg"                                
-            href="menuSupervisor.jsp"
-            >
-            Menú
-        </button>
-        </br>      
+    </br>&nbsp;&nbsp;               
+        <a class="" href="menuSupervisor.jsp">
+            <button id="btnMenu"
+                  type="submit" 
+                  class="btn btn-lg"                                
+                  href="menuSupervisor.jsp"
+                  >
+
+                  Menú
+          </button> 
+       </a>             
         <div class="container" >
             <h1>Visitas Médicas</h1>    
             <button id="btnAgregarVisita"

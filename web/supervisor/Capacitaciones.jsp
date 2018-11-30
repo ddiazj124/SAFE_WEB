@@ -21,7 +21,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <title>CAPACITACIONES</title>
     
-    <link rel="stylesheet" type="text/css" href="CSS.css"> 
+    <!--<link rel="stylesheet" type="text/css" href="CSS.css"> -->
     <style type="text/css"> 
         .preloader {
             background-color    : #D2D2D2;
@@ -43,15 +43,17 @@
         <img src="img/loading.gif" width="80" height="80" alt="" style="position: fixed; top: 50%; left: 50%; " />
     </div>
     <!--<div class="preloader"></div>-->
-    </br>&nbsp;&nbsp;
-        <button id="btnMenu"
-            type="button" 
-            class="btn btn-lg"                                
-            href="menuSupervisor.jsp"
-            >
-            Menú
-        </button>
-        </br>      
+    </br>&nbsp;&nbsp;        
+        <a class="" href="menuSupervisor.jsp">
+            <button id="btnMenu"
+                  type="submit" 
+                  class="btn btn-lg"                                
+                  href="menuSupervisor.jsp"
+                  >
+
+                  Menú
+          </button> 
+       </a>      
         <div class="container" >
             <h1>Capacitaciones</h1>    
             <button id="btnAgregarCapacitacion"
@@ -72,18 +74,18 @@
                 <thead>
                     <tr>
                         <th bgcolor="#D4E6F1" class="text-center">ID</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE CAPACITACIÓN</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE</th>
                         <th bgcolor="#D4E6F1" class="text-center">FECHA TERMINO</th>
                         <th bgcolor="#D4E6F1" class="text-center">FECHA INICIO</th>
                         <th bgcolor="#D4E6F1" class="text-center">ID AREA</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE AREA</th>
+                        <th bgcolor="#D4E6F1" class="text-center">AREA</th>
                         <th bgcolor="#D4E6F1" class="text-center">ID PLAN</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE PLAN</th>
-                        <th bgcolor="#D4E6F1" class="text-center">ACCIONES</th>
+                        <th bgcolor="#D4E6F1" class="text-center">PLAN</th>
+                        <th bgcolor="#D4E6F1" class="text-center">ACCIONES</th> 
                     </tr>
                 </thead>
                 <%
-                    CapacitacionDAO             dao             = new CapacitacionDAO();
+                    CapacitacionDAO             dao         = new CapacitacionDAO();
                     List<CapacitacionVO>        list            = dao.listar();
                     Iterator<CapacitacionVO>    iter            =list.iterator();
                     CapacitacionVO              capacitacionVO  = null;

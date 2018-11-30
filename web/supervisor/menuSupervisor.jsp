@@ -51,7 +51,19 @@
           <li class="nav-item ">
             <a class="nav-link" href="Capacitaciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Mostrar Capacitaciones</p>
+              <p>Capacitaciones</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="PlanCapacitaciones.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Plan Anual</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="VisitasMedicas.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Visitas Médicas</p>
             </a>
           </li>
           
