@@ -144,6 +144,12 @@
                               <td>${atm.rut_trabajador}</td>
                               <td>${atm.motivo_consulta}</td>
                               <td>${atm.fecha_visita}</td>
+                              <td>
+                                  <form action="../ServEditarVisitaMed" method="POST">
+                                      <input class="form-control" type="submit" value="Editar"/>
+                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${atm.id_visita}"/>
+                                  </form>
+                              </td>
                               </tr>
                           </c:forEach>
                       </tbody>

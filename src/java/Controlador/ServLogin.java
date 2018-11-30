@@ -90,9 +90,9 @@ public class ServLogin extends HttpServlet {
               
          DAOUsuario uDao = new DAOUsuario();
          
-         Usuario u = uDao.Autenticacion(txtUser, getMD5(txtPass));
-            System.out.println(u.getId_perfil());
-         HttpSession sesion = request.getSession(true);
+        Usuario u = uDao.Autenticacion(txtUser, getMD5(txtPass));
+        System.out.println(u.getId_perfil());
+             HttpSession sesion = request.getSession(true);
                     sesion.setAttribute("datosUsuario", u);
                     
                     if(u.getId_perfil()==1)
