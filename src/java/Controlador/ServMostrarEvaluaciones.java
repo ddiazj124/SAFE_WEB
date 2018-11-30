@@ -44,7 +44,7 @@ public class ServMostrarEvaluaciones extends HttpServlet {
                 //Preguntas
                 DAOEvaluacion p = new DAOEvaluacion();
                 ArrayList<Evaluacion> Listemp = p.TraerEvaluacionesTecnico(rut_tecnico);
-                session.setAttribute("datosPreguntas", Listemp);    
+                session.setAttribute("datosEvaluacionesTecnico", Listemp);    
         }
         catch (Exception ex)
         {

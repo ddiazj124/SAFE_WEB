@@ -106,10 +106,13 @@
           <div class="row">
             
             
-            <table>
+            <table border = 'Solid'>
                 <tr>
                     <td>
                         ID Evaluacion
+                    </td>
+                    <td>
+                        Titulo
                     </td>
                     <td>
                         Fecha Evaluacion
@@ -121,22 +124,26 @@
                         
                     </td>
                 </tr>
-                
+            <c:forEach items="${datosEvaluacionesTecnico}" var="p">
                 <tr>
                     <td>
-                        ID Evaluacion
+                        <label>${p.id_ev}</label>
                     </td>
                     <td>
-                        Fecha Evaluacion
+                        ${p.titulo}
                     </td>
                     <td>
-                        Descripcion Evaluacion
+                        ${p.fecha_eval}
                     </td>
+                    <td>
+                        ${p.descripcion}
+                    </td>
+                    
                     <td>
                         <input type="submit" value="Responder">
                     </td>
                 </tr>
-              
+              </c:forEach>
             </table>
               
             

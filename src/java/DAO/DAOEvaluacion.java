@@ -23,7 +23,7 @@ public class DAOEvaluacion {
     private static String sql_selectAll = "SELECT * FROM EVALUACION";
     private static String sql_insertarProcedimiento = "CALL INSERT_EVAL(?,?,?,?,?)";
     private static String sql_contarCantidadEvaluacion = "SELECT COUNT(*) FROM EVALUACION";
-    private static String sql_EvaluacionesTecnico = "SELECT * FROM EVALUACION where rut_tecnico = ?";
+    private static String sql_EvaluacionesTecnico = "SELECT * FROM EVALUACION where rut_tecnico = ? and EVALUACION_ESTADO_ID = 1";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -85,7 +85,7 @@ public class DAOEvaluacion {
         System.out.println("Cantidad de objetos: " + Listvis.size());
         
         for (Evaluacion obj : Listvis) {
-            System.out.println("ID Evaluacion: "+obj.getId_ev()+ " Descripcion: " + obj.getDescripcion());
+            System.out.println("ID Evaluacion: "+obj.getId_ev()+ " Titulo "+obj.getTitulo() +" Descripcion: " + obj.getDescripcion());
         }
         
         System.out.println("---------------------------------");
