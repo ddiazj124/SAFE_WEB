@@ -7,6 +7,18 @@ package Controlador;
 
 import DAO.DAOUsuario;
 import Entidades.Usuario;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +27,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -35,32 +52,63 @@ public class Prueba extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-        DAOUsuario usu = new DAOUsuario();
-        ArrayList<Usuario> Listusu = usu.TraerTodos();
-        
-        
-        System.out.println(Listusu.size());
-        
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Prueba</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            for (Usuario usuario : Listusu) {
-                out.println("<h1>"+usuario.getNombre_usuario()+"</h1>");
-                out.println("<h1>"+usuario.getContrasena()+"</h1>");
-                out.println("<h1>"+usuario.getId_perfil()+"</h1>");
-                out.println("<h1>"+usuario.getRut_trabajador()+"</h1>");
+        response.setContentType("application/pdf");
+        OutputStream out = response.getOutputStream();
+        try {
+            //Estilos
+            Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 26, Font.BOLDITALIC);
+            Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+            Font categoryFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+            Font subcategoryFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
+            Font blueFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);    
+            Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+            //IMAGEN
+            String RutaImagen = "";
+            
+            Document document = new Document();
+            /* Estructura basica de pdf */
+            PdfWriter.getInstance(document, out);
+            document.open();
+            //AÑADIR RUTA PARA AGREGAR IMAGEN
+            //Image imagen = Image.getInstance();
+            
+            //Pagina 1
+            document.addTitle("Reporte Visitas Medicas");
+            document.addSubject("Generando Pdf Visitas.");
+            document.addKeywords("Safe");
+            document.addAuthor("SAFE - Asesoria Empresarial");
+            document.addCreator("SAFE - Asesoria Empresarial");
+            
+            //Contenido PDF
+            Chunk chunk = new Chunk("This is the title", chapterFont);
+            //chunk.setBackground(BaseColor.GRAY);
+            Chapter chapter = new Chapter(new Paragraph(chunk), 1);
+            chapter.setNumberDepth(0);
+            chapter.add(new Paragraph("This is the paragraph", paragraphFont));
+            Image image;
+            try {
+                image = Image.getInstance(RutaImagen);  
+                image.setAbsolutePosition(2, 150);
+                chapter.add(image);
+            } catch (BadElementException ex) {
+                System.out.println("Image BadElementException" +  ex);
+            } catch (IOException ex) {
+                System.out.println("Image IOException " +  ex);
             }
-            out.println("</body>");
-            out.println("</html>");
+            
+            document.add(chapter);
+            document.close();
+            System.out.println("¡Se ha generado tu hoja PDF!");
+        } catch (DocumentException e) {
+            System.out.println("Se ha producido un error al generar un documento: "+ e);
+        }finally{
+            out.close();
         }
+        
+        
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
