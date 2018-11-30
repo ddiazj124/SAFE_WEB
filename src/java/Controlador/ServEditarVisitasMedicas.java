@@ -1,7 +1,9 @@
 package Controlador;
 
 import DAO.CapacitacionDAO;
+import DAO.VisitaMedicaDAO;
 import VO.CapacitacionVO;
+import VO.VisitaMedicaVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -12,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ServEditarCapacitaciones", urlPatterns = {"/ServEditarCapacitaciones"})
-public class ServEditarCapacitaciones extends HttpServlet {
+@WebServlet(name = "ServEditarVisitasMedicas", urlPatterns = {"/ServEditarVisitasMedicas"})
+public class ServEditarVisitasMedicas extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,41 +54,44 @@ public class ServEditarCapacitaciones extends HttpServlet {
         PrintWriter out = response.getWriter();
         Boolean salida  = false;
         
-        String idCapacitacionEditar = request.getParameter("idCapacitacionEditar");
-        String nombreEditar         = request.getParameter("nombreEditar");
-        String fechaTerminoEditar   = request.getParameter("fechaTerminoEditar");
-        String fechaInicioEditar    = request.getParameter("fechaInicioEditar");
-        String areaEditar           = request.getParameter("areaEditar");
-        String areaPlan             = request.getParameter("areaPlan");
-                         
-        try{ 
+        String idVisitaMedicaEditar     = request.getParameter("idVisitaMedicaEditar");
+        String rutMedicoEditar          = request.getParameter("rutMedicoEditar");
+        String rutTrabajadorEditar      = request.getParameter("rutTrabajadorEditar");
+        String motivoConsultaEditar     = request.getParameter("motivoConsultaEditar");
+        String fechaVisitaEditar        = request.getParameter("fechaVisitaEditar");
+        
+        String salida2 = "";
+        //String salida2 = idVisitaMedicaEditar + "-" + rutMedicoEditar + "-" + rutTrabajadorEditar 
+        //                + "-" + motivoConsultaEditar + "-" + fechaVisitaEditar;                
+        try{
+            VisitaMedicaDAO dao         = new VisitaMedicaDAO();
+            VisitaMedicaVO  vo          = new VisitaMedicaVO();
             
-            CapacitacionDAO dao         = new CapacitacionDAO();
-            CapacitacionVO  vo          = new CapacitacionVO();
+            vo.setId_visita(Integer.parseInt(idVisitaMedicaEditar));
+            vo.setRut_medico(rutMedicoEditar);
+            vo.setRut_trabajador(rutTrabajadorEditar);
+            vo.setMotivo_consulta(motivoConsultaEditar);
+            vo.setFecha_visita(Date.valueOf(fechaVisitaEditar));
             
-            vo.setId_capacitacion(Integer.parseInt(idCapacitacionEditar));
-            vo.setNombre_capacitación(nombreEditar);
-            vo.setFecha_termino(Date.valueOf(fechaTerminoEditar));
-            vo.setFecha_inicio(Date.valueOf(fechaInicioEditar));
-            vo.setId_area(Integer.parseInt(areaEditar));
-            vo.setId_plan(Integer.parseInt(areaPlan));
+            salida = dao.edit(vo); 
             
-            salida = dao.edit(vo);           
+            salida2 = vo.getId_visita() + "-" + vo.getRut_medico() + "-" + vo.getRut_trabajador() +
+                             vo.getMotivo_consulta() + "-" + vo.getFecha_visita();
             
-            //HttpSession session = request.getSession();
-            
-            //session.setAttribute("capacitacionEdit", vo);            
+            HttpSession session = request.getSession();            
+            session.setAttribute("visitaModificada", true);            
             //response.sendRedirect("./supervisor/Capacitaciones.jsp");
         }
         catch(Exception e)
-        {            
-            //HttpSession session = request.getSession();
+        {   
+            HttpSession session = request.getSession();
+            session.setAttribute("visitaModificada", false);
             //Boolean capacitacionEdit = false;
             //session.setAttribute("capacitacionEdit", capacitacionEdit);
             //response.sendRedirect("./supervisor/Capacitaciones.jsp");
             
         }
-        out.println(salida);
+        out.println(salida2);
     }
 
     /**

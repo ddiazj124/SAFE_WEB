@@ -52,13 +52,13 @@ public class ServEliminarCapacitacion extends HttpServlet {
         PrintWriter out = response.getWriter();
         Boolean salida = false;
         
-        String idCapacitacionEditar = request.getParameter("idCapacitacionEditar");
+        String idCapacitacionEliminar = request.getParameter("idCapacitacionEliminar");
                          
         try{             
             CapacitacionDAO dao         = new CapacitacionDAO();
             CapacitacionVO  vo          = new CapacitacionVO();
                         
-            vo.setId_capacitacion(Integer.parseInt(idCapacitacionEditar));
+            vo.setId_capacitacion(Integer.parseInt(idCapacitacionEliminar));
             
             salida = dao.delete(vo.getId_capacitacion());           
             

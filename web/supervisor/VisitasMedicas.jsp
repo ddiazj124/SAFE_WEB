@@ -1,3 +1,6 @@
+<%@page import="Entidades.Trabajador"%>
+<%@page import="VO.MedicoVO"%>
+<%@page import="VO.VisitaMedicaVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -19,7 +22,7 @@
     <script src="js/jquery-latest.js" type="text/javascript"></script>
     <!--<link href="css/loader.css" rel="stylesheet" type="text/css"/>-->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <title>CAPACITACIONES</title>
+    <title>VISITAS MEDICAS</title>
     
     <link rel="stylesheet" type="text/css" href="CSS.css"> 
     <style type="text/css"> 
@@ -53,13 +56,13 @@
         </button>
         </br>      
         <div class="container" >
-            <h1>Capacitaciones</h1>    
-            <button id="btnAgregarCapacitacion"
+            <h1>Visitas Médicas</h1>    
+            <button id="btnAgregarVisita"
                     type="submit" 
                     class="btn btn-success"                                
                     data-toggle="modal" 
                     data-target="#modalAgregar">
-                    Agregar Capacitación
+                    Agregar Visita
             </button>
             <button id="btnExcel"
                     class="btn btn-success"
@@ -68,49 +71,53 @@
             </button>
             </br></br>
             
-            <table id="tblCapacitaciones" class="table table-bordered">
+            <table id="tblVisitasMedicas" class="table table-bordered">
                 <thead>
                     <tr>
                         <th bgcolor="#D4E6F1" class="text-center">ID</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE CAPACITACIÓN</th>
-                        <th bgcolor="#D4E6F1" class="text-center">FECHA TERMINO</th>
-                        <th bgcolor="#D4E6F1" class="text-center">FECHA INICIO</th>
-                        <th bgcolor="#D4E6F1" class="text-center">ID AREA</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE AREA</th>
-                        <th bgcolor="#D4E6F1" class="text-center">ID PLAN</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE PLAN</th>
+                        <th bgcolor="#D4E6F1" class="text-center">RUT MEDICO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">RUT TRABAJADOR</th>
+                        <th bgcolor="#D4E6F1" class="text-center">MOTIVO CONSULTA</th>
+                        <!--<th bgcolor="#D4E6F1" class="text-center">OBSERVACIONES</th>-->
+                        <!--<th bgcolor="#D4E6F1" class="text-center">DIAGNOSTICO</th>-->
+                        <th bgcolor="#D4E6F1" class="text-center">FECHA VISITA</th>
+                        <th bgcolor="#D4E6F1" class="text-center">ID ESTADO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">ESTADO</th>
+                        <!--<th bgcolor="#D4E6F1" class="text-center">RECETA</th>-->
                         <th bgcolor="#D4E6F1" class="text-center">ACCIONES</th>
                     </tr>
                 </thead>
                 <%
-                    CapacitacionDAO             dao             = new CapacitacionDAO();
-                    List<CapacitacionVO>        list            = dao.listar();
-                    Iterator<CapacitacionVO>    iter            =list.iterator();
-                    CapacitacionVO              capacitacionVO  = null;
+                    VisitaMedicaDAO             dao             = new VisitaMedicaDAO();
+                    List<VisitaMedicaVO>        list            = dao.listar();
+                    Iterator<VisitaMedicaVO>    iter            =list.iterator();
+                    VisitaMedicaVO              visitaMedicaVO  = null;
                     while (iter.hasNext()) {
-                            capacitacionVO = iter.next();                    
+                            visitaMedicaVO = iter.next();                    
                 %> 
                 <tbody>
                     <tr>
-                        <td class="text-center"><%= capacitacionVO.getId_capacitacion() %></td>
-                        <td class="text-center"><%= capacitacionVO.getNombre_capacitación() %></td>
-                        <td class="text-center"><%= capacitacionVO.getFecha_termino() %></td>
-                        <td class="text-center"><%= capacitacionVO.getFecha_inicio() %></td>
-                        <td class="text-center"><%= capacitacionVO.getId_area() %></td>
-                        <td class="text-center"><%= capacitacionVO.getArea() %></td>
-                        <td class="text-center"><%= capacitacionVO.getId_plan()  %></td>
-                        <td class="text-center"><%= capacitacionVO.getPlan() %></td>
+                        <td class="text-center"><%= visitaMedicaVO.getId_visita()%></td>
+                        <td class="text-center"><%= visitaMedicaVO.getRut_medico()%></td>
+                        <td class="text-center"><%= visitaMedicaVO.getRut_trabajador() %></td>
+                        <td class="text-center"><%= visitaMedicaVO.getMotivo_consulta()%></td>
+                        <!--<td class="text-center"><%= visitaMedicaVO.getObservaciones() %></td>-->
+                        <!--<td class="text-center"><%= visitaMedicaVO.getDiagnostico() %></td>-->
+                        <td class="text-center"><%= visitaMedicaVO.getFecha_visita()%></td>
+                        <td class="text-center"><%= visitaMedicaVO.getEstado() %></td>
+                        <td class="text-center"><%= visitaMedicaVO.getEstado_descripcion() %></td>
+                        <!--<td class="text-center"><%= visitaMedicaVO.getReceta() %></td>-->
                         <td class="text-center">
                             <button id="btnEditar"
                                     type="button" 
                                     class="btn btn-primary btn-sm" 
                                     data-toggle="modal" 
-                                    data-target="#modalEditar">
+                                    data-target="#modalEditar">                                
                                     Editar
                             </button>
                             <button id="btnEliminar"
                                     type="button" 
-                                    class="btn btn-warning btn-sm"                                 
+                                    class="btn btn-warning btn-sm"                                
                                     data-toggle="modal" 
                                     data-target="#modalEliminar">
                                     Eliminar
@@ -121,76 +128,70 @@
                 </tbody>
             </table>
 
-            <!-- MODAL AGREGAR CAPACITACION-->
+            <!-- MODAL AGREGAR VISITA-->
             <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle">Agregar Capacitación</h2>
+                    <h2 class="modal-title" id="exampleModalLongTitle">Agregar Visita Médica</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                      <form id="formAgregarCapacitacion" action="" method="" >                     
+                      <form id="formAgregarVisitaMedica" action="" method="" >                     
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Nombre</label>
-                          <div class="col-sm-10">
-                              <input id="nombreAgregar" type="text" class="form-control form-control-lg" placeholder="Largo máximo 30" maxlength="30" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Término</label>
-                          <div class="col-sm-10">
-                            <input id="fechaTerminoAgregar" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Inicio</label>
-                          <div class="col-sm-10">
-                            <input id="fechaInicioAgregar" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Área</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Médico</label>
                             <div class="col-sm-10">                            
-                                <select id="areaAgregar" class="form-control form-control-lg">
+                                <select id="rutMedico" class="form-control form-control-lg">
                                 <%
-                                    AreaDAO             daoArea1     = new AreaDAO();
-                                    List<AreaVO>        listArea1    = daoArea1.listar();
-                                    Iterator<AreaVO>    iterArea1    = listArea1.iterator();
-                                    AreaVO              areaVO1      = null;
-                                    while (iterArea1.hasNext()) {
-                                            areaVO1 = iterArea1.next();                           
+                                    MedicoDAO           daoMedico    = new MedicoDAO();
+                                    List<MedicoVO>      listMedico   = daoMedico.listar();
+                                    Iterator<MedicoVO>  iterMedico   = listMedico.iterator();
+                                    MedicoVO            medicoVO      = null;
+                                    while (iterMedico.hasNext()) {
+                                            medicoVO = iterMedico.next();                           
                                 %>  
-                                    <option value="<%= areaVO1.getId_area() %>"><%= areaVO1.getNombre_area() %></option>
+                                    <option value="<%= medicoVO.getRut_medico() %>"><%= medicoVO.getRut_medico() %></option>
                                 <%}%>
                                 </select>                            
-                            </div>                          
+                            </div> 
                         </div>
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Plan</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Trabajador</label>
                             <div class="col-sm-10">                            
-                                <select id="planAgregar" class="form-control form-control-lg">
+                                <select id="rutTrabajador" class="form-control form-control-lg">
                                 <%
-                                    PlanDAO             daoPlan1     = new PlanDAO();
-                                    List<PlanVO>        listPlan1    = daoPlan1.listar();
-                                    Iterator<PlanVO>    iterPlan1    = listPlan1.iterator();
-                                    PlanVO              planVO1      = null;
-                                    while (iterPlan1.hasNext()) {
-                                            planVO1 = iterPlan1.next();                           
+                                    DAOTrabajador           daoTrabajador   = new DAOTrabajador();
+                                    List<Trabajador>        listTrabajador  = daoTrabajador.TraerTodos();
+                                    Iterator<Trabajador>    iterTrabajador  = listTrabajador.iterator();
+                                    Trabajador              trabajador      = null;
+                                    while (iterTrabajador.hasNext()) {
+                                            trabajador = iterTrabajador.next();                           
                                 %>  
-                                    <option value="<%= planVO1.getId_plan()%>"><%= planVO1.getDescripcion()%></option>
+                                    <option value="<%= trabajador.getRut_trabajador() %>" ><%= trabajador.getRut_trabajador() %></option>
                                 <%}%>
                                 </select>                            
-                            </div>                          
+                            </div> 
                         </div>
+                        <div class="form-group row">
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Motivo Consulta</label>
+                          <div class="col-sm-10">
+                              <input id="motivoConsulta" type="text" class="form-control form-control-lg" placeholder="Largo máximo 50" maxlength="50" required>
+                          </div>
+                        </div>                                                       
+                        <div class="form-group row">
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Visita</label>
+                          <div class="col-sm-10">
+                            <input id="fechaVisita" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
+                          </div>
+                        </div>  
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button 
-                                id="btnAgregarCapacitacion"                     
+                                id="btnAgregarVisitaMedica"                     
                                 type="submit" 
-                                value="Agregar"                                
+                                value="Agregar"
                                 class="btn btn-primary">
                                 Agregar
                             </button>
@@ -201,7 +202,7 @@
               </div>
             </div>        
 
-            <!-- MODAL EDITAR CAPACITACION-->            
+            <!-- MODAL EDITAR VISITA MEDICA-->            
             <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -212,70 +213,64 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <form id="formEditCapacitacion">
+                      <form id="formEditVisitaMedica" action="" method="">
                         <div class="form-group row">
                           <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">ID</label>
                           <div class="col-sm-10">
-                              <input id="idCapacitacionEditar" type="email" class="form-control form-control-lg" readonly="true">
+                              <input id="idVisitaMedicaEditar" type="email" class="form-control form-control-lg" readonly="true">
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Nombre</label>
-                          <div class="col-sm-10">
-                              <input id="nombreEditar" type="text" class="form-control form-control-lg" placeholder="Largo máximo 30" maxlength="30" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Término</label>
-                          <div class="col-sm-10">
-                            <input id="fechaTerminoEditar" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Inicio</label>
-                          <div class="col-sm-10">
-                            <input id="fechaInicioEditar" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Área</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Médico</label>
                             <div class="col-sm-10">                            
-                                <select id="areaEditar" class="form-control form-control-lg">
+                                <select id="rutMedicoEditar" class="form-control form-control-lg">
                                 <%
-                                    AreaDAO             daoArea     = new AreaDAO();
-                                    List<AreaVO>        listArea    = daoArea.listar();
-                                    Iterator<AreaVO>    iterArea    = listArea.iterator();
-                                    AreaVO              areaVO      = null;
-                                    while (iterArea.hasNext()) {
-                                            areaVO = iterArea.next();                           
+                                    MedicoDAO           daoMedico2    = new MedicoDAO();
+                                    List<MedicoVO>      listMedico2   = daoMedico2.listar();
+                                    Iterator<MedicoVO>  iterMedico2   = listMedico2.iterator();
+                                    MedicoVO            medicoVO2      = null;
+                                    while (iterMedico2.hasNext()) {
+                                            medicoVO2 = iterMedico2.next();                           
                                 %>  
-                                    <option value="<%= areaVO.getId_area() %>"><%= areaVO.getNombre_area() %></option>
+                                    <option vaue="<%= medicoVO2.getRut_medico() %>" ><%= medicoVO2.getRut_medico() %></option>
                                 <%}%>
                                 </select>                            
-                            </div>                          
+                            </div> 
                         </div>
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Plan</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Trabajador</label>
                             <div class="col-sm-10">                            
-                                <select id="areaPlan" class="form-control form-control-lg">
+                                <select id="rutTrabajadorEditar" class="form-control form-control-lg">
                                 <%
-                                    PlanDAO             daoPlan     = new PlanDAO();
-                                    List<PlanVO>        listPlan    = daoPlan.listar();
-                                    Iterator<PlanVO>    iterPlan    = listPlan.iterator();
-                                    PlanVO              planVO      = null;
-                                    while (iterPlan.hasNext()) {
-                                            planVO = iterPlan.next();                           
+                                    DAOTrabajador           daoTrabajador2   = new DAOTrabajador();
+                                    List<Trabajador>        listTrabajador2  = daoTrabajador2.TraerTodos();
+                                    Iterator<Trabajador>    iterTrabajador2  = listTrabajador2.iterator();
+                                    Trabajador              trabajador2      = null;
+                                    while (iterTrabajador2.hasNext()) {
+                                            trabajador2 = iterTrabajador2.next();                           
                                 %>  
-                                    <option value="<%= planVO.getId_plan()%>"><%= planVO.getDescripcion()%></option>
+                                    <option value="<%=  trabajador2.getRut_trabajador() %>"><%= trabajador2.getRut_trabajador() %></option>
                                 <%}%>
                                 </select>                            
-                            </div>                          
+                            </div> 
+                        </div>
+                        <div class="form-group row">
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Motivo Consulta</label>
+                          <div class="col-sm-10">
+                              <input id="motivoConsultaEditar" type="text" class="form-control form-control-lg" placeholder="Largo máximo 50" maxlength="50" required>
+                          </div>
+                        </div>                                                       
+                        <div class="form-group row">
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Fecha Visita</label>
+                          <div class="col-sm-10">
+                            <input id="fechaVisitaEditar" type="date" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required>
+                          </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <!--<button 
                                 id="btnGrabarEditCapacitacion"                     
-                                type="submit" 
+                                type="button" 
                                 value="Editar" 
                                 data-dismiss="modal"
                                 data-toggle="modal" 
@@ -285,7 +280,7 @@
                                 Guardar
                             </button>-->
                             <button 
-                                id="btnGrabarEditCapacitacion"                     
+                                id="btnGrabarEditVisitaMedica"                     
                                 type="submit" 
                                 value="Grabar"                                
                                 class="btn btn-primary">
@@ -298,18 +293,18 @@
               </div>
             </div>
 
-            <!-- MODAL ELIMINAR CAPACITACION -->
+            <!-- MODAL ELIMINAR VISITA MEDICA -->
             <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle">Eliminar Capacitación</h2>
+                    <h2 class="modal-title" id="exampleModalLongTitle">Eliminar Visita Médica</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                      <h4>¿Está seguro de eliminar la capacitación? </h4>
+                      <h4>¿Está seguro de eliminar la Visita Médica? </h4>
                   </div>
                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -318,7 +313,7 @@
                             type="button" 
                             value="Eliminar"
                             data-dismiss="modal"                            
-                            onclick="eliminarCapacitacion()"
+                            onclick="eliminarVisitaMedica()"
                             class="btn btn-primary">
                             Eliminar                            
                         </button>
@@ -327,8 +322,8 @@
               </div>
             </div>
             
-            <!-- MODAL CACAPACITACION MODIFICADA -->
-            <div class="modal fade" id="modCapacitacionModificada" tabindex="-1" role="dialog" 
+            <!-- MODAL VISITA MEDICA MODIFICADA -->
+            <div class="modal fade" id="modVisitaMedicaModificada" tabindex="-1" role="dialog" 
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -339,7 +334,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <h4>Capacitación modificada correctamente</h4>
+                      <h4>Visita Médica modificada correctamente</h4>
                   </div>
                   <div class="modal-footer">
                       <button type="button" onclick="pageLoad()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
@@ -348,8 +343,8 @@
               </div>
             </div>
 
-            <!-- MODAL CACAPACITACION AGREGADA -->
-            <div class="modal fade" id="modCapacitacionAgregada" tabindex="-1" role="dialog" 
+            <!-- MODAL VISITA MEDICA AGREGADA -->
+            <div class="modal fade" id="modVisitaMedicaAgregada" tabindex="-1" role="dialog" 
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -360,7 +355,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <h4>Capacitación agregada correctamente</h4>
+                      <h4>Visita Médica agregada correctamente</h4>
                   </div>
                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
@@ -369,8 +364,8 @@
               </div>
             </div>
             
-            <!-- MODAL CACAPACITACION ELIMINADA -->
-            <div class="modal fade" id="modCapacitacionEliminada" tabindex="-1" role="dialog" 
+            <!-- MODAL VISITA MEDICA ELIMINADA -->
+            <div class="modal fade" id="modVisitaMedicaEliminada" tabindex="-1" role="dialog" 
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -381,7 +376,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <h4>Capacitación eliminada correctamente</h4>
+                      <h4>Visita Médica eliminada correctamente</h4>
                   </div>
                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
@@ -391,18 +386,21 @@
             </div>
             
             <script type="text/javascript">
-                var table = document.getElementById('tblCapacitaciones'),rIndex;
+                //SETIAMOS EL MODAL DE EDICION 
+                var table = document.getElementById('tblVisitasMedicas'),rIndex;
                 for (var i = 0; i < table.rows.length; i++) {
                     table.rows[i].onclick = function(){
                         rIndex = this.rowIndex; 
-                        document.getElementById('idCapacitacionEditar').value   = this.cells[0].innerHTML;
-                        document.getElementById('nombreEditar').value           = this.cells[1].innerHTML;
-                        document.getElementById('fechaTerminoEditar').value     = this.cells[2].innerHTML;
-                        document.getElementById('fechaInicioEditar').value      = this.cells[3].innerHTML;
-                        document.getElementById('areaEditar').selectedIndex     = (this.cells[4].innerHTML)-1;
-                        document.getElementById('areaPlan').selectedIndex       = (this.cells[6].innerHTML)-1;
+                        document.getElementById('idVisitaMedicaEditar').value       = this.cells[0].innerHTML;
+                        document.getElementById('rutMedicoEditar').value            = this.cells[1].innerHTML;
+                        document.getElementById('rutTrabajadorEditar').value        = this.cells[2].innerHTML;
+                        document.getElementById('motivoConsultaEditar').value       = this.cells[3].innerHTML;
+                        document.getElementById('fechaVisitaEditar').value          = this.cells[4].innerHTML;
                     };
                 }
+                //FIN
+                
+                //EXPORT EXCEL
                 function exportTableToExcel() {                
                     var uri = 'data:application/vnd.ms-excel;base64,'
                     , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
@@ -412,61 +410,26 @@
                     var table = 'tblReporte';
                     var name = 'nombre_hoja_calculo';
 
-                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                    if (!table.nodeType) table = document.getElementById('tblVisitasMedicas')
                      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                      window.location.href = uri + base64(format(template, ctx))
                 }; 
+                //FIN
                 
-                function editarCapacitacion() {
-                    var idCapacitacionEditar    = $('#idCapacitacionEditar').val();
-                    var nombreEditar            = $('#nombreEditar').val();
-                    var fechaTerminoEditar      = $('#fechaTerminoEditar').val();
-                    var fechaInicioEditar       = $('#fechaInicioEditar').val();
-                    var fechaInicioEditar       = $('#fechaInicioEditar').val();
-                    var areaEditar              = $('#areaEditar').val();
-                    var areaPlan                = $('#areaPlan').val();
-
-                    $.post('../ServEditarCapacitaciones', {
-                            idCapacitacionEditar    : idCapacitacionEditar
-                            ,nombreEditar           : nombreEditar
-                            ,fechaTerminoEditar     : fechaTerminoEditar
-                            ,fechaInicioEditar      : fechaInicioEditar
-                            ,areaEditar             : areaEditar
-                            ,areaPlan               : areaPlan
-                    }, function(responseText) {                       
-                        //alert(responseText); 
-                        //$('#modCapacitacionModificada2').style.display = "block";                       
-                            //$('#tabla').html(responseText);
-                    });
-                };
-                
-                function agregarCapacitacion() {                    
-                    var nombreAgregar           = $('#nombreAgregar').val();
-                    var fechaTerminoAgregar     = $('#fechaTerminoAgregar').val();
-                    var fechaInicioAgregar      = $('#fechaInicioAgregar').val();
-                    var areaAgregar             = $('#areaAgregar').val();
-                    var planAgregar             = $('#planAgregar').val();
-
-                    $.post('../ServAgregarCapacitacion', {
-                             nombreAgregar           : nombreAgregar
-                            ,fechaTerminoAgregar    : fechaTerminoAgregar
-                            ,fechaInicioAgregar     : fechaInicioAgregar
-                            ,areaAgregar            : areaAgregar
-                            ,planAgregar            : planAgregar
+                function editarVisitaMedica() {
+                    var idVisitaMedicaEditar    = $('#idVisitaMedicaEditar').val();
+                    var rutMedicoEditar         = $('#rutMedicoEditar').val();
+                    var rutTrabajadorEditar     = $('#rutTrabajadorEditar').val();
+                    var motivoConsultaEditar    = $('#motivoConsultaEditar').val();
+                    var fechaVisitaEditar       = $('#fechaVisitaEditar').val();
+                       
+                    $.post('../ServEditarVisitasMedicas', {
+                            idVisitaMedicaEditar    : idVisitaMedicaEditar
+                            ,rutMedicoEditar        : rutMedicoEditar
+                            ,rutTrabajadorEditar    : rutTrabajadorEditar
+                            ,motivoConsultaEditar   : motivoConsultaEditar
+                            ,fechaVisitaEditar      : fechaVisitaEditar
                     }, function(responseText) {
-                        
-                        //alert(responseText); 
-                        //$('#modCapacitacionModificada2').style.display = "block";                       
-                            //$('#tabla').html(responseText);
-                    });
-                };
-                
-                function eliminarCapacitacion() {                    
-                     var idCapacitacionEliminar    = $('#idCapacitacionEditar').val();
-
-                    $.post('../ServEliminarCapacitacion', {
-                             idCapacitacionEliminar    : idCapacitacionEliminar
-                    }, function(responseText) {                        
                         location.reload();
                         //alert(responseText); 
                         //$('#modCapacitacionModificada2').style.display = "block";                       
@@ -474,16 +437,47 @@
                     });
                 };
                 
-                $('#formAgregarCapacitacion').submit(function () {
-                    agregarCapacitacion();
+                function agregarVisitaMedica() {   
+                    var rutMedico         = $('#rutMedico').val();
+                    var rutTrabajador     = $('#rutTrabajador').val();
+                    var motivoConsulta    = $('#motivoConsulta').val();
+                    var fechaVisita       = $('#fechaVisita').val();
+
+                    $.post('../ServAgregarVisitaMedica', {
+                             rutMedico        : rutMedico
+                            ,rutTrabajador    : rutTrabajador
+                            ,motivoConsulta   : motivoConsulta
+                            ,fechaVisita      : fechaVisita
+                    }, function(responseText) {
+                        location.reload();
+                        //alert(responseText); 
+                        //$('#modCapacitacionModificada2').style.display = "block";                       
+                            //$('#tabla').html(responseText);
+                    });
+                };
+                
+                function eliminarVisitaMedica() {                     
+                    var idVisitaMedicaEliminar = $('#idVisitaMedicaEditar').val();
+                    
+                    $.post('../ServEliminarVisitaMedica', {
+                             idVisitaMedicaEliminar    : idVisitaMedicaEliminar
+                    }, function(responseText) {
+                        location.reload();
+                        //alert(responseText); 
+                        //$('#modCapacitacionModificada2').style.display = "block";                       
+                            //$('#tabla').html(responseText);
+                    });
+                };
+                
+                $('#formAgregarVisitaMedica').submit(function () {                    
+                    agregarVisitaMedica();
                 });
                 
-                $('#formEditCapacitacion').submit(function () {
-                    editarCapacitacion();
+                $('#formEditVisitaMedica').submit(function () {                    
+                    editarVisitaMedica();
                 });
-                                
-                //circular load
-                $(document).ready(function () { 
+                
+                $(document).ready(function () {                                      
                     $('.preloader').fadeOut('fast');
                                 
                     $(document).ajaxStart(function () {
@@ -504,7 +498,8 @@
                     //location.reload();
                     $('#wait').show();
                     window.location = document.URL;
-                };   
+                };
+                
             </script> 
         </div>
         

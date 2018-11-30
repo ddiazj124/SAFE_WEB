@@ -35,7 +35,7 @@ public class CapacitacionDAO implements CRUDCapacitacion{
                         "FROM        CAPACITACION CAP " +
                         "INNER JOIN  AREA         ARE ON CAP.ID_AREA = ARE.ID_AREA " +
                         "INNER JOIN  PLAN_ANUAL   PLA ON CAP.ID_PLAN = PLA.ID_PLAN " +
-                        "ORDER BY CAP.ID_CAPACITACION ASC ";
+                        "ORDER BY CAP.ID_CAPACITACION DESC ";
         try {
             ps = objConn.getConn().prepareStatement(sql);
             rs = ps.executeQuery();

@@ -1,7 +1,9 @@
 package Controlador;
 
 import DAO.CapacitacionDAO;
+import DAO.VisitaMedicaDAO;
 import VO.CapacitacionVO;
+import VO.VisitaMedicaVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -12,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ServEditarCapacitaciones", urlPatterns = {"/ServEditarCapacitaciones"})
-public class ServEditarCapacitaciones extends HttpServlet {
+@WebServlet(name = "ServEliminarVisitaMedica", urlPatterns = {"/ServEliminarVisitaMedica"})
+public class ServEliminarVisitaMedica extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,28 +52,17 @@ public class ServEditarCapacitaciones extends HttpServlet {
         
         response.setContentType( "text/html; charset=iso-8859-1" );
         PrintWriter out = response.getWriter();
-        Boolean salida  = false;
+        Boolean salida = false;
         
-        String idCapacitacionEditar = request.getParameter("idCapacitacionEditar");
-        String nombreEditar         = request.getParameter("nombreEditar");
-        String fechaTerminoEditar   = request.getParameter("fechaTerminoEditar");
-        String fechaInicioEditar    = request.getParameter("fechaInicioEditar");
-        String areaEditar           = request.getParameter("areaEditar");
-        String areaPlan             = request.getParameter("areaPlan");
+        String idVisitaMedicaEliminar = request.getParameter("idVisitaMedicaEliminar");
                          
-        try{ 
+        try{             
+            VisitaMedicaDAO dao         = new VisitaMedicaDAO();
+            VisitaMedicaVO  vo          = new VisitaMedicaVO();
+                        
+            vo.setId_visita(Integer.parseInt(idVisitaMedicaEliminar));
             
-            CapacitacionDAO dao         = new CapacitacionDAO();
-            CapacitacionVO  vo          = new CapacitacionVO();
-            
-            vo.setId_capacitacion(Integer.parseInt(idCapacitacionEditar));
-            vo.setNombre_capacitación(nombreEditar);
-            vo.setFecha_termino(Date.valueOf(fechaTerminoEditar));
-            vo.setFecha_inicio(Date.valueOf(fechaInicioEditar));
-            vo.setId_area(Integer.parseInt(areaEditar));
-            vo.setId_plan(Integer.parseInt(areaPlan));
-            
-            salida = dao.edit(vo);           
+            salida = dao.delete(vo.getId_visita());           
             
             //HttpSession session = request.getSession();
             
