@@ -1,7 +1,7 @@
 <%-- 
-    Document   : menuTrabajador
-    Created on : 22-oct-2018, 10:21:09
-    Author     : Diego
+    Document   : generarInformeVisita
+    Created on : 27-nov-2018, 19:42:04
+    Author     : Cristian
 --%>
 
 
@@ -44,7 +44,7 @@
         <ul class="nav">
           <li class="nav-item active  ">
             <a class="nav-link" href="./menuTrabajador.jsp">
-              <i class="material-icons">dashboard</i>
+              <i class="material-icons">dashboard</i>x
               <p>Inicio</p>
             </a>
           </li>
@@ -69,9 +69,8 @@
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeVisita.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Ex&aacute;amenes</p>
+              <p>Informe de Ex&aacute;menes</p>
             </a>
-          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
@@ -86,7 +85,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Controles M&eacute;dicos</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -116,62 +115,82 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category">Generar Informe Capacitacion</p>
-                  <h3 class="card-title"><a id="re" href="./generarInformeCapacitacion.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
             
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Visitas Medicas</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
+            <section>
+              <div class="table-responsive" style="border-top:1px solid #dee2e6;">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr style="background-color:#61a5ea;">
+              <th style="width: 80px;"><b>Fecha Visita</b></th>
+              <th style="width: 60px;"><b>Rut M&eacute;dico</b></th>
+              <th style="width: 70px;"><b>Motivo Consulta</b></th>
+              <th style="width: 200px;"><b>Observaciones</b></th>
+              <th style="width: 100px;"><b>Receta</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>11-11-1111</td>
+            <td>1111111-1</td>
+            <td>Control agendado.</td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+          </tr>
+          <tr>
+            <td>11-11-1111</td>
+            <td>1111111-1</td>
+            <td>Control agendado.</td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+          </tr>
+          <tr>
+            <td>11-11-1111</td>
+            <td>1111111-1</td>
+            <td>Control agendado.</td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+          </tr>
+          <tr>
+            <td>11-11-1111</td>
+            <td>1111111-1</td>
+            <td>Control agendado.</td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+          </tr>
+          <tr>
+            <td>11-11-1111</td>
+            <td>1111111-1</td>
+            <td>Control agendado.</td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+          </div>        
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">Excel</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Informe de Ex&aacute;menes</p>
-                  <h3 class="card-title"><a href="./generarInformeVisita.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+        </div>
+    </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#Diego">
+                <a href="#">
                   SAFE - Prevencion de Riesgos
                 </a>
               </li>              

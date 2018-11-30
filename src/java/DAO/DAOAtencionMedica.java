@@ -56,22 +56,18 @@ public class DAOAtencionMedica {
         try {
             ArrayList<Atencion> LAtencion = new ArrayList<>();
             PreparedStatement ps;
-            
-
             ps = objConn.getConn().prepareStatement(sql_selectAll);
             rs = ps.executeQuery();
-            
             while(rs.next()){
                 LAtencion.add(new Atencion(rs.getInt("id_visita"), rs.getString("rut_medico"), rs.getString("rut_trabajador"), rs.getString("motivo_consulta"),rs.getString("fecha_visita")));
             }
-            return LAtencion; 
-        
+            return LAtencion;
         } catch (SQLException ex) {
             Logger.getLogger(DAOAtencionMedica.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             objConn.Cerrar();
         }
-        return null;  
+        return null;
     }
     
     public Atencion Buscar(int v_nvisita, String v_rutTrabajador, String v_rutMedico){
