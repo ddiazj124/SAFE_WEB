@@ -101,11 +101,12 @@
         </div>
       </nav>
       <!-- End Navbar -->
+      
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             
-            
+              <form action="../ServMostrarPreguntas" method="POST">
             <table border = 'Solid'>
                 <tr>
                     <td>
@@ -121,22 +122,23 @@
                         Descripcion Evaluacion
                     </td>
                     <td>
-                        
+                        Contestar Preguntas
                     </td>
                 </tr>
             <c:forEach items="${datosEvaluacionesTecnico}" var="p">
                 <tr>
                     <td>
                         <label>${p.id_ev}</label>
+                        <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
                     </td>
                     <td>
-                        ${p.titulo}
+                        <label>${p.titulo}</label>
                     </td>
                     <td>
-                        ${p.fecha_eval}
+                        <label>${p.fecha_eval}</label>
                     </td>
                     <td>
-                        ${p.descripcion}
+                        <label>${p.descripcion}</label>
                     </td>
                     
                     <td>
@@ -145,7 +147,7 @@
                 </tr>
               </c:forEach>
             </table>
-              
+          </form>    
             
           </div>
           

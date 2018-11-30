@@ -18,6 +18,7 @@ public class Evaluacion {
     private int evaluacion_estado_id;
     private String rut_tecnico;
     private String rut_ingeniero;
+    private String razon_social;
 
     public Evaluacion() {
     }
@@ -31,6 +32,13 @@ public class Evaluacion {
         this.evaluacion_estado_id = evaluacion_estado_id;
         this.rut_tecnico = rut_tecnico;
         this.rut_ingeniero = rut_ingeniero;
+    }
+    
+    public Evaluacion(String titulo,String fecha_eval,String descripcion,String razonSocial) {
+        this.titulo = titulo;
+        this.fecha_eval = fecha_eval;
+        this.descripcion = descripcion;
+        this.razon_social = razonSocial;
     }
 
     public int getId_ev() {
@@ -97,7 +105,9 @@ public class Evaluacion {
         this.rut_ingeniero = rut_ingeniero;
     }
 
-    
+    public String getRazon_social() {
+        return razon_social;
+    }
     
     
 }

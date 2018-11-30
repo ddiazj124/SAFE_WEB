@@ -5,7 +5,9 @@
  */
 package Controlador;
 
+import DAO.DAOEvaluacion;
 import DAO.DAOPregunta;
+import Entidades.Evaluacion;
 import Entidades.Pregunta;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,13 +40,21 @@ public class ServMostrarPreguntas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
                 HttpSession session = request.getSession();
-                
+                int id_ev = Integer.parseInt(request.getParameter("id_ev"));
                 //Añadir objeto de Session que consulte que ID de evaluacion es:
                 
                 //Preguntas
                 DAOPregunta p = new DAOPregunta();
-                ArrayList<Pregunta> Listemp = p.TraerPreguntasEval(23);
-                session.setAttribute("datosPreguntas", Listemp);    
+                ArrayList<Pregunta> Listemp = p.TraerPreguntasEval(id_ev);
+                session.setAttribute("datosPreguntas", Listemp);
+                
+                DAOEvaluacion e = new DAOEvaluacion();
+                ArrayList<Evaluacion> ListEval = e.TraerEvaluacionesPregunta(id_ev);
+                session.setAttribute("datosDatosEval", ListEval);
+                
+                response.sendRedirect("./tecnico/responderPreguntas.jsp");
+                
+                
         }
         catch (Exception ex)
         {

@@ -24,6 +24,8 @@ public class DAOEvaluacion {
     private static String sql_insertarProcedimiento = "CALL INSERT_EVAL(?,?,?,?,?)";
     private static String sql_contarCantidadEvaluacion = "SELECT COUNT(*) FROM EVALUACION";
     private static String sql_EvaluacionesTecnico = "SELECT * FROM EVALUACION where rut_tecnico = ? and EVALUACION_ESTADO_ID = 1";
+    private static String sql_EvaluacionesPregunta = "SELECT E.TITULO,E.FECHA_EVAL,E.DESCRIPCION,EMP.RAZON_SOCIAL FROM EVALUACION E JOIN EMPRESA EMP ON (emp.rut_empresa = e.rut_empresa) where e.id_ev = ?";
+    
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -73,7 +75,27 @@ public class DAOEvaluacion {
         return null;  
     }
     
-    
+    public ArrayList<Evaluacion> TraerEvaluacionesPregunta(int id_ev) {
+        try {
+            ArrayList<Evaluacion> Levaluacion = new ArrayList<>();
+            PreparedStatement ps;
+            
+            ps = objConn.getConn().prepareStatement(sql_EvaluacionesPregunta);
+            ps.setInt(1,id_ev);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Levaluacion.add(new Evaluacion(rs.getString("TITULO"),rs.getString("FECHA_EVAL") ,rs.getString("DESCRIPCION"),rs.getString("RAZON_SOCIAL")));                
+            }
+            return Levaluacion; 
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
     
     public static void main(String[] args) {
         
@@ -90,6 +112,11 @@ public class DAOEvaluacion {
         
         System.out.println("---------------------------------");
         
+        ArrayList<Evaluacion> Listevapre = dao1.TraerEvaluacionesPregunta(3);
+        System.out.println("====");
+        for (Evaluacion obj : Listevapre) {
+            System.out.println("Razon Social: "+obj.getRazon_social());
+        }
         
     }
     

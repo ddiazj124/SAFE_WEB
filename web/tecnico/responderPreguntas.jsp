@@ -117,25 +117,26 @@
                 </div>
                 <div class="card-body">
                     <form action="../ServRegistroRespuestas" method="post">
+                    <c:forEach items="${datosDatosEval}" var="e">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" required="true">
+                          <label class="bmd-label-floating">TITULO EVALUACION</label><br>
+                          <label>${e.titulo}</label>
                         </div>
                       </div>
                         <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                            <label class="bmd-label-floating">Fecha</label><br>
+                          <label>${e.fecha_eval}</label>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          
+                            <label class="bmd-label-floating">EMPRESA</label><br>
+                          <label>${e.razon_social}</label>
                         </div>
                       </div>  
                     </div>
@@ -143,10 +144,11 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">DESCRIPCION DE EVALUACION</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true"></textarea>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true" disabled>${e.descripcion}</textarea>
                         </div>
                       </div>
                     </div>
+                    </c:forEach>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
