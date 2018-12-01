@@ -37,7 +37,7 @@ public class ServRegistroPregunta extends HttpServlet {
         try{
             
             //Evaluacion;
-            int id_eval = 0;
+            int id_eval = Integer.parseInt(request.getParameter("ddlEvaluacion"));
             String pregunta = request.getParameter("txtPregunta");
             int ponderacion = 1;
             

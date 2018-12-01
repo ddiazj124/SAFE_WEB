@@ -13,10 +13,22 @@ public class EvaluacionPersonal {
     private int id;
     private String descripcion;
     private int id_tipo;
+    private int id_ev;
     private String rut_trabajador;
 
     public EvaluacionPersonal() {
     }
+
+    public EvaluacionPersonal(int id, String descripcion, int id_tipo, int id_ev, String rut_trabajador) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.id_tipo = id_tipo;
+        this.id_ev = id_ev;
+        this.rut_trabajador = rut_trabajador;
+    }
+    
+    
+    
 
     public EvaluacionPersonal(int id, String descripcion, int id_tipo, String rut_trabajador) {
         this.id = id;
@@ -63,6 +75,14 @@ public class EvaluacionPersonal {
 
     public void setRut_trabajador(String rut_trabajador) {
         this.rut_trabajador = rut_trabajador;
+    }
+
+    public int getId_ev() {
+        return id_ev;
+    }
+
+    public void setId_ev(int id_ev) {
+        this.id_ev = id_ev;
     }
     
     

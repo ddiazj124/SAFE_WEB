@@ -65,12 +65,12 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
         
         try{
             //DATOS DEL FORMULARIO
-            String titulo = request.getParameter("txtEvaluacion");
+            /*String titulo = request.getParameter("txtEvaluacion");
             String rut_empresa = request.getParameter("ddlEmpresa");
             String rut_trabajador = request.getParameter("ddlTrabajador");
             String descripcion_evaluacion = request.getParameter("");
             String descripcion_evaluacionP = request.getParameter("txtDescripcionPersona");
-            int tipo_eval = 7;
+            int tipo_eval = 1;
             int id_estado = 1;
             
             //FECHA
@@ -79,13 +79,32 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
             //DAO
             DAOEvaluacion dao = new DAOEvaluacion();
             DAOEvaluacionPersonal eDao = new DAOEvaluacionPersonal();
+            */
+            //Evaluacion;
+            int id_eval = 0;
+            String titulo = request.getParameter("txtTitulo");
+            String rut_empresa = request.getParameter("ddlEmpresa");
+            String rut_trabajador = request.getParameter("ddlTrabajador");
+            String fecha_eval = request.getParameter("txtFecha");
+            String descripcion = request.getParameter("txtDescripcion");
+            int estado_eval = 1;
+            String rut_tecnico = "16200739-4";
+            String rut_ingeniero = request.getParameter("ddlIngeniero");
             
+            Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);
+            DAOEvaluacion dev = new DAOEvaluacion();
+            dev.Insertar(ev);
             
-            Evaluacion ev = new Evaluacion(titulo, tipo_eval, rut_empresa,fecha_eval, descripcion_evaluacion, id_estado);
-            EvaluacionPersonal e = new EvaluacionPersonal(descripcion_evaluacionP,tipo_eval,rut_trabajador);
+            //Evaluacion personal
+            String descripcion_Personal = request.getParameter("txtDescripcionPersonal");
+            int id_tipo = 1;
+            id_eval = dev.TraerMaximo();
             
-            dao.Insertar(ev);
-            eDao.Insertar(e);
+            EvaluacionPersonal e = new EvaluacionPersonal(0,descripcion_Personal,id_tipo,id_eval,rut_trabajador);
+            DAOEvaluacionPersonal dep = new DAOEvaluacionPersonal();
+            
+            dep.Insertar(e);
+            
             
             response.sendRedirect("./tecnico/registroExitoso.jsp");
         }catch(Exception e)

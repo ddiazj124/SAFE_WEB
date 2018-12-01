@@ -39,14 +39,13 @@ public class ServMostrarIngresoPregunta extends HttpServlet {
         HttpSession session = request.getSession();
         
         //Guardar ID
-        int id_ev = Integer.parseInt(request.getParameter("id_ev"));
-        session.setAttribute("datoIdEv", id_ev);
+        String rut = "16200739-4";
         
         //Guardar Dato de Nombre Evaluacion
         DAOEvaluacion dev = new DAOEvaluacion();
-        ArrayList<Evaluacion> Listemp = dev.TraerEvaluacionesPregunta(id_ev);;
+        ArrayList<Evaluacion> Listdev = dev.TraerEvaluacionesTecnico(rut);
         
-        session.setAttribute("datosNombreEvaluacion", Listemp);
+        session.setAttribute("datosEvaluacionesA", Listdev);
         response.sendRedirect("./tecnico/registroPregunta.jsp");
     }
 

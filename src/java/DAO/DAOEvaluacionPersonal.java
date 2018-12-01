@@ -20,8 +20,9 @@ import java.util.logging.Logger;
  */
 public class DAOEvaluacionPersonal {
  
-    private static String sql_selectAll = "SELECT * FROM EVAL_TERRENO";
+    private static String sql_selectAll = "SELECT * FROM EVAL_PERSONAL";
     private static String sql_insertarProcedimiento = "CALL INSERT_EVAL_PERS(?,?,?)";
+    private static String sql_insertar = "INSERT INTO EVAL_PERS (id,descripcion,rut_trabajador,id_evaluacion,id_tipo) VALUES (S_EVAL_PERS.NEXTVAL,?,?,?,?)";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -30,10 +31,12 @@ public class DAOEvaluacionPersonal {
         try {
             PreparedStatement ps;
             
-            ps = objConn.getConn().prepareStatement(sql_insertarProcedimiento);
+            ps = objConn.getConn().prepareStatement(sql_insertar);
             ps.setString(1, e.getDescripcion());
-            ps.setInt(2, e.getId_tipo());
-            ps.setString(3, e.getRut_trabajador());
+            ps.setString(2, e.getRut_trabajador());
+            ps.setInt(3, e.getId_ev());
+            ps.setInt(4, e.getId_tipo());
+            
             
             if(ps.executeUpdate()>0){
                 return true;
@@ -49,9 +52,12 @@ public class DAOEvaluacionPersonal {
     
     public static void main(String[] args) {
         
-        //Evaluacion e = new Evaluacion("PruebaDesdeJava", 2, "20385652-9", "Prueba");
-        //DAOEvaluacion Dev = new DAOEvaluacion();
-        //Dev.Insertar(e);
+        //EvaluacionPersonal e = new EvaluacionPersonal();
+        String detalle = "Evaluacion de Supervision de Seguridad";
+        String rut = "19585020-8";
+        EvaluacionPersonal e = new EvaluacionPersonal(0,detalle,1,102,rut);
+        DAOEvaluacionPersonal Dev = new DAOEvaluacionPersonal();
+        Dev.Insertar(e);
         
     }
     

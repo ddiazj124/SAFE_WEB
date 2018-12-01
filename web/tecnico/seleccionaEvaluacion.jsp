@@ -133,20 +133,20 @@
                         Ingresar Pregunta
                     </td>
                 </tr>
-            <c:forEach items="${datosEvaluacionesTecnico}" var="p">
+            <c:forEach items="${datosEvaluacionesTecnico}" var="et">
                 <tr>
                     <td>
-                        <label>${p.id_ev}</label>
-                        <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
+                        <label>${et.id_ev}</label>
+                        <input type="hidden" id="id_ev${et.id_ev}" name="id_ev" value="${et.id_ev}">
                     </td>
                     <td>
-                        <label>${p.titulo}</label>
+                        <label>${et.titulo}</label>
                     </td>
                     <td>
-                        <label>${p.fecha_eval}</label>
+                        <label>${et.fecha_eval}</label>
                     </td>
                     <td>
-                        <label>${p.descripcion}</label>
+                        <label>${et.descripcion}</label>
                     </td>
                     
                     <td>

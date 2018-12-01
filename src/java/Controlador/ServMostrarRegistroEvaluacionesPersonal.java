@@ -8,10 +8,12 @@ package Controlador;
 import DAO.DAOEmpresa;
 import DAO.DAOEvaluacion;
 import DAO.DAOEvaluacionPersonal;
+import DAO.DAOIngeniero;
 import DAO.DAOTipo_Eval;
 import DAO.DAOTrabajador;
 import Entidades.Empresa;
 import Entidades.EvaluacionPersonal;
+import Entidades.Ingeniero;
 import Entidades.Tipo_Eval;
 import Entidades.Trabajador;
 import java.io.IOException;
@@ -62,6 +64,11 @@ public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
                 DAOTrabajador tr = new DAOTrabajador();
                 ArrayList<Trabajador> Listtr = tr.TraerTodos();
                 session.setAttribute("datosTrabajador", Listtr);
+                
+                //Ingeniero
+                DAOIngeniero i = new DAOIngeniero();
+                ArrayList<Ingeniero> Listing = i.TraerTodos();
+                session.setAttribute("datosIngeniero", Listing);
                 
                 
                 
