@@ -5,7 +5,9 @@
  */
 package Controlador;
 
+import DAO.DAOEvaluacion;
 import DAO.DAOEvaluacionTerreno;
+import Entidades.Evaluacion;
 import Entidades.EvaluacionTerreno;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +37,26 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            int tipoEvaluacion = Integer.parseInt(request.getParameter("sTipoEvaluacion"));
+            
+            //Evaluacion;
+            int id_eval = 0;
+            String titulo = request.getParameter("txtTitulo");
+            String rut_empresa = request.getParameter("ddlEmpresa");
+            String fecha_eval = request.getParameter("txtFecha");
+            String descripcion = request.getParameter("txtDescripcion");
+            int estado_eval = 1;
+            String rut_tecnico = "16200739-4";
+            String rut_ingeniero = request.getParameter("ddlIngeniero");
+            
+            Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);
+            DAOEvaluacion dev = new DAOEvaluacion();
+            dev.Insertar(ev);
+            //Evaluacion Terreno
+            id_eval = dev.TraerMaximo();
+            
+            
+            //Evaluacion en terreno
+            int tipoEvaluacion = 1;
             String Descipcion = request.getParameter("txtDescripcion");
             DAOEvaluacionTerreno eDao = new DAOEvaluacionTerreno();
             EvaluacionTerreno e = new EvaluacionTerreno(0, Descipcion, tipoEvaluacion);

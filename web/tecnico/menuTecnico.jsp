@@ -61,6 +61,12 @@
             </a>
           </li>
           <li class="nav-item ">
+            <a class="nav-link" href="./menuEvaluaciones.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Listar Evaluaciones</p>
+            </a>
+          </li>
+          <li class="nav-item ">
             <a class="nav-link" href=".../.../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
@@ -110,8 +116,8 @@
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Registrar Evaluacion</p>
-                  <h3 class="card-title"><a id="re" href="./registroEvaluaciones.jsp">Entrar</a>
+                  <p class="card-category">Listar Evaluacion</p>
+                  <h3 class="card-title"><a id="re" href="./menuEvaluaciones.jsp">Entrar</a>
                   </h3>
                 </div>
                 <div class="card-footer">

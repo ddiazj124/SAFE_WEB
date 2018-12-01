@@ -1,18 +1,14 @@
 <%-- 
-    Document   : registroEvaluacionesTerreno
-    Created on : 21-oct-2018, 21:12:18
+    Document   : menuEvaluaciones
+    Created on : 30-nov-2018, 1:03:24
     Author     : Diego
 --%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.util.Calendar"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../ServMostrarEvalTerreno" flush="true"></jsp:include>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../ServMostrarEvaluaciones" flush="true"></jsp:include>
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
@@ -33,7 +29,7 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -46,26 +42,26 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="menuTecnico.jsp">
+          <li class="nav-item active ">
+            <a class="nav-link" href="./menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
+          <li class="nav-item ">
+            <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="registroEvaluacionesPersonal.jsp">
+            <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="../index.jsp">
+            <a class="nav-link" href=".../.../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
             </a>
@@ -105,91 +101,65 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <!-- End Navbar -->
+      
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
-            <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Registro Evaluacion en Terreno</h4>
-                  <p class="card-category">Completa el Formulario</p>
-                </div>
-                <div class="card-body">
-                    <form action="../ServRegistroEvalTerrenoTecnico" method="post">
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txttitulo" class="form-control" required="true">
-                        </div>
-                      </div>
-                        <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control" required="true">
-                            <c:forEach items="${datosEmpresa}" var="e">
-                                <option value="${e.rut_empresa}">${e.razon_social}</option>
-                            </c:forEach>
-                           </select>
-                        </div>
-                      </div>  
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">DESCRIPCION DE EVALUACION</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">DETALLE DE EVALUACION EN TERRENO</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionTerreno" required="true"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Ingeniero a Cargo</label>
-                          <select id="ddlEmpresa" name="ddlIngeniero" class="form-control" required="true">
-                          <c:forEach items="${datosIngeniero}" var="i">
-                                <option value="${i.rut_ingeniero}">${i.nombre} ${i.apellido}</option>
-                            </c:forEach>
-                          </select>
-                        </div>
-                      </div>
-                    </div>    
-                        <input type="submit" class="btn btn-primary pull-right" value="Registrar Evaluación"/>
-                    <div class="clearfix"></div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            
+              <form action="../ServMostrarPreguntas" method="POST">
+            <table border = 'Solid'>
+                <tr>
+                    <td>
+                        ID Evaluacion
+                    </td>
+                    <td>
+                        Titulo
+                    </td>
+                    <td>
+                        Fecha Evaluacion
+                    </td>
+                    <td>
+                        Descripcion Evaluacion
+                    </td>
+                    <td>
+                        Contestar Preguntas
+                    </td>
+                </tr>
+            <c:forEach items="${datosEvaluacionesTecnico}" var="p">
+                <tr>
+                    <td>
+                        <label>${p.id_ev}</label>
+                        <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
+                    </td>
+                    <td>
+                        <label>${p.titulo}</label>
+                    </td>
+                    <td>
+                        <label>${p.fecha_eval}</label>
+                    </td>
+                    <td>
+                        <label>${p.descripcion}</label>
+                    </td>
+                    
+                    <td>
+                        <input type="submit" value="Responder">
+                    </td>
+                </tr>
+              </c:forEach>
+            </table>
+          </form>    
+            
           </div>
-        </div>
-      </div>
+          
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#">
+                <a href="#Diego">
                   SAFE - Prevencion de Riesgos
                 </a>
-              </li>
-              
+              </li>              
             </ul>
           </nav>
           <div class="copyright float-right">
@@ -225,3 +195,4 @@
 </body>
 
 </html>
+

@@ -17,8 +17,22 @@ public class Evaluacion {
     private String fecha_eval;
     private String descripcion;
     private int evaluacion_estado_id;
+    private String rut_tecnico;
+    private String rut_ingeniero;
+    private String razon_social;
 
     public Evaluacion() {
+    }
+    
+    public Evaluacion(int id_ev, String titulo, String rut_empresa, String fecha_eval, String descripcion, int evaluacion_estado_id, String rut_tecnico, String rut_ingeniero) {
+        this.id_ev = id_ev;
+        this.titulo = titulo;
+        this.rut_empresa = rut_empresa;
+        this.fecha_eval = fecha_eval;
+        this.descripcion = descripcion;
+        this.evaluacion_estado_id = evaluacion_estado_id;
+        this.rut_tecnico = rut_tecnico;
+        this.rut_ingeniero = rut_ingeniero;
     }
 
     public Evaluacion(int id_ev, String titulo, int id_tipo, String rut_empresa, String fecha_eval, String descripcion, int evaluacion_estado_id) {
@@ -31,6 +45,13 @@ public class Evaluacion {
         this.evaluacion_estado_id = evaluacion_estado_id;
     }
 
+    public Evaluacion(String titulo,String fecha_eval,String descripcion,String razonSocial) {
+        this.titulo = titulo;
+        this.fecha_eval = fecha_eval;
+        this.descripcion = descripcion;
+        this.razon_social = razonSocial;
+    }
+    
     public Evaluacion(String titulo, int id_tipo, String rut_empresa, String fecha_eval, String descripcion, int evaluacion_estado_id) {
         this.titulo = titulo;
         this.id_tipo = id_tipo;
@@ -95,8 +116,26 @@ public class Evaluacion {
     public void setEvaluacion_estado_id(int evaluacion_estado_id) {
         this.evaluacion_estado_id = evaluacion_estado_id;
     }
-
     
+    public String getRut_tecnico() {
+        return rut_tecnico;
+    }
+
+    public void setRut_tecnico(String rut_tecnico) {
+        this.rut_tecnico = rut_tecnico;
+    }
+
+    public String getRut_ingeniero() {
+        return rut_ingeniero;
+    }
+
+    public void setRut_ingeniero(String rut_ingeniero) {
+        this.rut_ingeniero = rut_ingeniero;
+    }
+
+    public String getRazon_social() {
+        return razon_social;
+    }
     
     
 }

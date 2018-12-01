@@ -7,9 +7,9 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../ServMostrarEvalTerreno" flush="true"></jsp:include>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../ServMostrarPreguntas" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -116,30 +116,27 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServRegistroEvalTerrenoTecnico" method="post">
+                    <form action="../ServRegistroRespuestas" method="post">
+                    <c:forEach items="${datosDatosEval}" var="e">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txttitulo" class="form-control" required="true">
+                          <label class="bmd-label-floating">TITULO EVALUACION</label><br>
+                          <label>${e.titulo}</label>
                         </div>
                       </div>
                         <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                            <label class="bmd-label-floating">Fecha</label><br>
+                          <label>${e.fecha_eval}</label>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">EMPRESA</label>
-                          <select id="ddlEmpresa" name="ddlEmpresa" class="form-control" required="true">
-                            <c:forEach items="${datosEmpresa}" var="e">
-                                <option value="${e.rut_empresa}">${e.razon_social}</option>
-                            </c:forEach>
-                           </select>
+                            <label class="bmd-label-floating">EMPRESA</label><br>
+                          <label>${e.razon_social}</label>
                         </div>
                       </div>  
                     </div>
@@ -147,27 +144,28 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">DESCRIPCION DE EVALUACION</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true"></textarea>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true" disabled>${e.descripcion}</textarea>
                         </div>
                       </div>
                     </div>
+                    </c:forEach>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">DETALLE DE EVALUACION EN TERRENO</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionTerreno" required="true"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Ingeniero a Cargo</label>
-                          <select id="ddlEmpresa" name="ddlIngeniero" class="form-control" required="true">
-                          <c:forEach items="${datosIngeniero}" var="i">
-                                <option value="${i.rut_ingeniero}">${i.nombre} ${i.apellido}</option>
+                          <label class="bmd-label-floating"></label>
+                          <c:forEach items="${datosPreguntas}" var="p">
+                              <table>
+                                  <tr>
+                                  <br>
+                                      <label>${p.detallePregunta}</label>
+                                  </tr>
+                                  <tr>
+                                      <textarea class="form-control" rows="4" cols="50" name="txtrespuesta${p.idPregunta}" required="true"></textarea>
+                                  </tr>
+                              </table>
+                                
+                                
                             </c:forEach>
-                          </select>
                         </div>
                       </div>
                     </div>    
@@ -225,3 +223,4 @@
 </body>
 
 </html>
+
