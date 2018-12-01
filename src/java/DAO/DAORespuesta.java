@@ -19,6 +19,8 @@ import java.util.logging.Logger;
  */
 public class DAORespuesta {
     private static String sql_insertar = "INSERT INTO RESPUESTA(?,?,?)";
+    private static String sql_update = "UPDATE EVALUACION SET EVALUACION_ESTADO_ID = 2 WHERE ID_EV = ?;";
+    
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -31,6 +33,25 @@ public class DAORespuesta {
             ps.setInt(1, resp.getIdRespuesta());
             ps.setInt(2, resp.getIdPregunta());
             ps.setString(3, resp.getDetalleRespuesta());
+            
+            if(ps.executeUpdate()>0){
+                return true;
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORespuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return false;
+    }
+    
+    public boolean update(int id_ev) {
+        try {
+            PreparedStatement ps;
+            
+            ps = objConn.getConn().prepareStatement(sql_insertar);
+            ps.setInt(1, id_ev);
             
             if(ps.executeUpdate()>0){
                 return true;

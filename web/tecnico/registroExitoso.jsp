@@ -70,6 +70,12 @@
             </a>
           </li>
           <li class="nav-item ">
+            <a class="nav-link" href="../ServMostrarIngresoPregunta">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Preguntas</p>
+            </a>
+          </li>
+          <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
