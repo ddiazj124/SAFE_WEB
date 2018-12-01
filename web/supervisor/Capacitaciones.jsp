@@ -464,7 +464,7 @@
                 };
                 
                 function eliminarCapacitacion() {                    
-                     var idCapacitacionEliminar    = $('#idCapacitacionEditar').val();
+                    var idCapacitacionEliminar    = $('#idCapacitacionEditar').val();
 
                     $.post('../ServEliminarCapacitacion', {
                              idCapacitacionEliminar    : idCapacitacionEliminar

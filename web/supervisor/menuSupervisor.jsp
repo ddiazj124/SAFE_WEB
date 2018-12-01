@@ -66,7 +66,12 @@
               <p>Visitas Médicas</p>
             </a>
           </li>
-          
+          <li class="nav-item ">
+            <a class="nav-link" href="Asistencia.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Asistencia Capacitaciones</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>

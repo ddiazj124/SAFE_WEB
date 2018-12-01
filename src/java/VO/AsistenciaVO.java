@@ -9,18 +9,28 @@ private String  rut_trabajador;
 private int     estado_id;
 private String  estado_asistencia;
 private Date    fecha_asistencia;
+private String  lugar;
 
     public AsistenciaVO() {
     }
 
     public AsistenciaVO(int id_asistencia, int capacitacion_id,  String rut_trabajador, int estado_id
-                        , String estado_asistencia, Date fecha_asistencia) {
+                        , String estado_asistencia, Date fecha_asistencia, String lugar) {
         this.id_asistencia      = id_asistencia;  
         this.capacitacion_id    = capacitacion_id;
         this.rut_trabajador     = rut_trabajador;
         this.estado_id          = estado_id;
         this.estado_asistencia  = estado_asistencia;
-        this.fecha_asistencia   = fecha_asistencia;              
+        this.fecha_asistencia   = fecha_asistencia; 
+        this.lugar              = lugar;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     public int getId_asistencia() {
