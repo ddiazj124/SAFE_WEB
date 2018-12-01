@@ -4,6 +4,7 @@
     Author     : Diego
 --%>
 
+<%@page import="Entidades.Usuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -32,7 +33,40 @@
 </head>
 
 <body class="">
-  <div class="wrapper ">
+            <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                %> 
+                <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -181,6 +215,11 @@
 
     });
   </script>
+                <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>
