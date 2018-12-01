@@ -48,6 +48,24 @@ public class DAOExamen {
         return false;
     }
     
+    public ArrayList<Examen> TraerTodos() {
+        try {
+            ArrayList<Examen> Lexamen = new ArrayList<>();
+            PreparedStatement ps;
+            ps = objConn.getConn().prepareStatement("SELECT * FROM EXAMEN");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Lexamen.add(new Examen(rs.getInt("id_examen"),rs.getString("observacion"),rs.getString("resultado"),rs.getString("fecha_visita"),rs.getInt("id_visita")));
+            }
+            return Lexamen;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOExamen.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
+    
     public static void main(String[] args) {
         
         //Evaluacion e = new Evaluacion("PruebaDesdeJava", 2, "20385652-9", "Prueba");
