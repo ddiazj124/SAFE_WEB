@@ -17,13 +17,13 @@ public class Visita_Med {
     private String observaciones;
     private String diagnostico;
     private String fecha_visita;
-    private char estado;
+    private int estado;
     private String receta;
 
     public Visita_Med() {
     }
 
-    public Visita_Med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, char estado, String receta) {
+    public Visita_Med(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones, String diagnostico, String fecha_visita, int estado, String receta) {
         this.id_visita = id_visita;
         this.rut_medico = rut_medico;
         this.rut_trabajador = rut_trabajador;
@@ -34,6 +34,17 @@ public class Visita_Med {
         this.estado = estado;
         this.receta = receta;
     }
+
+    public Visita_Med(int id_visita, String motivo_consulta, String observaciones, String diagnostico, int estado, String receta) {
+        this.id_visita = id_visita;
+        this.motivo_consulta = motivo_consulta;
+        this.observaciones = observaciones;
+        this.diagnostico = diagnostico;
+        this.estado = estado;
+        this.receta = receta;
+    }
+    
+    
 
     public Visita_Med(int id_visita) {
         this.id_visita = id_visita;
@@ -95,13 +106,15 @@ public class Visita_Med {
         this.fecha_visita = fecha_visita;
     }
 
-    public char getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(char estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
 
     public String getReceta() {
         return receta;

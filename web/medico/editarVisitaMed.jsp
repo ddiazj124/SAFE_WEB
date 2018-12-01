@@ -83,22 +83,16 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
+              <p>Lista Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./administrarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Lista de Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -170,7 +164,6 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">ID</label>
                           <input type="text" name="txtID" id="txtID" class="form-control" disabled value="<%out.println(visita.getId_visita());%>"/>
-                          <input type="hidden" name="idVisita" id="idVisita"/>
                         </div>
                       </div>
                       <div class="col-md-3">

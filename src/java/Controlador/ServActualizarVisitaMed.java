@@ -5,6 +5,8 @@
  */
 package Controlador;
 
+import DAO.DAOVisita_Med;
+import Entidades.Visita_Med;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -58,20 +60,33 @@ public class ServActualizarVisitaMed extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int id = Integer.parseInt(request.getParameter("idVisita"));
-        int estado = Integer.parseInt(request.getParameter("cmbEstado"));
+        int id_vis_ori = 0;
+        
+        String estado = request.getParameter("cmbEstado");
+        String idvis = request.getParameter("txtID");
         String motivo_consulta = request.getParameter("txtMotivoConsulta");
         String observaciones = request.getParameter("txtObservaciones");
         String diagnostico = request.getParameter("txtDiagnostico");
         String receta = request.getParameter("txtReceta");
         
         try {
+            DAOVisita_Med vism = new DAOVisita_Med();
+            
+            
+            try{
+                int id = Integer.parseInt(idvis);
+                id_vis_ori = id;
+             }catch(NumberFormatException ex){ // handle your exception
+                System.out.println(ex);
+             }
+            
+            Visita_Med visi = new Visita_Med(id_vis_ori, motivo_consulta, observaciones, diagnostico, Integer.parseInt("estado"), receta);
+            vism.ActualizarVisitaMedX(visi);
             
             response.sendRedirect("medico/editarVisitaMed.jsp");
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        
         
     }
 
