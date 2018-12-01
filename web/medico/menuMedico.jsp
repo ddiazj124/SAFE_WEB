@@ -80,22 +80,16 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
+              <p>Lista Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
+            <a class="nav-link" href="./listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./administrarExamenes.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Lista de Examenes</p>
             </a>
           </li>
           <li class="nav-item ">

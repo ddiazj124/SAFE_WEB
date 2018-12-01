@@ -19,6 +19,11 @@ public class Examen {
     public Examen() {
     }
 
+    public Examen(int id_examen) {
+        this.id_examen = id_examen;
+    }
+    
+
     public Examen(int id_examen, String observacion, String resultado, String fecha_visita, int id_visita) {
         this.id_examen = id_examen;
         this.observacion = observacion;

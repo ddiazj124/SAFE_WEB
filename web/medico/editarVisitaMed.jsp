@@ -84,13 +84,13 @@
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./listarAtenciones.jsp">
+            <a class="nav-link" href="listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarExamenes.jsp">
+            <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista de Examenes</p>
             </a>
@@ -163,7 +163,8 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID</label>
-                          <input type="text" name="txtID" id="txtID" class="form-control" disabled value="<%out.println(visita.getId_visita());%>"/>
+                          <input type="text" class="form-control" disabled value="<%out.println(visita.getId_visita());%>"/>
+                          <input type="hidden" name="txtId" id="txtId" value="<%out.println(visita.getRut_medico().toString());%>"/>
                         </div>
                       </div>
                       <div class="col-md-3">

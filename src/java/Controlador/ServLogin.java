@@ -5,9 +5,11 @@
  */
 package Controlador;
 
+import DAO.DAOExamen;
 import DAO.DAOMedico;
 import DAO.DAOUsuario;
 import DAO.DAOVisita_Med;
+import Entidades.Examen;
 import Entidades.Medico;
 import Entidades.Usuario;
 import Entidades.Visita_Med;
@@ -130,13 +132,19 @@ public class ServLogin extends HttpServlet {
                         
                         Medico med = new Medico();
                         DAOMedico daoMed = new DAOMedico();
+                        Examen exam = new Examen();
+                        
+                        
                         med = daoMed.BuscarRutMedico(u.getNombre_usuario());
                         
                         DAOVisita_Med vism = new DAOVisita_Med();
+                        DAOExamen daoExam = new DAOExamen();
+                        
                         ArrayList<Visita_Med> Listvis = vism.TraerVisitasMedXRut(med.getRut_medico());
+                        ArrayList<Examen> Lexam = daoExam.TraerExamenMedXRut(med.getRut_medico());
                         
                         session.setAttribute("ListarVisitasX", Listvis);
-                        
+                        session.setAttribute("ListarExamX", Lexam);
                         
                         response.sendRedirect("medico/menuMedico.jsp");
                     }

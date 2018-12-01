@@ -5,8 +5,6 @@
  */
 package Controlador;
 
-import DAO.DAOVisita_Med;
-import Entidades.Visita_Med;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Sebastian
  */
-@WebServlet(name = "ServActualizarVisitaMed", urlPatterns = {"/ServActualizarVisitaMed"})
-public class ServActualizarVisitaMed extends HttpServlet {
+@WebServlet(name = "SevEditarExamen", urlPatterns = {"/SevEditarExamen"})
+public class SevEditarExamen extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +29,22 @@ public class ServActualizarVisitaMed extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SevEditarExamen</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SevEditarExamen at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,7 +58,7 @@ public class ServActualizarVisitaMed extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -59,35 +72,7 @@ public class ServActualizarVisitaMed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int id_vis_ori = 0;
-        
-        String estado = request.getParameter("cmbEstado");
-        String idvis = request.getParameter("txtId");
-        String motivo_consulta = request.getParameter("txtMotivoConsulta");
-        String observaciones = request.getParameter("txtObservaciones");
-        String diagnostico = request.getParameter("txtDiagnostico");
-        String receta = request.getParameter("txtReceta");
-        
-        try {
-            DAOVisita_Med vism = new DAOVisita_Med();
-            
-            
-            try{
-                int id = Integer.parseInt(idvis);
-                id_vis_ori = id;
-             }catch(NumberFormatException ex){ // handle your exception
-                System.out.println(ex);
-             }
-            
-            Visita_Med visi = new Visita_Med(id_vis_ori, motivo_consulta, observaciones, diagnostico, Integer.parseInt("estado"), receta);
-            vism.ActualizarVisitaMedX(visi);
-            
-            response.sendRedirect("medico/editarVisitaMed.jsp");
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
-        
+        processRequest(request, response);
     }
 
     /**
