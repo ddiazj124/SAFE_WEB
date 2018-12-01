@@ -1,11 +1,15 @@
 <%-- 
-    Document   : aministrarExamenes
-    Created on : 21-oct-2018, 22:22:28
+    Document   : registroEvaluacionesTerreno
+    Created on : 21-oct-2018, 21:12:18
     Author     : Diego
 --%>
-
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Calendar"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../ServMostrarPreguntas" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +28,7 @@
   <!-- CSS Files -->
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -36,40 +40,40 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="./menuMedico.jsp" class="simple-text logo-normal">
+        <a href="./menuTecnico.jsp" class="simple-text logo-normal">
           Menu
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="./menuMedico.jsp">
+          <li class="nav-item">
+            <a class="nav-link" href="menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuMedico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
+          <li class="nav-item active">
+            <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./listarAtenciones.jsp">
+            <a class="nav-link" href="registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
+              <p>Registrar Evaluacion Personal</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
+            <a class="nav-link" href="./menuEvaluaciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
+              <p>Listar Evaluaciones</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarExamenes.jsp">
+            <a class="nav-link" href="../ServMostrarIngresoPregunta">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Registrar Preguntas</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -86,7 +90,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuMedico.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTecnico.jsp">Inicio</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -113,50 +117,73 @@
         </div>
       </nav>
       <!-- End Navbar -->
+      <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <div class="card">
+            <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Administrar Atencion Medica</h4>
-                  <p class="card-category">Selecciona Siguiente Paso</p>
+                  <h4 class="card-title">Registro Evaluacion en Terreno</h4>
+                  <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form  method="post">
+                    <form action="../ServRegistroRespuestas" method="post">
+                    <c:forEach items="${datosDatosEval}" var="e">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating"> No se ingreso Correctamente ¿Deseas Ingresar nuevamente?</label>
-                          <a href="./administrarAtenciones.jsp">Ingresar Otra</a>                          
+                          <label class="bmd-label-floating">TITULO EVALUACION</label><br>
+                          <label>${e.titulo}</label>
+                        </div>
+                      </div>
+                        <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Fecha</label><br>
+                          <label>${e.fecha_eval}</label>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Volver al Menú</label>
-                          <a href="./menuMedico.jsp">Volver al Menú</a>
+                            <label class="bmd-label-floating">EMPRESA</label><br>
+                          <label>${e.razon_social}</label>
+                        </div>
+                      </div>  
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">DESCRIPCION DE EVALUACION</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcion" required="true" disabled>${e.descripcion}</textarea>
                         </div>
                       </div>
                     </div>
-                      
-                        
-                      
+                    </c:forEach>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating"></label>
+                          <c:forEach items="${datosPreguntas}" var="p">
+                              <table>
+                                  <tr>
+                                  <br>
+                                      <label>${p.detallePregunta}</label>
+                                  </tr>
+                                  <tr>
+                                      <textarea class="form-control" rows="4" cols="50" name="txtrespuesta${p.idPregunta}" required="true"></textarea>
+                                  </tr>
+                              </table>
+                                
+                                
+                            </c:forEach>
+                        </div>
+                      </div>
+                    </div>    
+                        <input type="submit" class="btn btn-primary pull-right" value="Registrar Evaluación"/>
+                    <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Medico</h6>
-                  <h4 class="card-title">Medico</h4>
                 </div>
               </div>
             </div>
@@ -165,12 +192,21 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#">
+                  SAFE - Prevencion de Riesgos
+                </a>
+              </li>
+              
+            </ul>
+          </nav>
           <div class="copyright float-right">
             &copy;
             <script>
               document.write(new Date().getFullYear())
-            </script> <i class="material-icons">favorite</i>
+            </script>
           </div>
         </div>
       </footer>
@@ -196,19 +232,7 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>
+

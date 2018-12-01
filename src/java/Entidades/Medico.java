@@ -18,6 +18,11 @@ public class Medico {
     public Medico() {
     }
 
+    public Medico(String rut_medico) {
+        this.rut_medico = rut_medico;
+    }
+    
+
     public Medico(String rut_medico, int id_perfil, String nombre, String apellido) {
         this.rut_medico = rut_medico;
         this.id_perfil = id_perfil;

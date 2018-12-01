@@ -5,17 +5,10 @@
  */
 package Controlador;
 
-import DAO.DAOEmpresa;
 import DAO.DAOEvaluacion;
-import DAO.DAOEvaluacionPersonal;
-import DAO.DAOIngeniero;
-import DAO.DAOTipo_Eval;
-import DAO.DAOTrabajador;
-import Entidades.Empresa;
-import Entidades.EvaluacionPersonal;
-import Entidades.Ingeniero;
-import Entidades.Tipo_Eval;
-import Entidades.Trabajador;
+import DAO.DAOPregunta;
+import Entidades.Evaluacion;
+import Entidades.Pregunta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -28,10 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Diego
+ * @author diego.diaz
  */
-@WebServlet(name = "ServMostrarRegistroEvaluacionesPersonal", urlPatterns = {"/ServMostrarRegistroEvaluacionesPersonal"})
-public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
+@WebServlet(name = "ServMostrarPreguntas", urlPatterns = {"/ServMostrarPreguntas"})
+public class ServMostrarPreguntas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,43 +38,30 @@ public class ServMostrarRegistroEvaluacionesPersonal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try
-            {
-                
+        try {
                 HttpSession session = request.getSession();
+                int id_ev = Integer.parseInt(request.getParameter("id_ev"));
+                //Añadir objeto de Session que consulte que ID de evaluacion es:
                 
-                //Empresas
-                DAOEmpresa e = new DAOEmpresa();
-                ArrayList<Empresa> Listemp = e.TraerTodos();
-                session.setAttribute("datosEmpresa", Listemp);
+                //Preguntas
+                DAOPregunta p = new DAOPregunta();
+                ArrayList<Pregunta> Listemp = p.TraerPreguntasEval(id_ev);
+                session.setAttribute("datosPreguntas", Listemp);
                 
-                //Tipo Evaluacion
-                DAOTipo_Eval teDao = new DAOTipo_Eval();
-                ArrayList<Tipo_Eval> ListTipoEval = teDao.TraerTodos();
-                session.setAttribute("datosTipoEvaluacion", ListTipoEval);
+                DAOEvaluacion e = new DAOEvaluacion();
+                ArrayList<Evaluacion> ListEval = e.TraerEvaluacionesPregunta(id_ev);
+                session.setAttribute("datosDatosEval", ListEval);
                 
-                //Trabajador
-                DAOTrabajador tr = new DAOTrabajador();
-                ArrayList<Trabajador> Listtr = tr.TraerTodos();
-                session.setAttribute("datosTrabajador", Listtr);
-                
-                //Ingeniero
-                DAOIngeniero i = new DAOIngeniero();
-                ArrayList<Ingeniero> Listing = i.TraerTodos();
-                session.setAttribute("datosIngeniero", Listing);
+                response.sendRedirect("./tecnico/responderPreguntas.jsp");
                 
                 
-                
-                //response.sendRedirect("medico/administrarAtenciones.jsp");
-                //request.getRequestDispatcher("medico/administrarAtenciones.jsp").forward(request, response);
-            }catch (Exception ex)
-            {
-                String error;
-                error = ex.toString();
-            }
+        }
+        catch (Exception ex)
+        {
+            String error;
+            error = ex.toString();
+        }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

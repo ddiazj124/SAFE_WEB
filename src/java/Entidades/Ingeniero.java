@@ -10,7 +10,7 @@ package Entidades;
  * @author Sebastian
  */
 public class Ingeniero {
-    private int rut_ingeniero;
+    private String rut_ingeniero;
     private int id_perfil;
     private String nombre;
     private String apellido;
@@ -18,18 +18,18 @@ public class Ingeniero {
     public Ingeniero() {
     }
 
-    public Ingeniero(int rut_ingeniero, int id_perfil, String nombre, String apellido) {
+    public Ingeniero(String rut_ingeniero, int id_perfil, String nombre, String apellido) {
         this.rut_ingeniero = rut_ingeniero;
         this.id_perfil = id_perfil;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public int getRut_ingeniero() {
+    public String getRut_ingeniero() {
         return rut_ingeniero;
     }
 
-    public void setRut_ingeniero(int rut_ingeniero) {
+    public void setRut_ingeniero(String rut_ingeniero) {
         this.rut_ingeniero = rut_ingeniero;
     }
 

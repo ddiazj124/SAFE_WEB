@@ -7,6 +7,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../ServMostrarEvalTerreno" flush="true"></jsp:include>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,6 +65,18 @@
             </a>
           </li>
           <li class="nav-item ">
+            <a class="nav-link" href="./menuEvaluaciones.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Listar Evaluaciones</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="../ServMostrarIngresoPregunta">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Preguntas</p>
+            </a>
+          </li>
+          <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
@@ -115,18 +128,18 @@
                   <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
+                    <form action="../ServRegistroEvalTerrenoTecnico" method="post">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" required="true">
+                          <input type="text" name="txtTitulo" class="form-control" required="true">
                         </div>
                       </div>
                         <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtEvaluacion" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                          <input type="text" name="txtFecha" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>
@@ -153,8 +166,20 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">COMENTARIO</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionEmpresa" required="true"></textarea>
+                          <label class="bmd-label-floating">DETALLE DE EVALUACION EN TERRENO</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtDescripcionTerreno" required="true"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Ingeniero a Cargo</label>
+                          <select id="ddlEmpresa" name="ddlIngeniero" class="form-control" required="true">
+                          <c:forEach items="${datosIngeniero}" var="i">
+                                <option value="${i.rut_ingeniero}">${i.nombre} ${i.apellido}</option>
+                            </c:forEach>
+                          </select>
                         </div>
                       </div>
                     </div>    
