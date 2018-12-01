@@ -3,8 +3,18 @@
     Created on : 28-nov-2018, 20:21:09
     Author     : Cristian
 --%>
-
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidades.Examen"%>
+<%@page import="Entidades.Usuario"%>
+<%@page import="java.sql.Date"%>
+<%@page import="VO.PlanVO"%>
+<%@page import="VO.AreaVO"%>
+<%@page import="VO.TrabajadorVO"%>
+<%@page import="Entidades.Area"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.*"%>
+<jsp:include page="../ServListarExamen" flush="true"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,26 +54,26 @@
         <ul class="nav">
           <li class="nav-item active  ">
             <a class="nav-link" href="./menuTrabajador.jsp">
-              <i class="material-icons">dashboard</i>
+              <i class="material-icons">dashboard</i>x
               <p>Inicio</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./menuTrabajador.jsp">
               <i class="material-icons">person</i>
-              <p>Men&uacute;</p>
+              <p>Menú</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeCapacitacion.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Generar Informe Capacitaci&oacute;n</p>
+              <p>Generar Informe Capacitacion</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./generarInformeVisita.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Visitas M&eacute;dicas</p>
+              <p>Informe de Visitas Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -85,7 +95,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Ex&aacute;menes</a>
+            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Exámenes</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -115,31 +125,59 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-12 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category"></p>
-                  <h3 class="card-title"><a id="re" href="./generarInformeCapacitacion.jsp"></a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
+            
+<section>
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
+                        <th bgcolor="#D4E6F1" style="width: 60px;"><b>Observaci&oacute;n</b></th>
+                        <th bgcolor="#D4E6F1" style="width: 70px;"><b>Resultado</b></th>
+                    </tr>
+                </thead>
+                <%
+                    DAOExamen             dao             = new DAOExamen();
+                    ArrayList<Examen>        list            = dao.TraerTodos();
+                    Iterator<Examen>    iter            = list.iterator();
+                    Examen              exa  = null;
+                    while (iter.hasNext()) {
+                            exa = iter.next();
+                %>
+                
+                <tbody>
+                    <tr>
+                        <td class="text-center"><%= exa.getFecha_visita() %></td>
+                        <td class="text-center"><%= exa.getObservacion() %></td>
+                        <td class="text-center"><%= exa.getResultado() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+          </div>        
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">Excel</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
-          </div>
-          
+        </div>
+    </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#Diego">
+                <a href="#">
                   SAFE - Prevencion de Riesgos
                 </a>
               </li>              
@@ -148,7 +186,7 @@
           <div class="copyright float-right">
             &copy;
             <script>
-              document.write(new Date().getFullYear())
+              document.write(new Date().getFullYear());
             </script>
           </div>
         </div>
