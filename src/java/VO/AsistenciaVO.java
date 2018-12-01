@@ -5,7 +5,10 @@ import java.sql.Date;
 public class AsistenciaVO {
 private int     id_asistencia;
 private int     capacitacion_id;
+private String  nombre_capacitacion;
 private String  rut_trabajador;
+private String  nombre_trabajador;
+private String  apellido_trabajador;
 private int     estado_id;
 private String  estado_asistencia;
 private Date    fecha_asistencia;
@@ -14,15 +17,43 @@ private String  lugar;
     public AsistenciaVO() {
     }
 
-    public AsistenciaVO(int id_asistencia, int capacitacion_id,  String rut_trabajador, int estado_id
-                        , String estado_asistencia, Date fecha_asistencia, String lugar) {
-        this.id_asistencia      = id_asistencia;  
-        this.capacitacion_id    = capacitacion_id;
-        this.rut_trabajador     = rut_trabajador;
-        this.estado_id          = estado_id;
-        this.estado_asistencia  = estado_asistencia;
-        this.fecha_asistencia   = fecha_asistencia; 
-        this.lugar              = lugar;
+    public String getNombre_capacitacion() {
+        return nombre_capacitacion;
+    }
+
+    public void setNombre_capacitacion(String nombre_capacitacion) {
+        this.nombre_capacitacion = nombre_capacitacion;
+    }
+
+    public String getNombre_trabajador() {
+        return nombre_trabajador;
+    }
+
+    public void setNombre_trabajador(String nombre_trabajador) {
+        this.nombre_trabajador = nombre_trabajador;
+    }
+
+    public String getApellido_trabajador() {
+        return apellido_trabajador;
+    }
+
+    public void setApellido_trabajador(String apellido_trabajador) {
+        this.apellido_trabajador = apellido_trabajador;
+    }
+
+    public AsistenciaVO(int id_asistencia, int capacitacion_id, String nombre_capacitacion, String rut_trabajador, 
+                        String  nombre_trabajador, String  apellido_trabajador, int estado_id, String estado_asistencia,
+                        Date fecha_asistencia, String lugar) {
+        this.id_asistencia          = id_asistencia;  
+        this.capacitacion_id        = capacitacion_id;
+        this.nombre_capacitacion    = nombre_capacitacion;
+        this.rut_trabajador         = rut_trabajador;
+        this.nombre_capacitacion    = nombre_capacitacion;
+        this.apellido_trabajador    = apellido_trabajador;
+        this.estado_id              = estado_id;
+        this.estado_asistencia      = estado_asistencia;
+        this.fecha_asistencia       = fecha_asistencia; 
+        this.lugar                  = lugar;
     }
 
     public String getLugar() {
