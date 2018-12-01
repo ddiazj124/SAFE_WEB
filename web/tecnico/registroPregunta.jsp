@@ -1,14 +1,16 @@
 <%-- 
-    Document   : registroExitoso
-    Created on : 28-oct-2018, 21:56:04
+    Document   : registroPregunta
+    Created on : 01-dic-2018, 4:10:42
     Author     : Diego
 --%>
 
-
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -51,7 +53,7 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
@@ -110,24 +112,43 @@
         </div>
       </nav>
       <!-- End Navbar -->
+      <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <div class="card">
+            <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Felicitaciones</h4>
+                  <h4 class="card-title">Selecciona Evaluacion</h4>
+                  <p class="card-category">Completa el Formulario</p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
+                    <form action="../ServRegistroPregunta" method="post">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Registro Exitoso!</label>
-                          <a href="menuTecnico.jsp">Volver al Menú</a>
+                            <jsp:include page="../ServMostrarIngresoPregunta" flush="true"></jsp:include>
+                          <label class="bmd-label-floating">NOMBRE EVALUACION</label>
+                          <c:forEach items="${datosNombreEvaluacion}" var="p">
+                              <label>${p.titulo}</label>
+                          </c:forEach>
+                          
+                        </div>
+                      </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">PREGUNTA EVALUACION</label>
+                          <textarea class="form-control" rows="4" cols="50" name="txtPregunta" required="true"></textarea>
                         </div>
                       </div>
                     </div>
+                    
+                    </div>    
+                        <input type="submit" class="btn btn-primary pull-right" value="Registrar Pregunta"/>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -178,19 +199,6 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>

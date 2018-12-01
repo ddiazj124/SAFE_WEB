@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class DAOPregunta {
     private static String sql_selectAll = "SELECT * FROM PREGUNTA where id_ev = ?";
+    private static String sql_insertar = "INSERT INTO PREGUNTA VALUES(S_PREGUNTAS.NEXTVAL,?,?,?)";
 
     
 private static Conexion objConn = Conexion.InstanciaConn();
@@ -46,6 +47,27 @@ public ArrayList<Pregunta> TraerPreguntasEval(int idEval) {
             objConn.Cerrar();
         }
         return null;  
+    }
+
+public boolean Insertar(Pregunta e) {
+        try {
+            PreparedStatement ps;
+            
+            ps = objConn.getConn().prepareStatement(sql_insertar);
+            ps.setInt(1, e.getIdEv());
+            ps.setString(2, e.getDetallePregunta());
+            ps.setInt(3, e.getPoneracion());
+            
+            if(ps.executeUpdate()>0){
+                return true;
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvaluacionTerreno.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return false;
     }
 
 public static void main(String[] args) {

@@ -6,7 +6,6 @@
 rv
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="java.time.LocalDateTime"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,6 +62,12 @@ rv
             <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./menuEvaluaciones.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Listar Evaluaciones</p>
             </a>
           </li>
           <li class="nav-item ">

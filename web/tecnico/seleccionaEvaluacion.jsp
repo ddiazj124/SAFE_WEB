@@ -1,17 +1,16 @@
 <%-- 
-    Document   : registroExitoso
-    Created on : 28-oct-2018, 21:56:04
+    Document   : seleccionaEvaluacion
+    Created on : 01-dic-2018, 4:18:50
     Author     : Diego
 --%>
 
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../ServMostrarEvaluaciones" flush="true"></jsp:include>
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
@@ -32,7 +31,7 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -45,20 +44,20 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="menuTecnico.jsp">
+          <li class="nav-item active ">
+            <a class="nav-link" href="./menuTecnico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registroEvaluacionesTerreno.jsp">
+          <li class="nav-item ">
+            <a class="nav-link" href="./registroEvaluacionesTerreno.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="registroEvaluacionesPersonal.jsp">
+            <a class="nav-link" href="./registroEvaluacionesPersonal.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Evaluacion Personal</p>
             </a>
@@ -70,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="../index.jsp">
+            <a class="nav-link" href=".../.../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
             </a>
@@ -110,42 +109,65 @@
         </div>
       </nav>
       <!-- End Navbar -->
+      
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Felicitaciones</h4>
-                </div>
-                <div class="card-body">
-                    <form action="../ServRegistroEvalPersonalTecnico" method="post">
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Registro Exitoso!</label>
-                          <a href="menuTecnico.jsp">Volver al Menú</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            
+              <form action="../ServMostrarIngresoPregunta" method="POST">
+            <table border = 'Solid'>
+                <tr>
+                    <td>
+                        ID Evaluacion
+                    </td>
+                    <td>
+                        Titulo
+                    </td>
+                    <td>
+                        Fecha Evaluacion
+                    </td>
+                    <td>
+                        Descripcion Evaluacion
+                    </td>
+                    <td>
+                        Ingresar Pregunta
+                    </td>
+                </tr>
+            <c:forEach items="${datosEvaluacionesTecnico}" var="p">
+                <tr>
+                    <td>
+                        <label>${p.id_ev}</label>
+                        <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
+                    </td>
+                    <td>
+                        <label>${p.titulo}</label>
+                    </td>
+                    <td>
+                        <label>${p.fecha_eval}</label>
+                    </td>
+                    <td>
+                        <label>${p.descripcion}</label>
+                    </td>
+                    
+                    <td>
+                        <input type="submit" value="Ingresar">
+                    </td>
+                </tr>
+              </c:forEach>
+            </table>
+          </form>    
+            
           </div>
-        </div>
-      </div>
+          
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#">
+                <a href="#Diego">
                   SAFE - Prevencion de Riesgos
                 </a>
-              </li>
-              
+              </li>              
             </ul>
           </nav>
           <div class="copyright float-right">
@@ -178,19 +200,6 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
 </body>
 
 </html>

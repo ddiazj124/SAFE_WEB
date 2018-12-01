@@ -51,9 +51,9 @@ public class DAOEvaluacionTerreno {
     
     public static void main(String[] args) {
         
-        EvaluacionTerreno e = new EvaluacionTerreno(0,"Infraestructura Minera",1, 65);
-        DAOEvaluacionTerreno Dev = new DAOEvaluacionTerreno();
-        Dev.Insertar(e);
+        //EvaluacionTerreno e = new EvaluacionTerreno(0,"Infraestructura Minera",1, 65);
+        //DAOEvaluacionTerreno Dev = new DAOEvaluacionTerreno();
+        //Dev.Insertar(e);
         
     }
     
