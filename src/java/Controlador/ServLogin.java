@@ -5,13 +5,18 @@
  */
 package Controlador;
 
+import DAO.DAOMedico;
 import DAO.DAOUsuario;
+import DAO.DAOVisita_Med;
+import Entidades.Medico;
 import Entidades.Usuario;
+import Entidades.Visita_Med;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -121,6 +126,18 @@ public class ServLogin extends HttpServlet {
                     }
                     if(u.getId_perfil()==7)
                     {
+                        HttpSession session = request.getSession();
+                        
+                        Medico med = new Medico();
+                        DAOMedico daoMed = new DAOMedico();
+                        med = daoMed.BuscarRutMedico(u.getNombre_usuario());
+                        
+                        DAOVisita_Med vism = new DAOVisita_Med();
+                        ArrayList<Visita_Med> Listvis = vism.TraerVisitasMedXRut(med.getRut_medico());
+                        
+                        session.setAttribute("ListarVisitasX", Listvis);
+                        
+                        
                         response.sendRedirect("medico/menuMedico.jsp");
                     }
         }else{

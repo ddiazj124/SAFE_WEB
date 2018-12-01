@@ -4,6 +4,8 @@
     Author     : Diego
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidades.Visita_Med"%>
 <%@page import="Entidades.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -85,19 +87,13 @@
           <li class="nav-item active">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
+              <p>Lista Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./administrarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Lista de Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -144,50 +140,68 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">Atenciones Medicas.</h4>
-                  <p class="card-category">Listado de las atenciones Medicas.</p>
+                  <p class="card-category"><%out.println(u.getNombre_usuario().toUpperCase() + ", estás son todas las visitas medicas en las cuales participas.");%></p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Rut Medico
-                        </th>
-                        <th>
-                          Rut Trabajador
-                        </th>
-                        <th>
-                          Motivo Consulta
-                        </th>
-                        <th>
-                          Fecha Visita
-                        </th>
-                      </thead>
-                      <tbody>
-                          <c:forEach items="${datosAtencion}" var="atm">
+                      <%
+                          HttpSession vmsession = request.getSession(true);
+                          ArrayList<Visita_Med> Lista = (ArrayList)vmsession.getAttribute("ListarVisitasX");
+                          
+                          if(Lista != null){%>
+                          <table class="table">
+                            <thead class=" text-primary">
+                              <th>
+                                ID
+                              </th>
+                              <th>
+                                Rut Medico
+                              </th>
+                              <th>
+                                Rut Trabajador
+                              </th>
+                              <th>
+                                Motivo Consulta
+                              </th>
+                              <th>
+                                Fecha Visita
+                              </th>
+                              <th>
+                                
+                              </th>
+                            </thead>
+                            <tbody>
+                          <c:forEach items="${ListarVisitasX}" var="atm">
                               <tr>
                               <td>${atm.id_visita}</td>
                               <td>${atm.rut_medico}</td>
                               <td>${atm.rut_trabajador}</td>
                               <td>${atm.motivo_consulta}</td>
-                              <td>${atm.fecha_visita}</td>
+                              <td>${atm.fecha_visita}
+                              </td>
                               <td>
                                   <form action="../ServEditarVisitaMed" method="POST">
-                                      <input class="form-control" type="submit" value="Editar"/>
+                                      <input class="btn btn-primary" type="submit" value="Editar"/>
                                       <input type="hidden"name="btnidVisita" id="btnidVisita" value="${atm.id_visita}"/>
                                   </form>
                               </td>
                               </tr>
                           </c:forEach>
-                      </tbody>
-                    </table>
+                            </tbody>
+                          </table>
+                          <%}else{%>
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <i class="material-icons">close</i>
+                                </button>
+                                <span>
+                                  <b> Advertencia - </b> Aún no existen registros!</span>
+                            </div>
+                          <%}%>
                   </div>
                 </div>
               </div>
@@ -216,6 +230,7 @@
   <script src="../customcss/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="../customcss/js/plugins/bootstrap-notify.js"></script>
+  <script src="../customcss/js/material-dashboard.js" type="text/javascript"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->

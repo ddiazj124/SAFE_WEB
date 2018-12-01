@@ -28,7 +28,6 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
-  <link href="../customcss/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
   
 </head>
 
@@ -66,7 +65,7 @@
                 
                 case 7:
                 %> 
-                <div class="wrapper ">
+<div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -161,7 +160,7 @@
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">FECHA ATENCION MEDICA</label>
-                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" required>
+                          <input type="date" name="txtFecha" id="txtFecha" class="form-control" required />
                         </div>
                       </div>
                     </div>
@@ -199,15 +198,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
-  <script src="../customcss/datepicker/js/locales/bootstrap-datepicker.es.js" type="text/javascript"></script>
-  <script src="../customcss/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
   
-  <script type="text/javascript">
-     $('#divMiCalendario').datetimepicker({
-          format: 'YYYY-MM-DD HH:mm'       
-      });
-      $('#divMiCalendario').data("DateTimePicker").show();
-   </script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
