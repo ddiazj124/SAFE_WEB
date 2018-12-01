@@ -121,13 +121,13 @@
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">TITULO EVALUACION</label>
-                          <input type="text" name="txttitulo" class="form-control" required="true">
+                          <input type="text" name="txtTitulo" class="form-control" required="true">
                         </div>
                       </div>
                         <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" class="form-control" disabled value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                          <input type="text" name="txtFecha" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>

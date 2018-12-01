@@ -22,6 +22,8 @@ public class DAOEvaluacionTerreno {
  
     private static String sql_selectAll = "SELECT * FROM EVAL_TERRENO";
     private static String sql_insertarProcedimiento = "CALL ADM_EVAL_TERRENO_TECNICO_I(?,?)";
+    private static String sql_insertar = "INSERT INTO EVAL_TERRENO VALUES(S_EVAL_TERRENO.NEXTVAL,?,?,?)";
+    
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -30,9 +32,10 @@ public class DAOEvaluacionTerreno {
         try {
             PreparedStatement ps;
             
-            ps = objConn.getConn().prepareStatement(sql_insertarProcedimiento);
+            ps = objConn.getConn().prepareStatement(sql_insertar);
             ps.setString(1, e.getDescripcion());
             ps.setInt(2, e.getId_tipo());
+            ps.setInt(3, e.getId_evaluacion());
             
             if(ps.executeUpdate()>0){
                 return true;
@@ -48,9 +51,9 @@ public class DAOEvaluacionTerreno {
     
     public static void main(String[] args) {
         
-        //Evaluacion e = new Evaluacion("PruebaDesdeJava", 2, "20385652-9", "Prueba");
-        //DAOEvaluacion Dev = new DAOEvaluacion();
-        //Dev.Insertar(e);
+        EvaluacionTerreno e = new EvaluacionTerreno(0,"Infraestructura Minera",1, 65);
+        DAOEvaluacionTerreno Dev = new DAOEvaluacionTerreno();
+        Dev.Insertar(e);
         
     }
     

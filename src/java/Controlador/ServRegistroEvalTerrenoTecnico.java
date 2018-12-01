@@ -51,17 +51,16 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);
             DAOEvaluacion dev = new DAOEvaluacion();
             dev.Insertar(ev);
+            
             //Evaluacion Terreno
+            String descripcion_Terreno = request.getParameter("txtDescripcionTerreno");
+            int id_tipo = 1;
             id_eval = dev.TraerMaximo();
             
+            EvaluacionTerreno et = new EvaluacionTerreno(0, descripcion, id_tipo, id_eval);
+            DAOEvaluacionTerreno det = new DAOEvaluacionTerreno();
             
-            //Evaluacion en terreno
-            int tipoEvaluacion = 1;
-            String Descipcion = request.getParameter("txtDescripcion");
-            DAOEvaluacionTerreno eDao = new DAOEvaluacionTerreno();
-            EvaluacionTerreno e = new EvaluacionTerreno(0, Descipcion, tipoEvaluacion);
-            
-            eDao.Insertar(e);
+            det.Insertar(et);
             
             response.sendRedirect("./tecnico/registroExitoso.jsp");
         }catch(Exception e)
