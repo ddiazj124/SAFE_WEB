@@ -23,6 +23,8 @@ public class DAOVisita_Med {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
     private static String sql_selectAllFecha = "SELECT * FROM VISITA_MED WHERE FECHA_VISITA LIKE ?";
     private static String sql_buscarVisita = "SELECT * FROM VISITA_MED WHERE ID_VISITA = ?";
+    private static String sql_buscarVisitasMedX = "SELECT * FROM VISITA_MED VM INNER JOIN MEDICO M ON M.RUT_MEDICO = VM.RUT_MEDICO WHERE M.RUT_MEDICO = ?";
+    private static String sql_updateVisitaMed = "UPDATE VISITA_MED SET MOTIVO_CONSULTA = ?, OBSERVACIONES = ?, DIAGNOSTICO = ?, ESTADO = ?, RECETA =? WHERE ID_VISITA = ?";
     
     private static Conexion objConn = Conexion.InstanciaConn();
     private ResultSet rs;
@@ -98,6 +100,30 @@ public class DAOVisita_Med {
     }
     
     
+    public ArrayList<Visita_Med> TraerVisitasMedXRut(String rut_medico) {
+        try {
+            ArrayList<Visita_Med> Lvisita = new ArrayList<>();
+            PreparedStatement ps;
+            
+
+            ps = objConn.getConn().prepareStatement(sql_buscarVisitasMedX);
+            ps.setString(1, rut_medico);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
+            }
+            return Lvisita; 
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
+    
+    
     public static void main(String[] args) {
         
         /*
@@ -109,7 +135,7 @@ public class DAOVisita_Med {
         */
         
         DAOVisita_Med vism = new DAOVisita_Med();
-        ArrayList<Visita_Med> Listvis = vism.TraerTodosPorFecha("20/10/2018");
+        ArrayList<Visita_Med> Listvis = vism.TraerVisitasMedXRut("10001191-3");
         
         System.out.println("Cantidad de Objetos: " + Listvis.size());
         
