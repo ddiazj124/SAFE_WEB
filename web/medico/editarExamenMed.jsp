@@ -1,14 +1,14 @@
 <%-- 
-    Document   : aministrarExamenes
-    Created on : 21-oct-2018, 22:22:28
-    Author     : Diego
+    Document   : editarVisitaMed
+    Created on : 30-11-2018, 14:08:46
+    Author     : Sebastian
 --%>
 
-
+<%@page import="Entidades.Examen"%>
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
@@ -25,10 +25,45 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href=".../customcss/demo/demo.css" rel="stylesheet" />
+  
 </head>
-
 <body class="">
-  <div class="wrapper ">
+        <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                    HttpSession vm = request.getSession(true);
+                    Examen examen = (Examen)vm.getAttribute("ExamenMedX");
+                %> 
+<div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -42,34 +77,22 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item">
             <a class="nav-link" href="./menuMedico.jsp">
               <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./menuMedico.jsp">
-              <i class="material-icons">person</i>
-              <p>Menú</p>
+          <li class="nav-item">
+            <a class="nav-link" href="listarAtenciones.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Lista Atenciones Medicas</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./listarAtenciones.jsp">
+          <li class="nav-item active">
+            <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./administrarExamenes.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Lista de Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -112,6 +135,7 @@
           </div>
         </div>
       </nav>
+      <jsp:include page="../ServMostrarTrabajador" flush="true"></jsp:include>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
@@ -119,58 +143,63 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Administrar Examenes</h4>
-                  <p class="card-category">Completa el Formulario</p>
+                  <h4 class="card-title">Administrar Examen</h4>
+                  <p class="card-category"><%out.print(u.getNombre_usuario().toUpperCase() + ", acá podrás editar los examenes medicos."); %></p>
                 </div>
                 <div class="card-body">
-                    <form action="../ServAdministrarExamenMedico" method="post">
+                    <%if(examen != null){%>
+                    <form action="../ServActualizarExamenMed" method="POST">
                     <div class="row">
-                      <div class="col-md-5">
+                    </div>    
+                    <div class="row">
+                      <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">ID VISITA</label>
-                            <input type="text" class="form-control" name="txtIdVisita">
+                          <label class="bmd-label-floating">NÚMERO DE EXAMEN</label>
+                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_examen());%>"/>
+                          <input type="hidden" name="txtId" id="txtId" value="<%out.println(examen.getId_examen());%>"/>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">FECHA EXAMEN</label>
-                           <input type="text" class="form-control" name="txtFechaExamen"> 
+                          <label class="bmd-label-floating">NÚMERO DE VISITA ASOCIADA</label>
+                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_visita());%>"/>
+                        </div>
+                      </div>  
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">FECHA DE LA VISITA</label>
+                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" disabled value="<%out.println(examen.getFecha_visita());%>"/>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
+                    <div class="row">    
+                        <div class="col-md-6">
                             <div class="form-group">
-                             <label class="bmd-label-floating">RESULTADO</label>
-                            <textarea rows="4" cols="50" name="txtResultado"></textarea> 
+                              <label class="bmd-label-floating">OBSERVACION</label>
+                              <textarea class="form-control" rows="4" cols="50" id="txtObservacion" name="txtObservacion" required><%out.println(examen.getObservacion());%></textarea>
                             </div>
-                        </div>  
-                    </div>  
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">OBSERVACIONES</label>
-                           <textarea rows="4" cols="50" name="txtObservaciones"></textarea> 
                         </div>
-                      </div>
-                                            
-                    </div>
-                      <button type="submit" class="btn btn-primary pull-right">Registrar Examen</button>
+                    </div>    
+                    <div class="row">    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">RESULTADO</label>
+                              <textarea class="form-control" rows="4" cols="50" id="txtResultado" name="txtResultado" required><%out.println(examen.getResultado());%></textarea>
+                            </div>
+                        </div>
+                    </div>      
+                    <button type="submit" class="btn btn-primary pull-right">Actualizar Examen Medico</button>
                     <div class="clearfix"></div>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="">
-                    <img class="img" src="../customcss/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">Medico</h6>
-                  <h4 class="card-title">Medico</h4>
+                  <%}else{%>
+                    <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <i class="material-icons">close</i>
+                                </button>
+                                <span>
+                            <b> Advertencia - </b> No has seleccionado ningúna visita medica!</span>
+                    </div>
+                  <%}%>
                 </div>
               </div>
             </div>
@@ -179,7 +208,6 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          
           <div class="copyright float-right">
             &copy;
             <script>
@@ -203,6 +231,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -210,19 +239,10 @@
 
     });
   </script>
-  
-  <script>
-		$(document).ready(function(){
-				$('#ddlAnimal').change(function(){
-                                var raza = $(this).val();
-                                        
-                                $.post( "ServTraerTrabajadores", { trabajador: trabajador})
-                                .done(function( data ) {
-                                $("#ddlRaza").append(data);
-                                        });
-				});
-                            });
-</script>
+                <%
+                break;
+            }
+        }
+        %>
 </body>
-
 </html>

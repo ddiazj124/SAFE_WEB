@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import DAO.DAOVisita_Med;
-import Entidades.Visita_Med;
+import DAO.DAOExamen;
+import Entidades.Examen;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,13 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Sebastian
  */
-@WebServlet(name = "ServActualizarVisitaMed", urlPatterns = {"/ServActualizarVisitaMed"})
-public class ServActualizarVisitaMed extends HttpServlet {
+@WebServlet(name = "SevEditarExamen", urlPatterns = {"/SevEditarExamen"})
+public class SevEditarExamen extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,28 +60,17 @@ public class ServActualizarVisitaMed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id_visita = Integer.parseInt(request.getParameter("btnidVisita"));
         
-        //String id_visita = request.getParameter("txtVisitaMedID");
-        String estado = request.getParameter("cmbEstado");
-        //String id_visita = request.getParameter("txtId");
-        String motivo_consulta = request.getParameter("txtMotivoConsulta");
-        String observaciones = request.getParameter("txtObservaciones");
-        String diagnostico = request.getParameter("txtDiagnostico");
-        String receta = request.getParameter("txtReceta");
+               
+        DAOExamen eDao = new DAOExamen();
+        Examen e = eDao.BuscarXExamen(id_visita);
         
-        try {
-            DAOVisita_Med vism = new DAOVisita_Med();
-            
-            
-            
-            Visita_Med visi = new Visita_Med(1, motivo_consulta, observaciones, diagnostico, Integer.parseInt(estado), receta);
-            vism.ActualizarVisitaMedX(visi);
-            
-            response.sendRedirect("medico/listarAtenciones.jsp");
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+        if(e != null){
+            HttpSession sesion = request.getSession(true);
+            sesion.setAttribute("ExamenMedX", e);
+            response.sendRedirect("medico/editarExamenMed.jsp");
         }
-        
     }
 
     /**

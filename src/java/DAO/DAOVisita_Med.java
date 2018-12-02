@@ -123,6 +123,34 @@ public class DAOVisita_Med {
         return null;  
     }
     
+    public boolean ActualizarVisitaMedX(Visita_Med vm){
+        try {
+            PreparedStatement ps;
+            
+
+            ps = objConn.getConn().prepareStatement(sql_updateVisitaMed);
+            ps.setString(1, vm.getMotivo_consulta());
+            ps.setString(2, vm.getObservaciones());
+            ps.setString(3, vm.getDiagnostico());
+            ps.setInt(4, vm.getEstado());
+            ps.setString(5, vm.getReceta());
+            ps.setInt(6, vm.getId_visita());
+            
+            rs = ps.executeQuery();
+            
+            if (rs.rowUpdated()) {
+                return true; 
+            }
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return false;
+    }
+    
     
     public static void main(String[] args) {
         
@@ -135,6 +163,12 @@ public class DAOVisita_Med {
         */
         
         DAOVisita_Med vism = new DAOVisita_Med();
+        
+        //UPDATE VISITA_MED SET MOTIVO_CONSULTA = ?, OBSERVACIONES = ?, DIAGNOSTICO = ?, ESTADO = ?, RECETA =? WHERE ID_VISITA = ?
+        //Visita_Med visi = new Visita_Med(11, "Evaluación preventiva", "Inchazon y visible fiebre", "Cefalea", 1, "Clarimil");
+        //vism.ActualizarVisitaMedX(visi);
+        
+        /*
         ArrayList<Visita_Med> Listvis = vism.TraerVisitasMedXRut("10001191-3");
         
         System.out.println("Cantidad de Objetos: " + Listvis.size());
@@ -154,6 +188,7 @@ public class DAOVisita_Med {
               System.out.println(obj.getReceta());
               System.out.println("------------------------------------------");
         }
+        */
         
     }
 }

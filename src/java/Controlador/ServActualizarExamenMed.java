@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import DAO.DAOVisita_Med;
-import Entidades.Visita_Med;
+import DAO.DAOExamen;
+import Entidades.Examen;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Sebastian
  */
-@WebServlet(name = "ServActualizarVisitaMed", urlPatterns = {"/ServActualizarVisitaMed"})
-public class ServActualizarVisitaMed extends HttpServlet {
+@WebServlet(name = "ServActualizarExamenMed", urlPatterns = {"/ServActualizarExamenMed"})
+public class ServActualizarExamenMed extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,27 +60,23 @@ public class ServActualizarVisitaMed extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //String id_visita = request.getParameter("txtVisitaMedID");
-        String estado = request.getParameter("cmbEstado");
-        //String id_visita = request.getParameter("txtId");
-        String motivo_consulta = request.getParameter("txtMotivoConsulta");
-        String observaciones = request.getParameter("txtObservaciones");
-        String diagnostico = request.getParameter("txtDiagnostico");
-        String receta = request.getParameter("txtReceta");
+        String observacion = request.getParameter("txtObservacion");
+        String resultado = request.getParameter("txtResultado");
         
         try {
-            DAOVisita_Med vism = new DAOVisita_Med();
+            DAOExamen exam = new DAOExamen();
             
             
             
-            Visita_Med visi = new Visita_Med(1, motivo_consulta, observaciones, diagnostico, Integer.parseInt(estado), receta);
-            vism.ActualizarVisitaMedX(visi);
+            Examen e = new Examen(1, observacion, resultado);
+            DAOExamen dao = new DAOExamen();
+        
+            dao.ActualizarExamenMedX(e);
             
-            response.sendRedirect("medico/listarAtenciones.jsp");
+            response.sendRedirect("medico/listarExamenes.jsp");
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        
     }
 
     /**

@@ -83,22 +83,16 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./listarAtenciones.jsp">
-              <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
-            </a>
-          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./buscarAtencionMedica.jsp">
+            <a class="nav-link" href="listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Atencion</p>
+              <p>Lista Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./administrarExamenes.jsp">
+            <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Administrar Examen</p>
+              <p>Lista de Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -160,7 +154,9 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">ESTADO DE LA VISITA</label>
                           <select class="form-control" id="cmbEstado" name="cmbEstado">
-                              <option value="1">Prueba - Pending</option>
+                              <option value="1">Pendiente</option>
+                              <option value="2">Realizada</option>
+                              <option value="3">Cancelada</option>
                           </select>
                         </div>
                     </div>         
@@ -169,8 +165,8 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID</label>
-                          <input type="text" name="txtID" id="txtID" class="form-control" disabled value="<%out.println(visita.getId_visita());%>"/>
-                          <input type="hidden" name="idVisita" id="idVisita"/>
+                          <input type="text" name="txtVisitaMedID" id="txtVisitaMedID" class="form-control" disabled value="<% out.print(visita.getId_visita());%>"/>
+                          <input type="hidden" name="txtId" id="txtId" value="<% out.print(visita.getId_visita());%>"/>
                         </div>
                       </div>
                       <div class="col-md-3">

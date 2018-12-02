@@ -4,8 +4,8 @@
     Author     : Diego
 --%>
 
+<%@page import="Entidades.Examen"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Entidades.Visita_Med"%>
 <%@page import="Entidades.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,7 +63,6 @@
                 
                 case 7:
                 %> 
-                <jsp:include page="../ServListarAtencionMed" flush="true"></jsp:include>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -72,7 +71,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="./menuMedico.jsp" class="simple-text logo-normal">
+        <a href="menuMedico.jsp" class="simple-text logo-normal">
           Menu
         </a>
       </div>
@@ -84,13 +83,13 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista Atenciones Medicas</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista de Examenes</p>
@@ -143,50 +142,50 @@
             <div class="col-md-10">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Atenciones Medicas.</h4>
-                  <p class="card-category"><%out.println(u.getNombre_usuario().toUpperCase() + ", estás son todas las visitas medicas en las cuales participas.");%></p>
+                  <h4 class="card-title ">Examenes Medicos.</h4>
+                  <p class="card-category"><%out.println(u.getNombre_usuario().toUpperCase() + ", estos son todos los examenes en los que participas.");%></p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                       <%
                           HttpSession vmsession = request.getSession(true);
-                          ArrayList<Visita_Med> Lista = (ArrayList)vmsession.getAttribute("ListarVisitasX");
+                          ArrayList<Examen> Lista = (ArrayList)vmsession.getAttribute("ListarExamX");
                           
                           if(Lista != null){%>
                           <table class="table">
                             <thead class=" text-primary">
                               <th>
-                                ID
+                                NÚMERO EXAMEN
                               </th>
                               <th>
-                                Rut Medico
+                                OBSERVACIÓN
                               </th>
                               <th>
-                                Rut Trabajador
+                                RESULTADO
                               </th>
                               <th>
-                                Motivo Consulta
+                                FECHA VISITA
                               </th>
                               <th>
-                                Fecha Visita
+                                NRO. VISITA ASOCIADA
                               </th>
                               <th>
-                                
+                                  
                               </th>
                             </thead>
                             <tbody>
-                          <c:forEach items="${ListarVisitasX}" var="atm">
+                          <c:forEach items="${ListarExamX}" var="exam">
                               <tr>
-                              <td>${atm.id_visita}</td>
-                              <td>${atm.rut_medico}</td>
-                              <td>${atm.rut_trabajador}</td>
-                              <td>${atm.motivo_consulta}</td>
-                              <td>${atm.fecha_visita}
+                              <td>${exam.id_examen}</td>
+                              <td>${exam.observacion}</td>
+                              <td>${exam.resultado}</td>
+                              <td>${exam.fecha_visita}</td>
+                              <td>${exam.id_visita}
                               </td>
                               <td>
-                                  <form action="../ServEditarVisitaMed" method="POST">
+                                  <form action="../SevEditarExamen" method="POST">
                                       <input class="btn btn-primary" type="submit" value="Editar"/>
-                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${atm.id_visita}"/>
+                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${exam.id_examen}"/>
                                   </form>
                               </td>
                               </tr>

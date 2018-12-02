@@ -25,7 +25,7 @@ public class DAOEvaluacion {
     private static String sql_insertarEvaluacion = "INSERT INTO EVALUACION(id_ev,titulo,rut_empresa,fecha_eval,descripcion,evaluacion_estado_id,rut_tecnico,rut_ingeniero) values(S_EVALUACION.nextval,?,?,?,?,?,?,?)";
     private static String sql_contarCantidadEvaluacion = "SELECT COUNT(*) FROM EVALUACION";
     private static String sql_EvaluacionesTecnico = "SELECT * FROM EVALUACION where rut_tecnico = ? and EVALUACION_ESTADO_ID = 1 order by id_ev";
-    private static String sql_EvaluacionesPregunta = "SELECT E.TITULO,E.FECHA_EVAL,E.DESCRIPCION,EMP.RAZON_SOCIAL FROM EVALUACION E JOIN EMPRESA EMP ON (emp.rut_empresa = e.rut_empresa) where e.id_ev = ? order by id_ev";
+    private static String sql_EvaluacionesPregunta = "SELECT E.TITULO,E.FECHA_EVAL,E.DESCRIPCION,EMP.RAZON_SOCIAL FROM EVALUACION E JOIN EMPRESA EMP ON (emp.rut_empresa = e.rut_empresa) where e.id_ev = ? and EVALUACION_ESTADO_ID = 1 order by id_ev";
     private static String sql_mayor = "select max(id_ev) as id_ev from evaluacion";
     
     private static Conexion objConn = Conexion.InstanciaConn();
