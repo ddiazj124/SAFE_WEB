@@ -119,24 +119,24 @@
           <div class="row">
             
               <form action="../ServMostrarPreguntas" method="POST">
-            <table border = 'Solid'>
-                <tr>
-                    <td>
+            <table  class="table">
+                <thead class=" text-primary">
+                    <th>
                         ID Evaluacion
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Titulo
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Fecha Evaluacion
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Descripcion Evaluacion
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Contestar Preguntas
-                    </td>
-                </tr>
+                    </th>
+                </thead>
             <c:forEach items="${datosEvaluacionesTecnico}" var="p">
                 <tr>
                     <td>
@@ -154,7 +154,7 @@
                     </td>
                     
                     <td>
-                        <input type="submit" value="Responder">
+                        <input type="submit" class="btn btn-primary" value="Responder">
                     </td>
                 </tr>
               </c:forEach>
