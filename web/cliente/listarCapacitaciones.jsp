@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="java.util.Iterator"%>
+<%@page import="VO.CapacitacionVO"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.CapacitacionDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -122,56 +126,60 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category">Visualizar Visitas</p>
-                  <h3 class="card-title"><a id="re" href="./listarAtenciones.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Visualizar Evaluaciones</p>
-                  <h3 class="card-title" href="./listarEvaluaciones.jsp"><a href="./listarEvaluaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Visualizar Capacitaciones</p>
-                  <h3 class="card-title"><a href="./listarCapacitaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+ <section>
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th bgcolor="#D4E6F1" class="text-center">ID</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE CAPACITACIÓN</th>
+                        <th bgcolor="#D4E6F1" class="text-center">FECHA TERMINO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">FECHA INICIO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE AREA</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE PLAN</th>
+                    </tr>
+                </thead>
+                <%
+                    CapacitacionDAO             dao             = new CapacitacionDAO();
+                    List<CapacitacionVO>        list            = dao.listar();
+                    Iterator<CapacitacionVO>    iter            =list.iterator();
+                    CapacitacionVO              capacitacionVO  = null;
+                    while (iter.hasNext()) {
+                            capacitacionVO = iter.next();                    
+                %>
+                <tbody>
+                    <tr>
+                        <td class="text-center"><%= capacitacionVO.getId_capacitacion() %></td>
+                        <td class="text-center"><%= capacitacionVO.getNombre_capacitación() %></td>
+                        <td class="text-center"><%= capacitacionVO.getFecha_termino() %></td>
+                        <td class="text-center"><%= capacitacionVO.getFecha_inicio() %></td>
+                        <td class="text-center"><%= capacitacionVO.getArea() %></td>
+                        <td class="text-center"><%= capacitacionVO.getPlan() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+
+    </section>
+              
           </div>
-          
+        </div>
+              <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">Excel</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -212,7 +220,23 @@
       md.initDashboardPageCharts();
 
     });
-  </script>
+  </script>    
+        <script type="text/javascript">
+        function exportTableToExcel() {                
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+
+                    var table = 'tblReporte';
+                    var name = 'nombre_hoja_calculo';
+
+                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                     var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                     window.location.href = uri + base64(format(template, ctx))
+                };
+    </script>
+
 </body>
 
 </html>

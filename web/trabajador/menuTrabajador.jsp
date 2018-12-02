@@ -67,9 +67,9 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./generarInformeVisita.jsp">
+            <a class="nav-link" href="./informeExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Informe de Ex&aacute;amenes</p>
+              <p>Informe de Ex&aacute;menes</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -86,7 +86,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio</a>
+            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio - Trabajador</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>

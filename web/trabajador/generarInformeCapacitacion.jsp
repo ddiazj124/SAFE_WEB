@@ -6,11 +6,15 @@
 <%@page import="java.sql.Date"%>
 <%@page import="VO.PlanVO"%>
 <%@page import="VO.AreaVO"%>
+<%@page import="VO.TrabajadorVO"%>
 <%@page import="Entidades.Area"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="VO.CapacitacionVO"%>
 <%@page import="DAO.*"%>
+<%@page import="com.itextpdf.text.Document"%>
+<%@page import="com.itextpdf.text.pdf.PdfWriter"%>
+<%@page import="com.itextpdf.text.Paragraph"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,7 +78,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./generarInformeVisita.jsp">
+            <a class="nav-link" href="./informeExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Informe de Ex&aacute;amenes</p>
             </a>
@@ -123,8 +127,7 @@
         <div class="container-fluid">
           <div class="row">
             
-            <section>
-              <div class="table-responsive" style="border-top:1px solid #dee2e6;">
+    <section>
       <table id="tblCapacitaciones" class="table table-bordered">
                 <thead>
                     <tr>
@@ -142,7 +145,7 @@
                     CapacitacionVO              capacitacionVO  = null;
                     while (iter.hasNext()) {
                             capacitacionVO = iter.next();                    
-                %> 
+                %>
                 <tbody>
                     <tr>
                         <td class="text-center"><%= capacitacionVO.getNombre_capacitación() %></td>
@@ -155,7 +158,7 @@
                     </tr>
                 </tbody>
             </table>
-    </div>
+
     </section>
           </div>
     <div class="content">
