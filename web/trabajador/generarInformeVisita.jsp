@@ -3,8 +3,22 @@
     Created on : 27-nov-2018, 19:42:04
     Author     : Cristian
 --%>
-
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidades.Visita_Med"%>
+<%@page import="Entidades.Usuario"%>
+<%@page import="java.sql.Date"%>
+<%@page import="VO.PlanVO"%>
+<%@page import="VO.AreaVO"%>
+<%@page import="VO.TrabajadorVO"%>
+<%@page import="Entidades.Area"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="VO.VisitaMedicaVO"%>
+<%@page import="DAO.*"%>
+<%@page import="com.itextpdf.text.Document"%>
+<%@page import="com.itextpdf.text.pdf.PdfWriter"%>
+<%@page import="com.itextpdf.text.Paragraph"%>
+<jsp:include page="../ServListarAtencionMed" flush="true"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -67,7 +81,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./generarInformeVisita.jsp">
+            <a class="nav-link" href="./informeExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Informe de Ex&aacute;menes</p>
             </a>
@@ -116,57 +130,38 @@
         <div class="container-fluid">
           <div class="row">
             
-            <section>
-              <div class="table-responsive" style="border-top:1px solid #dee2e6;">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr style="background-color:#61a5ea;">
-              <th style="width: 80px;"><b>Fecha Visita</b></th>
-              <th style="width: 60px;"><b>Rut M&eacute;dico</b></th>
-              <th style="width: 70px;"><b>Motivo Consulta</b></th>
-              <th style="width: 200px;"><b>Observaciones</b></th>
-              <th style="width: 100px;"><b>Receta</b></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>11-11-1111</td>
-            <td>1111111-1</td>
-            <td>Control agendado.</td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-          </tr>
-          <tr>
-            <td>11-11-1111</td>
-            <td>1111111-1</td>
-            <td>Control agendado.</td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-          </tr>
-          <tr>
-            <td>11-11-1111</td>
-            <td>1111111-1</td>
-            <td>Control agendado.</td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-          </tr>
-          <tr>
-            <td>11-11-1111</td>
-            <td>1111111-1</td>
-            <td>Control agendado.</td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-          </tr>
-          <tr>
-            <td>11-11-1111</td>
-            <td>1111111-1</td>
-            <td>Control agendado.</td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-            <td>Proin feugiat aliquam tortor, id hendrerit urna semper pulvinar. Nullam iaculis aliquam risus, nec tempus quam condimentum ut. </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<section>
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
+                        <th bgcolor="#D4E6F1" style="width: 60px;"><b>Rut M&eacute;dico</b></th>
+                        <th bgcolor="#D4E6F1" style="width: 70px;"><b>Motivo Consulta</b></th>
+			<th bgcolor="#D4E6F1" style="width: 200px;"><b>Observaciones</b></th>
+			<th bgcolor="#D4E6F1" style="width: 100px;"><b>Receta</b></th>
+                    </tr>
+                </thead>
+                <%
+                    DAOVisita_Med             dao             = new DAOVisita_Med();
+                    ArrayList<Visita_Med>        list            = dao.TraerTodos();
+                    Iterator<Visita_Med>    iter            =list.iterator();
+                    Visita_Med              visitaMed  = null;
+                    while (iter.hasNext()) {
+                            visitaMed = iter.next();
+                %>
+                
+                <tbody>
+                    <tr>
+                        <td class="text-center"><%= visitaMed.getFecha_visita() %></td>
+                        <td class="text-center"><%= visitaMed.getRut_trabajador() %></td>
+                        <td class="text-center"><%= visitaMed.getMotivo_consulta() %></td>
+                        <td class="text-center"><%= visitaMed.getObservaciones() %></td>
+                        <td class="text-center"><%= visitaMed.getReceta() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
     </section>
           </div>        
     <div class="content">
@@ -199,7 +194,7 @@
           <div class="copyright float-right">
             &copy;
             <script>
-              document.write(new Date().getFullYear())
+              document.write(new Date().getFullYear());
             </script>
           </div>
         </div>

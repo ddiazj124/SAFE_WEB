@@ -67,7 +67,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./generarInformeVisita.jsp">
+            <a class="nav-link" href="./informeExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Informe de Ex&aacute;amenes</p>
             </a>
