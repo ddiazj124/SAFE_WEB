@@ -14,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Sebastian
  */
-@WebServlet(name = "SevEditarExamen", urlPatterns = {"/SevEditarExamen"})
-public class SevEditarExamen extends HttpServlet {
+@WebServlet(name = "ServActualizarExamenMed", urlPatterns = {"/ServActualizarExamenMed"})
+public class ServActualizarExamenMed extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,16 +59,23 @@ public class SevEditarExamen extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id_visita = Integer.parseInt(request.getParameter("btnidVisita"));
         
-               
-        DAOExamen eDao = new DAOExamen();
-        Examen e = eDao.BuscarXExamen(id_visita);
+        String observacion = request.getParameter("txtObservacion");
+        String resultado = request.getParameter("txtResultado");
         
-        if(e != null){
-            HttpSession sesion = request.getSession(true);
-            sesion.setAttribute("ExamenMedX", e);
-            response.sendRedirect("medico/editarExamenMed.jsp");
+        try {
+            DAOExamen exam = new DAOExamen();
+            
+            
+            
+            Examen e = new Examen(1, observacion, resultado);
+            DAOExamen dao = new DAOExamen();
+        
+            dao.ActualizarExamenMedX(e);
+            
+            response.sendRedirect("medico/listarExamenes.jsp");
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
     }
 

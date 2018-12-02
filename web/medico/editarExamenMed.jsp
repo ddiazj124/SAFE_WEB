@@ -4,7 +4,7 @@
     Author     : Sebastian
 --%>
 
-<%@page import="Entidades.Visita_Med"%>
+<%@page import="Entidades.Examen"%>
 <%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,7 +61,7 @@
                 
                 case 7:
                     HttpSession vm = request.getSession(true);
-                    Visita_Med visita = (Visita_Med)vm.getAttribute("VisitaMedicaX");
+                    Examen examen = (Examen)vm.getAttribute("ExamenMedX");
                 %> 
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
@@ -83,13 +83,13 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista Atenciones Medicas</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista de Examenes</p>
@@ -143,86 +143,52 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Administrar Atenciones</h4>
-                  <p class="card-category"><%out.print(u.getNombre_usuario().toUpperCase() + ", acá podrás editar la visita medica seleccionada."); %></p>
+                  <h4 class="card-title">Administrar Examen</h4>
+                  <p class="card-category"><%out.print(u.getNombre_usuario().toUpperCase() + ", acá podrás editar los examenes medicos."); %></p>
                 </div>
                 <div class="card-body">
-                    <%if(visita != null){%>
-                    <form action="../ServActualizarVisitaMed" method="POST">
+                    <%if(examen != null){%>
+                    <form action="../ServActualizarExamenMed" method="POST">
                     <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">ESTADO DE LA VISITA</label>
-                          <select class="form-control" id="cmbEstado" name="cmbEstado">
-                              <option value="1">Pendiente</option>
-                              <option value="2">Realizada</option>
-                              <option value="3">Cancelada</option>
-                          </select>
-                        </div>
-                    </div>         
                     </div>    
                     <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">ID</label>
-                          <input type="text" name="txtVisitaMedID" id="txtVisitaMedID" class="form-control" disabled value="<% out.print(visita.getId_visita());%>"/>
-                          <input type="hidden" name="txtId" id="txtId" value="<% out.print(visita.getId_visita());%>"/>
+                          <label class="bmd-label-floating">NÚMERO DE EXAMEN</label>
+                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_examen());%>"/>
+                          <input type="hidden" name="txtId" id="txtId" value="<%out.println(examen.getId_examen());%>"/>
                         </div>
                       </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">NÚMERO DE VISITA ASOCIADA</label>
+                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_visita());%>"/>
+                        </div>
+                      </div>  
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">FECHA DE LA VISITA</label>
-                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" disabled value="<%out.println(visita.getFecha_visita());%>"/>
+                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" disabled value="<%out.println(examen.getFecha_visita());%>"/>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT MEDICO</label>
-                          <input type="text" name="txtRutMedico" id="txtRutMedico" class="form-control" disabled value="<%out.println(visita.getRut_medico());%>"/>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">RUT TRABAJADOR</label>
-                          <input type="text" name="txtRutMedico" id="txtRutMedico" class="form-control" disabled value="<%out.println(visita.getRut_trabajador());%>"/>
-                        </div>
-                      </div> 
-                    </div>
                     <div class="row">    
                         <div class="col-md-6">
                             <div class="form-group">
-                              <label class="bmd-label-floating">MOTIVO DE LA CONSULTA</label>
-                              <textarea class="form-control" rows="4" cols="50" id="txtMotivoConsulta" name="txtMotivoConsulta" required><%out.println(visita.getMotivo_consulta());%></textarea>
+                              <label class="bmd-label-floating">OBSERVACION</label>
+                              <textarea class="form-control" rows="4" cols="50" id="txtObservacion" name="txtObservacion" required><%out.println(examen.getObservacion());%></textarea>
                             </div>
                         </div>
-                    </div>
+                    </div>    
                     <div class="row">    
                         <div class="col-md-6">
                             <div class="form-group">
-                              <label class="bmd-label-floating">OBSERVACIONES</label>
-                              <textarea class="form-control" rows="4" cols="50" id="" id="txtObservaciones" name="txtObservaciones" required><%out.println(visita.getObservaciones());%></textarea>
+                              <label class="bmd-label-floating">RESULTADO</label>
+                              <textarea class="form-control" rows="4" cols="50" id="txtResultado" name="txtResultado" required><%out.println(examen.getResultado());%></textarea>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">    
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label class="bmd-label-floating">DIAGNOSTICO</label>
-                              <textarea class="form-control" rows="4" cols="50" id="" id="txtDiagnostico" name="txtDiagnostico" required><%out.println(visita.getDiagnostico());%></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">    
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label class="bmd-label-floating">RECETA</label>
-                              <textarea class="form-control" rows="4" cols="50" id="" id="txtReceta" name="txtReceta" required><%out.println(visita.getReceta());%></textarea>
-                            </div>
-                        </div>
-                    </div>   
-                    <button type="submit" class="btn btn-primary pull-right">Actualizar Visita Medica</button>
+                    </div>      
+                    <button type="submit" class="btn btn-primary pull-right">Actualizar Examen Medico</button>
                     <div class="clearfix"></div>
                   </form>
                   <%}else{%>

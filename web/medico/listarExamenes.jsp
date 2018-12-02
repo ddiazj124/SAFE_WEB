@@ -90,7 +90,7 @@
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="administrarExamenes.jsp">
+            <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista de Examenes</p>
             </a>
@@ -151,7 +151,7 @@
                           HttpSession vmsession = request.getSession(true);
                           ArrayList<Examen> Lista = (ArrayList)vmsession.getAttribute("ListarExamX");
                           
-                          if(Lista == null){%>
+                          if(Lista != null){%>
                           <table class="table">
                             <thead class=" text-primary">
                               <th>
@@ -176,7 +176,7 @@
                             <tbody>
                           <c:forEach items="${ListarExamX}" var="exam">
                               <tr>
-                              <td>${exam.id_exam}</td>
+                              <td>${exam.id_examen}</td>
                               <td>${exam.observacion}</td>
                               <td>${exam.resultado}</td>
                               <td>${exam.fecha_visita}</td>
@@ -185,7 +185,7 @@
                               <td>
                                   <form action="../SevEditarExamen" method="POST">
                                       <input class="btn btn-primary" type="submit" value="Editar"/>
-                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${exam.id_exam}"/>
+                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${exam.id_examen}"/>
                                   </form>
                               </td>
                               </tr>
