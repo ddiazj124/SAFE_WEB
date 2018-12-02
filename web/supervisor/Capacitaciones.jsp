@@ -328,70 +328,7 @@
                 </div>
               </div>
             </div>
-            
-            <!-- MODAL CACAPACITACION MODIFICADA -->
-            <div class="modal fade" id="modCapacitacionModificada" tabindex="-1" role="dialog" 
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle">Estimado Supervisor</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <h4>Capacitación modificada correctamente</h4>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" onclick="pageLoad()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- MODAL CACAPACITACION AGREGADA -->
-            <div class="modal fade" id="modCapacitacionAgregada" tabindex="-1" role="dialog" 
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle">Estimado Supervisor</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <h4>Capacitación agregada correctamente</h4>
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
-                    </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- MODAL CACAPACITACION ELIMINADA -->
-            <div class="modal fade" id="modCapacitacionEliminada" tabindex="-1" role="dialog" 
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle">Estimado Supervisor</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <h4>Capacitación eliminada correctamente</h4>
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                        
-                    </div>
-                </div>
-              </div>
-            </div>
-            
+                        
             <script type="text/javascript">
                 var table = document.getElementById('tblCapacitaciones'),rIndex;
                 for (var i = 0; i < table.rows.length; i++) {

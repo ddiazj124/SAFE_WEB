@@ -51,10 +51,13 @@
                         <a href="PlanCapacitaciones.jsp"><i class="fa fa-qrcode "></i>Plan Capacitaciones</a>
                     </li>                    
                     <li class="active-link">
-                        <a href="Asistencia.jsp" ><i class="fa fa-desktop "></i>Registrar Asistencia Capacitaciones<span class="badge"></span></a>
+                        <a href="Asistencia.jsp" ><i class="fa fa-desktop "></i>Registrar Asistencia<span class="badge"></span></a>
                     </li>
                     <li>
-                        <a href="ConsultarAsistencia.jsp"><i class="fa fa-table "></i>Consultar Asistencia Capacitaciones<span class="badge"></span></a>
+                        <a href="ConsultarAsistencia.jsp"><i class="fa fa-table "></i>Consultar Asistencia<span class="badge"></span></a>
+                    </li>
+                    <li>
+                        <a href="ConsultarEvaluacion.jsp"><i class="fa fa-edit "></i>Consultar Evaluación<span class="badge"></span></a>
                     </li>
                 </ul>
             </div>
@@ -106,7 +109,7 @@
                     <div class="div-square">
                         <a href="Asistencia.jsp" >
                             <i class="fa fa-users fa-5x"></i>
-                            <h4>Registrar Asistencia</h4>
+                            <h4>Registrar Asistencia Capacitaciones</h4>
                         </a>
                     </div>
                 </div>
@@ -115,10 +118,19 @@
                     <div class="div-square">
                         <a href="ConsultarAsistencia.jsp" >
                             <i class="fa fa-key fa-5x"></i>
-                            <h4>Consultar Asistencia </h4>
+                            <h4>Consultar Asistencia Capacitaciones</h4>
                        </a>
                     </div> 
-                  </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                    <div class="div-square">
+                        <a href="ConsultarEvaluacion.jsp" >
+                            <i class="fa fa-clipboard fa-5x"></i>
+                            <h4>Consultar Evaluación</h4>
+                        </a>
+                    </div>
+                </div>
             </div> 
                   
     </div>

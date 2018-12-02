@@ -23,13 +23,13 @@ public class PlanDAO implements CRUDPlan{
     @Override
     public List listar() {
         List<PlanVO> listado = new ArrayList();
-        String sql =    "SELECT " +
+        String sql =    " SELECT " +
                         "      ID_PLAN       AS ID " +
                         "    , DESCRIPCION   AS NOMBRE " +
                         "    , FECHA_INICIO  AS FECHA_INICIO " +
                         "    , FECHA_TERMINO AS FECHA_TERMINO " +
-                        "FROM PLAN_ANUAL " +
-                        "ORDER BY ID_PLAN ASC";
+                        " FROM PLAN_ANUAL " +
+                        " ORDER BY ID_PLAN ASC";
         try {
             con = cn.getConn();
             ps  = con.prepareStatement(sql);

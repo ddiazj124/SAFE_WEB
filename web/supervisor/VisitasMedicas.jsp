@@ -394,7 +394,7 @@
                     table.rows[i].onclick = function(){
                         rIndex = this.rowIndex; 
                         document.getElementById('idVisitaMedicaEditar').value       = this.cells[0].innerHTML;
-                        document.getElementById('rutMedicoEditar').value            = this.cells[1].innerHTML;
+                        document.getElementById('rutMedicoEditar').selectedIndex    = this.cells[1].innerHTML;
                         document.getElementById('rutTrabajadorEditar').value        = this.cells[2].innerHTML;
                         document.getElementById('motivoConsultaEditar').value       = this.cells[3].innerHTML;
                         document.getElementById('fechaVisitaEditar').value          = this.cells[4].innerHTML;
