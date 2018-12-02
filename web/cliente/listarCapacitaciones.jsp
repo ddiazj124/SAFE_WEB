@@ -164,7 +164,22 @@
               
           </div>
         </div>
-          
+              <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">Excel</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -205,7 +220,23 @@
       md.initDashboardPageCharts();
 
     });
-  </script>
+  </script>    
+        <script type="text/javascript">
+        function exportTableToExcel() {                
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+
+                    var table = 'tblReporte';
+                    var name = 'nombre_hoja_calculo';
+
+                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                     var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                     window.location.href = uri + base64(format(template, ctx))
+                };
+    </script>
+
 </body>
 
 </html>
