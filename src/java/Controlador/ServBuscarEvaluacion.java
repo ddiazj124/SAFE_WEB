@@ -47,16 +47,19 @@ public class ServBuscarEvaluacion extends HttpServlet {
             EvaluacionLiteVO eva = new EvaluacionLiteVO();
            
             ListaEvaluacionLite = dao.listLite(idEmpresaCmb);
-            
+            String salida = "";
+            String id = "";
+            String titulo = "";
             request.setAttribute("listaEva", ListaEvaluacionLite);
             for (EvaluacionLiteVO evaluacionLiteVO : ListaEvaluacionLite) {
-                request.setAttribute("id", evaluacionLiteVO.getId());
-                request.setAttribute("titulo", evaluacionLiteVO.getTitulo());
+                salida = "<option value=" + String.valueOf(evaluacionLiteVO.getId()) + "> "
+                        + evaluacionLiteVO.getTitulo()+ "</option>";
+                //salida2 = evaluacionLiteVO.getTitulo();
             }
             
             session.setAttribute("ListaEvaluacionLite", ListaEvaluacionLite);
             session.setAttribute("idEmpresaCmbX", idEmpresaCmbX);
-            out.println(ListaEvaluacionLite);
+            out.println(salida);
             //response.sendRedirect("./medico/administrarAtenciones.jsp");
         }catch(Exception e)
         {
