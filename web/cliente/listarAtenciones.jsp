@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="java.util.Iterator"%>
+<%@page import="Entidades.Visita_Med"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.DAOVisita_Med"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -92,7 +96,16 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuCliente.jsp">Inicio</a>
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                        </td>
+                        <td>
+                            <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                        </td>
+                    </tr>
+                </table>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -121,63 +134,58 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
+          <div class="row" id="imprimir">
+                                      <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Visualizar Visitas</p>
-                  <h3 class="card-title"><a id="re" href="./listarAtenciones.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Visualizar Evaluaciones</p>
-                  <h3 class="card-title" href="./listarEvaluaciones.jsp"><a href="./listarEvaluaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Visualizar Capacitaciones</p>
-                  <h3 class="card-title"><a href="./listarCapacitaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+                <p class="card-title">CONTROLES MEDICOS DEL PERSONAL</p>
+<section>
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 20px;"><b>ID</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 60px;"><b>Rut M&eacute;dico</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 70px;"><b>Motivo Consulta</b></th>
+			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 200px;"><b>Observaciones</b></th>
+			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 100px;"><b>Receta</b></th>
+                    </tr>
+                </thead>
+                <%
+                    DAOVisita_Med             dao             = new DAOVisita_Med();
+                    ArrayList<Visita_Med>        list            = dao.TraerTodos();
+                    Iterator<Visita_Med>    iter            =list.iterator();
+                    Visita_Med              visitaMed  = null;
+                    while (iter.hasNext()) {
+                            visitaMed = iter.next();
+                %>
+                
+                <tbody>
+                    <tr>
+                        <td class="text-center text-dark"><%= visitaMed.getId_visita() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getFecha_visita() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getRut_trabajador() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getMotivo_consulta() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getObservaciones() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getReceta() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
           </div>
-          
+              </div><!--fin card-->
+          </div>
+        </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#Diego">
+                <a href="#">
                   SAFE - Prevencion de Riesgos
                 </a>
               </li>              
@@ -186,13 +194,12 @@
           <div class="copyright float-right">
             &copy;
             <script>
-              document.write(new Date().getFullYear())
+              document.write(new Date().getFullYear());
             </script>
           </div>
         </div>
       </footer>
-    </div>
-  </div>
+    </div><!--fin-->
   <!--   Core JS Files   -->
   <script src="../customcss/js/core/jquery.min.js" type="text/javascript"></script>
   <script src="../customcss/js/core/popper.min.js" type="text/javascript"></script>
@@ -206,6 +213,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -213,6 +221,57 @@
 
     });
   </script>
+  
+    <script type="text/javascript">
+        function exportTableToExcel() {                
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+
+                    var table = 'tblReporte';
+                    var name = 'nombre_hoja_calculo';
+
+                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                     var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                     window.location.href = uri + base64(format(template, ctx))
+                };
+    </script>
+    
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.text(200,50,"CONTROLES MEDICOS PERSONAL");
+            pdf.text(200,750,"- Empresas SAFE -");
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('Controles_Medicos.pdf');
+                }, margins
+            );
+        }
+    </script>
 </body>
 
 </html>
