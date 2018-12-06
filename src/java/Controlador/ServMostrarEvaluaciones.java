@@ -9,6 +9,7 @@ import DAO.DAOEvaluacion;
 import DAO.DAOTecnico;
 import Entidades.Evaluacion;
 import Entidades.Tecnico;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,9 +42,12 @@ public class ServMostrarEvaluaciones extends HttpServlet {
         try {
                 HttpSession session = request.getSession();
                 
+                //Recuperar Correo del Uusario
+                Usuario u = (Usuario)session.getAttribute("datosUsuarioCorreo");
+                String correo = u.getCorreo_electronico();
                 //Busca el Rut actual del Tecnico 
                 DAOTecnico dao = new DAOTecnico();
-                ArrayList<Tecnico> Ltecnico = dao.TraerTecnico("d.diazj@alumnos.duoc.cl");
+                ArrayList<Tecnico> Ltecnico = dao.TraerTecnico(correo);
                 String rut_tecnico = "";
                 for (Tecnico obj : Ltecnico) {
                     rut_tecnico = obj.getRut_tecnico();

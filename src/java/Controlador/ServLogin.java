@@ -116,6 +116,8 @@ public class ServLogin extends HttpServlet {
                     }
                     if(u.getId_perfil()==4)
                     {
+                        Usuario uc = uDao.AutenticacionCorreo(txtUser, getMD5(txtPass));
+                        sesion.setAttribute("datosUsuarioCorreo", uc);
                         response.sendRedirect("tecnico/menuTecnico.jsp");
                     }
                     if(u.getId_perfil()==5)

@@ -11,6 +11,7 @@ import DAO.DAOTecnico;
 import Entidades.Evaluacion;
 import Entidades.EvaluacionTerreno;
 import Entidades.Tecnico;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,6 +43,8 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             
+            HttpSession session = request.getSession();
+            
             //Evaluacion;
             int id_eval = 0;
             String titulo = request.getParameter("txtTitulo");
@@ -48,9 +52,14 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             String fecha_eval = request.getParameter("txtFecha");
             String descripcion = request.getParameter("txtDescripcion");
             int estado_eval = 1;
-            //Busca el RUT del tecnico
+            
+            //Recuperar Correo del Uusario
+            Usuario u = (Usuario)session.getAttribute("datosUsuarioCorreo");
+            String correo = u.getCorreo_electronico();
+            
+            //Busca el Rut actual del Tecnico 
             DAOTecnico dao = new DAOTecnico();
-            ArrayList<Tecnico> Ltecnico = dao.TraerTecnico("d.diazj@alumnos.duoc.cl");
+            ArrayList<Tecnico> Ltecnico = dao.TraerTecnico(correo);
             String rut_tecnico = "";
             for (Tecnico obj : Ltecnico) {
                 rut_tecnico = obj.getRut_tecnico();
