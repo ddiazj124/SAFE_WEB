@@ -149,7 +149,7 @@
                         <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                          <input type="text" name="txtFecha" required="true" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>

@@ -189,7 +189,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">PREGUNTA EVALUACION</label>
-                          <textarea class="form-control" rows="4" cols="50" name="txtPregunta" required="true"></textarea>
+                          <input class="form-control" type="text" rows="4" cols="50" name="txtPregunta" required="true"></input>
                         </div>
                       </div>
                     </div>
