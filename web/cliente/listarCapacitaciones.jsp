@@ -29,6 +29,7 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
+  
 </head>
 
 <body class="">
@@ -125,7 +126,7 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
+          <div class="row" id="imprimir">
  <section>
       <table id="tblCapacitaciones" class="table table-bordered">
                 <thead>
@@ -173,7 +174,7 @@
                             <button type="button" class="btn btn-info btn-lg">Excel</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-info btn-lg">PDF</button>
+                            <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
                         </td>
                     </tr>
                 </table>
@@ -214,6 +215,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -235,8 +237,41 @@
                      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                      window.location.href = uri + base64(format(template, ctx))
                 };
+                
     </script>
 
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('Capacitaciones.pdf');
+                }, margins
+            );
+        }
+</script>
 </body>
 
 </html>
