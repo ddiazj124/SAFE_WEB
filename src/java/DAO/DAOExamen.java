@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class DAOExamen {
  
     private static String sql_selectAll = "SELECT * FROM EXAMEN";
+    private static String sql_selectAllAsc = "SELECT * FROM EXAMEN order by id_examen";
     private static String sql_buscarExamen = "SELECT * FROM EXAMEN WHERE ID_EXAMEN = ?";
     private static String TraerTodoExamenX = "SELECT E.* FROM EXAMEN E INNER JOIN VISITA_MED VM ON VM.ID_VISITA = E.ID_VISITA INNER JOIN MEDICO M ON M.RUT_MEDICO = VM.RUT_MEDICO WHERE M.RUT_MEDICO = ?";
     private static String sql_insertarProcedimiento = "CALL ADM_EXAMENES(?,?,?,?)";
@@ -53,7 +54,24 @@ public class DAOExamen {
         return false;
     }
     
-
+       public ArrayList<Examen> TraerTodosAsc() {
+        try {
+            ArrayList<Examen> Lexamen = new ArrayList<>();
+            PreparedStatement ps;
+            ps = objConn.getConn().prepareStatement(sql_selectAllAsc);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Lexamen.add(new Examen(rs.getInt("id_examen"),rs.getString("observacion"),rs.getString("resultado"),rs.getString("fecha_visita"),rs.getInt("id_visita")));
+            }
+            return Lexamen;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOExamen.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
+    
     public ArrayList<Examen> TraerTodos() {
         try {
             ArrayList<Examen> Lexamen = new ArrayList<>();
