@@ -6,7 +6,9 @@
 package Controlador;
 
 import DAO.DAOEvaluacion;
+import DAO.DAOTecnico;
 import Entidades.Evaluacion;
+import Entidades.Tecnico;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,8 +41,14 @@ public class ServMostrarEvaluaciones extends HttpServlet {
         try {
                 HttpSession session = request.getSession();
                 
-                //Añadir objeto de Session que consulte que ID de evaluacion es:
-                String rut_tecnico = "16200739-4";
+                //Busca el Rut actual del Tecnico 
+                DAOTecnico dao = new DAOTecnico();
+                ArrayList<Tecnico> Ltecnico = dao.TraerTecnico("d.diazj@alumnos.duoc.cl");
+                String rut_tecnico = "";
+                for (Tecnico obj : Ltecnico) {
+                    rut_tecnico = obj.getRut_tecnico();
+                }
+                
                 //Preguntas
                 DAOEvaluacion p = new DAOEvaluacion();
                 ArrayList<Evaluacion> Listemp = p.TraerEvaluacionesTecnico(rut_tecnico);

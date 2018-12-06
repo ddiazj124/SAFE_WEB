@@ -6,6 +6,7 @@
 
 
 
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +28,15 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
-
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
@@ -74,7 +83,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href=".../.../index.jsp">
+            <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
             </a>
@@ -241,3 +250,12 @@
 
 </html>
 
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>

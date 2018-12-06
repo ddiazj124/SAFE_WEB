@@ -3,6 +3,7 @@
     Created on : 21-oct-2018, 21:12:18
     Author     : Diego
 --%>
+<%@page import="Entidades.Usuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Calendar"%>
@@ -30,7 +31,15 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
-
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
@@ -235,4 +244,14 @@
 </body>
 
 </html>
+
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>
 

@@ -4,7 +4,17 @@
     Author     : Diego
 --%>
 
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %> 
 <!DOCTYPE html>
 <html lang="es">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,6 +36,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
+
+
 
 <body class="">
   <div class="wrapper ">
@@ -73,7 +85,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href=".../.../index.jsp">
+            <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
             </a>
@@ -118,7 +130,9 @@
         <div class="container-fluid">
           <div class="row">
             
-              <form action="../ServMostrarPreguntas" method="POST">
+              <div class="card-body">
+                  <div class="table-responsive">
+              
             <table  class="table">
                 <thead class=" text-primary">
                     <th>
@@ -141,7 +155,7 @@
                 <tr>
                     <td>
                         <label>${p.id_ev}</label>
-                        <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
+                        
                     </td>
                     <td>
                         <label>${p.titulo}</label>
@@ -152,17 +166,19 @@
                     <td>
                         <label>${p.descripcion}</label>
                     </td>
-                    
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Responder">
-                    </td>
+                    <form action="../ServMostrarPreguntas" method="POST">
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Responder">
+                            <input type="hidden" id="id_ev" name="id_ev" value="${p.id_ev}">
+                        </td>
+                    </form>
                 </tr>
               </c:forEach>
             </table>
-          </form>    
+              
             
           </div>
-          
+          </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -207,4 +223,13 @@
 </body>
 
 </html>
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>
 

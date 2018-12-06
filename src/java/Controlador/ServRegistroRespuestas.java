@@ -35,18 +35,18 @@ public class ServRegistroRespuestas extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
-            int id_eval = Integer.parseInt(request.getParameter("id_ev"));
+            //int id_eval = Integer.parseInt(request.getParameter("id_ev"));
 
 
-            DAORespuesta dr = new DAORespuesta();
-
+            //DAORespuesta dr = new DAORespuesta();
+            /*
             for (int i = 0; i < 5; i++) {
                 String respuesta = request.getParameter("txtRespuesra"+i);
                 Respuesta r = new Respuesta(0, id_eval, respuesta);
                 dr.Insertar(r);            
-            }
+            }*/
             
-            dr.update(id_eval);
+            //dr.update(id_eval);
             response.sendRedirect("./tecnico/registroExitoso.jsp");
         }catch(Exception e)
         {

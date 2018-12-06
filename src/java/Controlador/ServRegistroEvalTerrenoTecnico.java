@@ -7,10 +7,13 @@ package Controlador;
 
 import DAO.DAOEvaluacion;
 import DAO.DAOEvaluacionTerreno;
+import DAO.DAOTecnico;
 import Entidades.Evaluacion;
 import Entidades.EvaluacionTerreno;
+import Entidades.Tecnico;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +48,13 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             String fecha_eval = request.getParameter("txtFecha");
             String descripcion = request.getParameter("txtDescripcion");
             int estado_eval = 1;
-            String rut_tecnico = "16200739-4";
+            //Busca el RUT del tecnico
+            DAOTecnico dao = new DAOTecnico();
+            ArrayList<Tecnico> Ltecnico = dao.TraerTecnico("d.diazj@alumnos.duoc.cl");
+            String rut_tecnico = "";
+            for (Tecnico obj : Ltecnico) {
+                rut_tecnico = obj.getRut_tecnico();
+            }
             String rut_ingeniero = request.getParameter("ddlIngeniero");
             
             Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);

@@ -41,6 +41,14 @@ public class Usuario {
         this.id_perfil = id_perfil;
     }
     
+    public Usuario(int id_usuario, String nombre_usuario, String contrasena, int id_perfil,String correo_electronico) {
+        this.id_usuario = id_usuario;
+        this.nombre_usuario = nombre_usuario;
+        this.contrasena = contrasena;
+        this.id_perfil = id_perfil;
+        this.correo_electronico = correo_electronico;
+    }
+    
     
     
     

@@ -75,6 +75,34 @@ public class DAOUsuario {
         return null;
     }
     
+    public Usuario AutenticacionCorreo(String v_usuario, String v_contrasena){
+        
+        PreparedStatement pst = null;
+        
+        Usuario u = new Usuario();
+        try {
+            pst = objConn.getConn().prepareStatement(sql_autenticacion);
+            
+            pst.setString(1, v_usuario);
+            pst.setString(2, v_contrasena);
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                u = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("contrasena"), rs.getInt("id_perfil"),rs.getString("correo_electronico"));
+                return u;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        
+        return null;
+    }
+    
+    
+    
     public boolean ValidarUsuario(String v_usuario, String v_contrasena){
         
         PreparedStatement pst = null;

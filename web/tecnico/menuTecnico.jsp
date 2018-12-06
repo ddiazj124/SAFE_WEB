@@ -1,4 +1,5 @@
 
+<%@page import="Entidades.Usuario"%>
 <%-- 
     Document   : menuTecnico
     Created on : 21-oct-2018, 0:42:19
@@ -27,6 +28,15 @@
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
 </head>
 
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
@@ -73,7 +83,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href=".../.../index.jsp">
+            <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
               <p>Cerrar Sesión</p>
             </a>
@@ -210,3 +220,12 @@
 </body>
 
 </html>
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>
