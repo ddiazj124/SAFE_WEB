@@ -45,7 +45,8 @@ public class Evaluacion {
         this.evaluacion_estado_id = evaluacion_estado_id;
     }
 
-    public Evaluacion(String titulo,String fecha_eval,String descripcion,String razonSocial) {
+    public Evaluacion(int id_ev,String titulo,String fecha_eval,String descripcion,String razonSocial) {
+        this.id_ev = id_ev;
         this.titulo = titulo;
         this.fecha_eval = fecha_eval;
         this.descripcion = descripcion;

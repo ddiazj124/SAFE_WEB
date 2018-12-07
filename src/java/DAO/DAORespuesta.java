@@ -50,7 +50,7 @@ public class DAORespuesta {
         try {
             PreparedStatement ps;
             
-            ps = objConn.getConn().prepareStatement(sql_insertar);
+            ps = objConn.getConn().prepareStatement(sql_update);
             ps.setInt(1, id_ev);
             
             if(ps.executeUpdate()>0){

@@ -138,12 +138,15 @@
                 </div>
                 <div class="card-body">
                     <form action="../ServRegistroRespuestas" method="post">
+                    
                     <c:forEach items="${datosDatosEval}" var="e">
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">TITULO EVALUACION</label><br>
                           <label>${e.titulo}</label>
+                          <input type="hidden" value="${e.id_ev}" id="id_ev" name="id_ev">
+                          
                         </div>
                       </div>
                         <div class="col-md-5">
@@ -174,19 +177,26 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating"></label>
-                          <c:forEach items="${datosPreguntas}" var="p">
-                              <table>
+                          <table>
+                              <c:set var="count" value="0" scope="page" />
+                                <c:forEach items="${datosPreguntas}" var="p">
+                                    
                                   <tr>
                                   <br>
                                       <label>${p.detallePregunta}</label>
+                                      <input type="hidden" value="${p.idPregunta}" id="idPregunta${count}" name="idPregunta${count}">
+                                      
                                   </tr>
                                   <tr>
-                                      <textarea class="form-control" rows="4" cols="50" name="txtrespuesta${p.idPregunta}" required="true"></textarea>
+                                      
+                                      <textarea class="form-control" rows="4" cols="50" name="txtRespuesta${count}" id="txtRespuesta${count}" required="true"></textarea>
+                                      <c:set var="count" value="${count + 1}" scope="page"/>
                                   </tr>
-                              </table>
-                                
-                                
-                            </c:forEach>
+                              
+                                </c:forEach>
+                                  <input type="hidden" value="${count}" id="num" name="num">
+                                  
+                            </table>
                         </div>
                       </div>
                     </div>    
