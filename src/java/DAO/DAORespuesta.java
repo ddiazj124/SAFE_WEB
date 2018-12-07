@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author Diego
  */
 public class DAORespuesta {
-    private static String sql_insertar = "INSERT INTO RESPUESTA(?,?,?)";
-    private static String sql_update = "UPDATE EVALUACION SET EVALUACION_ESTADO_ID = 2 WHERE ID_EV = ?;";
+    private static String sql_insertar = "INSERT INTO RESPUESTA VALUES(S_RESPUESTAS.nextval,?,?)";
+    private static String sql_update = "UPDATE EVALUACION SET EVALUACION_ESTADO_ID = 2 WHERE ID_EV = ?";
     
     
     private static Conexion objConn = Conexion.InstanciaConn();
@@ -30,9 +30,8 @@ public class DAORespuesta {
             PreparedStatement ps;
             
             ps = objConn.getConn().prepareStatement(sql_insertar);
-            ps.setInt(1, resp.getIdRespuesta());
-            ps.setInt(2, resp.getIdPregunta());
-            ps.setString(3, resp.getDetalleRespuesta());
+            ps.setInt(1, resp.getIdPregunta());
+            ps.setString(2, resp.getDetalleRespuesta());
             
             if(ps.executeUpdate()>0){
                 return true;
