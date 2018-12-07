@@ -3,17 +3,14 @@
     Created on : 22-oct-2018, 11:26:46
     Author     : Diego
 --%>
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="Entidades.Examen"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entidades.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../customcss/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
