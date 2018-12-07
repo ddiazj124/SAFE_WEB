@@ -1,3 +1,4 @@
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 ﻿﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,7 +15,11 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
-<body>      
+<body> 
+    <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+    %>    
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -42,18 +47,21 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">                 
                     <li>
-                        <a href="CompletarEvaluaciones.jsp"><i class="fa fa-table "></i>Completar Evaluaciones<span class="badge"></span></a>
+                        <a href="CompletarEvaluacionesEnTerreno.jsp"><i class="fa fa-table "></i>Completar Evaluaciones en Terreno<span class="badge"></span></a>
+                    </li>
+                    <li>
+                        <a href="CompletarEvaluacionesAPersonas.jsp"><i class="fa fa-edit "></i>Completar Evaluaciones a Personas<span class="badge"></span></a>
                     </li>                    
                 </ul>
             </div>
-
         </nav>
+        
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>Supervisor</h2>   
+                     <h2>Ingeniero: <%out.println(u.getNombre_usuario());%></h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -65,13 +73,21 @@
                 
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="CompletarEvaluaciones.jsp" >
-                        <i class="fa fa-user fa-5x"></i>
-                      <h4>Completar Evaluaciones</h4>
+                           <a href="CompletarEvaluacionesEnTerreno.jsp" >
+                        <i class="fa fa-comments-o fa-5x"></i>
+                      <h4>Completar Evaluaciones en Terreno</h4>
                       </a>
                       </div>
                 </div> 
-                  
+                
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                      <div class="div-square">
+                           <a href="CompletarEvaluacionesAPersonas.jsp" >
+                        <i class="fa fa-user fa-5x"></i>
+                      <h4>Completar Evaluaciones a Personas</h4>
+                      </a>
+                      </div>
+                </div>
                 
             </div> 
                   

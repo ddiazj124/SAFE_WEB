@@ -1,3 +1,4 @@
+<%@page import="Entidades.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAO.EvaluacionDAO"%>
 <%@page import="VO.EvaluacionLiteVO"%>
@@ -93,22 +94,31 @@
     </style> 
 </head>
 
-<body >     
+<body >
+    <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+    %> 
     <div class="preloader" id="wait">
         <img src="img/loading.gif" width="80" height="80" alt="" style="position: fixed; top: 50%; left: 50%; " />
     </div>
     </br>&nbsp;&nbsp;        
-        <a class="" href="menuSupervisor.jsp">
+        <a class="" href="menuIngeniero.jsp">
             <button id="btnMenu"
                   type="submit" 
                   class="btn btn-lg"                                
                   href="menuSupervisor.jsp"
                   >
                   Menú
-          </button> 
-       </a>      
+          </button>  
+       </a> 
         <div class="container" >
-            <h1>Completar Evaluaciones</h1>    
+            <h3>Ingeniero: <%out.println(u.getNombre_usuario());%>
+            </h3>
+        </div>     
+            
+        <div class="container" >
+            <h1>Completar Evaluaciones en Terreno</h1>    
             
     <div class="container">
 <div class="stepwizard">
@@ -122,11 +132,15 @@
             <p>Evaluación</p>
         </div>
         <div class="stepwizard-step">
-            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-            <p>Completar</p>
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Trabajadores</p>
         </div>
         <div class="stepwizard-step">
-            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <p>Observaciones</p>
+        </div>
+        <div class="stepwizard-step">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
             <p>Resúmen</p>
         </div>
     </div>
@@ -166,11 +180,10 @@
                 <div class="form-group">
                     <label class="control-label">Evaluación</label>
                     <select id="idEvaluacion" name="idEvaluacion" class="form-control form-control-lg">
-                        <option value="-1">Seleccione</option>
-                        <option id="optEva"></option>
+                        <option value="-1">Seleccione</option>                        
                     </select>
                 </div>
-                <button disabled="true" id="siguiente1" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+                <button disabled="true" id="siguiente2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
     </div>
@@ -178,18 +191,34 @@
     <div class="row setup-content" id="step-3">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3>Completar Evaluación</h3>
+                <h3>Trabajadores</h3>
                 <br>
                 <div class="form-group">
-                    <label class="control-label">Observaciones</label>
-                    
+                    <select id="idTrabajadores" name="idTrabajadores" class="form-control form-control-lg">
+                        <option value="-1">Seleccione</option>                        
+                    </select>
                 </div>
-                <button disabled="true" id="siguiente1" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+                <button disabled="true" id="siguiente3" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
-    </div>                
-                     
+    </div>
+                   
     <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <h3>Observaciones</h3>
+                <br>
+                <div class="form-group">
+                    <select id="idObservaciones" name="idObservaciones" class="form-control form-control-lg">
+                        <option value="-1">Seleccione</option>                        
+                    </select>
+                </div>
+                <button disabled="true" id="siguiente4" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            </div>
+        </div>
+    </div>
+                     
+    <div class="row setup-content" id="step-5">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>
@@ -222,14 +251,12 @@
             
             var idEmpresaCmb          = $('#idEmpresa').val();
             
-            $.post('../ServBuscarEvaluacion', {
+            $.post('../ServBuscarEvaluacion_rutEmpresa_rutIngeniero', {
                  idEmpresaCmb     : idEmpresaCmb
+                 //rut_ingeniero : rut_ingeniero
             }, function(data) {
-                //alert(responseText);--trae la data
-                console.log(data);
-                document.getElementById('optEva').innerHTML = data;
-                
-        });
+                //document.getElementById('idEvaluacion').innerHTML = data;
+            });
        }       
     }); 
     
@@ -239,7 +266,14 @@
                      
        if(idEvaluacionSelect !== -1){  
           $('#siguiente2').attr('disabled', false);
-          //document.getElementById('siguiente1').disabled = "false"; 
+          
+          var idCapacitacionCmb = $('#idEvaluacion').val();
+          //alert(idCapacitacionCmb);
+          $.post('../ServBuscarTrabajadoresPorEmpresa', {
+                 idCapacitacionCmb     : idCapacitacionCmb
+            }, function(data) {
+                document.getElementById('idTrabajadores').innerHTML = data;
+            });
        }       
     });  
     
