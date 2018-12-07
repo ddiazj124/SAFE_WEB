@@ -38,7 +38,19 @@
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                             <form class="login100-form validate-form" action="ServLogin" method="POST">
 					<!--<span class="login100-form-title p-b-49">Login</span>--->
-                                        
+                                        <%  
+                                        HttpSession z = request.getSession(true);
+                                        Object objError = request.getParameter("msjError");
+                                        if(objError != null){%>
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <i class="material-icons">x</i>
+                                            </button>
+                                            <span>
+                                                <b> Advertencia - </b>USUARIO Y/O CONTRASEÑA INCORRECTO
+                                            </span>
+                                        </div>
+                                        <%}%>
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Usuario es requerido">
 						<span class="label-input100">Usuario</span>
                                                     <input class="input100" type="text" name="txtUser" id="txtUser" placeholder="Ingresa tu usuario">
@@ -50,11 +62,7 @@
                                                     <input class="input100" type="password" name="txtPass" id="txtPass" placeholder="ingresa tu contraseña">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-					
-					<div class="text-right p-t-8 p-b-31">
-						<c:out value="${error}"/>
-					</div>
-					
+                                        
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>

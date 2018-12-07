@@ -7,10 +7,12 @@ package Controlador;
 
 import DAO.DAOExamen;
 import DAO.DAOMedico;
+import DAO.DAOTrabajador;
 import DAO.DAOUsuario;
 import DAO.DAOVisita_Med;
 import Entidades.Examen;
 import Entidades.Medico;
+import Entidades.Trabajador;
 import Entidades.Usuario;
 import Entidades.Visita_Med;
 import java.io.IOException;
@@ -137,21 +139,39 @@ public class ServLogin extends HttpServlet {
                         Examen exam = new Examen();
                         
                         
+                        
+                        
                         med = daoMed.BuscarRutMedico(u.getNombre_usuario());
                         
                         DAOVisita_Med vism = new DAOVisita_Med();
                         DAOExamen daoExam = new DAOExamen();
+                        DAOTrabajador t = new DAOTrabajador();
                         
+                        ArrayList<Medico> Lmedicos = daoMed.TraerTodos();
                         ArrayList<Visita_Med> Listvis = vism.TraerVisitasMedXRut(med.getRut_medico());
                         ArrayList<Examen> Lexam = daoExam.TraerExamenMedXRut(med.getRut_medico());
+                        ArrayList<Trabajador> ListTrab = t.TraerTodos();
                         
+                        session.setAttribute("datosTrabajador", ListTrab);
+                        session.setAttribute("Lmedicos", Lmedicos);
                         session.setAttribute("ListarVisitasX", Listvis);
                         session.setAttribute("ListarExamX", Lexam);
                         
                         response.sendRedirect("medico/menuMedico.jsp");
                     }
         }else{
-            System.out.println("USUARIO Y CONTRASEÑA INCORRECTO");
+            HttpSession session = request.getSession();
+            boolean error = true;
+            String mensaje = "";
+            if(error){
+                
+               mensaje = "ERROR"; 
+                
+                
+                session.setAttribute("msjError", error);
+                response.sendRedirect("index.jsp");
+            }
+            //System.out.println("USUARIO Y CONTRASEÑA INCORRECTO");
         }
         
         

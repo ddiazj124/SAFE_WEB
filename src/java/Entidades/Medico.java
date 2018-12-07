@@ -21,6 +21,12 @@ public class Medico {
     public Medico(String rut_medico) {
         this.rut_medico = rut_medico;
     }
+
+    public Medico(String rut_medico, String nombre, String apellido) {
+        this.rut_medico = rut_medico;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
     
 
     public Medico(String rut_medico, int id_perfil, String nombre, String apellido) {
