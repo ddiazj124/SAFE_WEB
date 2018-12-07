@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class DAOVisita_Med {
     private static String sql_selectAll = "SELECT * FROM VISITA_MED";
+    private static String sql_selectAllAsc = "SELECT * FROM VISITA_MED ORDER BY id_visita ASC";
     private static String sql_selectAllFecha = "SELECT * FROM VISITA_MED WHERE FECHA_VISITA LIKE ?";
     private static String sql_buscarVisita = "SELECT * FROM VISITA_MED WHERE ID_VISITA = ?";
     private static String sql_buscarVisitasMedX = "SELECT * FROM VISITA_MED VM INNER JOIN MEDICO M ON M.RUT_MEDICO = VM.RUT_MEDICO WHERE M.RUT_MEDICO = ?";
@@ -51,7 +52,26 @@ public class DAOVisita_Med {
         }
         return null;  
     }
-    
+   
+    public ArrayList<Visita_Med> TraerTodosAsc() {
+        try {
+            ArrayList<Visita_Med> Lvisita = new ArrayList<>();
+            PreparedStatement ps;
+
+            ps = objConn.getConn().prepareStatement(sql_selectAllAsc);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Lvisita.add(new Visita_Med(rs.getInt("id_visita"),rs.getString("rut_medico"),rs.getString("rut_trabajador"),rs.getString("motivo_consulta"),rs.getString("observaciones"),rs.getString("diagnostico"),rs.getString("fecha_visita"),rs.getString("estado").charAt(0),rs.getString("receta")));
+            }
+            return Lvisita; 
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOPerfil.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            objConn.Cerrar();
+        }
+        return null;  
+    }
     
     public ArrayList<Visita_Med> TraerTodosPorFecha(String fecha) {
         try {

@@ -59,6 +59,48 @@ public class VisitaMedicaDAO implements CRUDVisitaMedica{
         return listado;
     }
 
+    public List listarAsc() {
+        PreparedStatement ps;
+        List<VisitaMedicaVO> listado = new ArrayList();
+        String sql =    " SELECT " +
+                        "      VM.ID_VISITA       AS ID_VISITA " +
+                        "    , VM.RUT_MEDICO      AS RUT_MEDICO " +
+                        "    , VM.RUT_TRABAJADOR  AS RUT_TRABAJADOR " +
+                        "    , VM.MOTIVO_CONSULTA AS MOTIVO_CONSULTA " +
+                        "    , VM.OBSERVACIONES   AS OBSERVACIONES " +
+                        "    , VM.DIAGNOSTICO     AS DIAGNOSTICO " +
+                        "    , VM.FECHA_VISITA    AS FECHA_VISITA " +
+                        "    , VM.ESTADO          AS ESTADO " +
+                        "    , VE.DESCRIPCION     AS ESTADO_DESCRIPCION " +
+                        "    , VM.RECETA          AS RECETA " +
+                        " FROM        VISITA_MED          VM " +
+                        " INNER JOIN  VISITA_MED_ESTADO   VE " +
+                        " ON VM.ESTADO = VE.ID " +
+                        " ORDER BY ID_VISITA ASC ";
+        try {
+            ps = objConn.getConn().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                VisitaMedicaVO visitaVO = new VisitaMedicaVO();
+                visitaVO.setId_visita(rs.getInt("ID_VISITA"));
+                visitaVO.setRut_medico(rs.getString("RUT_MEDICO"));
+                visitaVO.setRut_trabajador(rs.getString("RUT_TRABAJADOR"));
+                visitaVO.setMotivo_consulta(rs.getString("MOTIVO_CONSULTA"));
+                visitaVO.setObservaciones(rs.getString("OBSERVACIONES"));
+                visitaVO.setDiagnostico(rs.getString("DIAGNOSTICO"));
+                visitaVO.setFecha_visita(rs.getDate("FECHA_VISITA"));
+                visitaVO.setEstado(rs.getInt("ESTADO"));
+                visitaVO.setEstado_descripcion(rs.getString("ESTADO_DESCRIPCION"));
+                visitaVO.setReceta(rs.getString("RECETA"));
+                listado.add(visitaVO);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar Visitas");
+        }
+        return listado;
+    }    
+    
     @Override
     public VisitaMedicaVO list(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

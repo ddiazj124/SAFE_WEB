@@ -7,17 +7,22 @@ package Controlador;
 
 import DAO.DAOEvaluacion;
 import DAO.DAOEvaluacionPersonal;
+import DAO.DAOTecnico;
 import Entidades.Evaluacion;
 import Entidades.EvaluacionPersonal;
+import Entidades.Tecnico;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -64,6 +69,7 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
             throws ServletException, IOException {
         
         try{
+             HttpSession session = request.getSession();
             //DATOS DEL FORMULARIO
             /*String titulo = request.getParameter("txtEvaluacion");
             String rut_empresa = request.getParameter("ddlEmpresa");
@@ -88,7 +94,18 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
             String fecha_eval = request.getParameter("txtFecha");
             String descripcion = request.getParameter("txtDescripcion");
             int estado_eval = 1;
-            String rut_tecnico = "16200739-4";
+            
+            //Recuperar Correo del Uusario
+            Usuario u = (Usuario)session.getAttribute("datosUsuarioCorreo");
+            String correo = u.getCorreo_electronico();
+            
+            //Busca el Rut actual del Tecnico 
+            DAOTecnico dao = new DAOTecnico();
+            ArrayList<Tecnico> Ltecnico = dao.TraerTecnico(correo);
+            String rut_tecnico = "";
+            for (Tecnico obj : Ltecnico) {
+                rut_tecnico = obj.getRut_tecnico();
+            }
             String rut_ingeniero = request.getParameter("ddlIngeniero");
             
             Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);

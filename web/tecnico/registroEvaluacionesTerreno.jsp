@@ -3,10 +3,20 @@
     Created on : 21-oct-2018, 21:12:18
     Author     : Diego
 --%>
+<%@page import="Entidades.Usuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %>
 <jsp:include page="../ServMostrarEvalTerreno" flush="true"></jsp:include>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -139,7 +149,7 @@
                         <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                          <input type="text" name="txtFecha" required="true" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
                         </div>
                       </div>
                     </div>
@@ -237,3 +247,13 @@
 </body>
 
 </html>
+
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>

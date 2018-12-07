@@ -6,7 +6,10 @@
 package Controlador;
 
 import DAO.DAOEvaluacion;
+import DAO.DAOTecnico;
 import Entidades.Evaluacion;
+import Entidades.Tecnico;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -38,12 +41,20 @@ public class ServMostrarIngresoPregunta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         
-        //Guardar ID
-        String rut = "16200739-4";
+        //Recuperar Correo del Uusario
+        Usuario u = (Usuario)session.getAttribute("datosUsuarioCorreo");
+        String correo = u.getCorreo_electronico();
+        //Busca el Rut actual del Tecnico 
+        DAOTecnico dao = new DAOTecnico();
+        ArrayList<Tecnico> Ltecnico = dao.TraerTecnico(correo);
+        String rut_tecnico = "";
+        for (Tecnico obj : Ltecnico) {
+            rut_tecnico = obj.getRut_tecnico();
+        }
         
         //Guardar Dato de Nombre Evaluacion
         DAOEvaluacion dev = new DAOEvaluacion();
-        ArrayList<Evaluacion> Listdev = dev.TraerEvaluacionesTecnico(rut);
+        ArrayList<Evaluacion> Listdev = dev.TraerEvaluacionesTecnico(rut_tecnico);
         
         session.setAttribute("datosEvaluacionesA", Listdev);
         response.sendRedirect("./tecnico/registroPregunta.jsp");

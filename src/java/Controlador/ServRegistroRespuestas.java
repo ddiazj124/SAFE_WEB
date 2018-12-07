@@ -36,14 +36,14 @@ public class ServRegistroRespuestas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             int id_eval = Integer.parseInt(request.getParameter("id_ev"));
-
-
+            int num = Integer.parseInt(request.getParameter("num"));
             DAORespuesta dr = new DAORespuesta();
-
-            for (int i = 0; i < 5; i++) {
-                String respuesta = request.getParameter("txtRespuesra"+i);
-                Respuesta r = new Respuesta(0, id_eval, respuesta);
-                dr.Insertar(r);            
+            
+            for (int i = 0; i < num; i++) {
+                String respuesta = request.getParameter("txtRespuesta"+i);
+                int id_pregunta = Integer.parseInt(request.getParameter("idPregunta"+i));
+                Respuesta r = new Respuesta(0, id_pregunta, respuesta);
+                dr.Insertar(r);
             }
             
             dr.update(id_eval);

@@ -54,7 +54,7 @@
         <ul class="nav">
           <li class="nav-item active  ">
             <a class="nav-link" href="./menuTrabajador.jsp">
-              <i class="material-icons">dashboard</i>x
+              <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
@@ -95,7 +95,16 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Exámenes</a>
+            <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                        </td>
+                        <td>
+                            <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                        </td>
+                    </tr>
+                </table>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -124,31 +133,35 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
-            
+          <div class="row" id="imprimir">
+                          <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                <p class="card-title">MIS EXAMENES</p>
 <section>
       <table id="tblCapacitaciones" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
-                        <th bgcolor="#D4E6F1" style="width: 60px;"><b>Observaci&oacute;n</b></th>
-                        <th bgcolor="#D4E6F1" style="width: 70px;"><b>Resultado</b></th>
+                        <th bgcolor="#D4E6F1" class="text-dark" style="width: 150px;"><b>Fecha Visita</b></th>
+                        <th bgcolor="#D4E6F1" class="text-dark" style="width: 200px;"><b>Observaci&oacute;n</b></th>
+                        <th bgcolor="#D4E6F1" class="text-dark" style="width: 200px;"><b>Resultado</b></th>
                     </tr>
                 </thead>
                 <%
                     DAOExamen             dao             = new DAOExamen();
-                    ArrayList<Examen>        list            = dao.TraerTodos();
+                    ArrayList<Examen>        list            = dao.TraerTodosAsc();
                     Iterator<Examen>    iter            = list.iterator();
                     Examen              exa  = null;
                     while (iter.hasNext()) {
                             exa = iter.next();
                 %>
-                
                 <tbody>
                     <tr>
-                        <td class="text-center"><%= exa.getFecha_visita() %></td>
-                        <td class="text-center"><%= exa.getObservacion() %></td>
-                        <td class="text-center"><%= exa.getResultado() %></td>
+                        <td class="text-center text-dark"><%= exa.getFecha_visita() %></td>
+                        <td class="text-center text-dark"><%= exa.getObservacion() %></td>
+                        <td class="text-center text-dark"><%= exa.getResultado() %></td>
                         </td>
                         <%}%>
                     </tr>
@@ -156,22 +169,10 @@
             </table>
     </section>
           </div>        
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <table>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">Excel</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">PDF</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+              </div><!--fin card-->
+          </div>
         </div>
-    </div>
+                    
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -206,6 +207,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -229,6 +231,41 @@
                      window.location.href = uri + base64(format(template, ctx))
                 };
     </script>
+    
+        <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.text(200,50,"EXAMENES REALIZADOS");
+            pdf.text(200,750,"- Empresas SAFE -");
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('MisExamenes.pdf');
+                }, margins
+            );
+        }
+</script>
 </body>
 
 </html>

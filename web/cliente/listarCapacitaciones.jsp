@@ -29,6 +29,7 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
+  
 </head>
 
 <body class="">
@@ -95,8 +96,17 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuCliente.jsp">Inicio</a>
+          <div class="navbar-wrapper">            
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                    </td>
+                    <td>
+                        <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                    </td>
+                </tr>
+            </table>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -125,61 +135,52 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
+          <div class="row" id="imprimir">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                <p class="card-title">CAPACITACIONES</p>
  <section>
       <table id="tblCapacitaciones" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th bgcolor="#D4E6F1" class="text-center">ID</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE CAPACITACIÓN</th>
-                        <th bgcolor="#D4E6F1" class="text-center">FECHA TERMINO</th>
-                        <th bgcolor="#D4E6F1" class="text-center">FECHA INICIO</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE AREA</th>
-                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE PLAN</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">ID</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">NOMBRE CAPACITACIÓN</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">FECHA TERMINO</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">FECHA INICIO</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">NOMBRE AREA</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">NOMBRE PLAN</th>
                     </tr>
                 </thead>
                 <%
                     CapacitacionDAO             dao             = new CapacitacionDAO();
-                    List<CapacitacionVO>        list            = dao.listar();
+                    List<CapacitacionVO>        list            = dao.listarAsc();
                     Iterator<CapacitacionVO>    iter            =list.iterator();
                     CapacitacionVO              capacitacionVO  = null;
                     while (iter.hasNext()) {
-                            capacitacionVO = iter.next();                    
+                            capacitacionVO = iter.next();
                 %>
                 <tbody>
                     <tr>
-                        <td class="text-center"><%= capacitacionVO.getId_capacitacion() %></td>
-                        <td class="text-center"><%= capacitacionVO.getNombre_capacitación() %></td>
-                        <td class="text-center"><%= capacitacionVO.getFecha_termino() %></td>
-                        <td class="text-center"><%= capacitacionVO.getFecha_inicio() %></td>
-                        <td class="text-center"><%= capacitacionVO.getArea() %></td>
-                        <td class="text-center"><%= capacitacionVO.getPlan() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getId_capacitacion() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getNombre_capacitación() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getFecha_termino() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getFecha_inicio() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getArea() %></td>
+                        <td class="text-center text-dark"><%= capacitacionVO.getPlan() %></td>
                         </td>
                         <%}%>
                     </tr>
                 </tbody>
             </table>
-
     </section>
-              
+              </div>
+              </div><!--fin card-->
           </div>
         </div>
-              <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <table>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">Excel</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">PDF</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -214,13 +215,14 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
 
     });
-  </script>    
+  </script>
         <script type="text/javascript">
         function exportTableToExcel() {                
                     var uri = 'data:application/vnd.ms-excel;base64,'
@@ -235,8 +237,43 @@
                      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                      window.location.href = uri + base64(format(template, ctx))
                 };
+                
     </script>
 
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.text(200,50,"CAPACITACIONES REALIZADAS");
+            pdf.text(200,750,"- Empresas SAFE -");
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('Capacitaciones.pdf');
+                }, margins
+            );
+        }
+</script>
 </body>
 
 </html>

@@ -142,25 +142,24 @@
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Registro Atenciones</p>
-                  <h3 class="card-title"><a id="re" href="./listarAtenciones.jsp">Entrar</a>
-                  </h3>
+                  <p class="card-category">Cantidad Atenciones</p>
+                  <h3 class="card-title">2</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="./buscarAtencionMedica.jspjsp"></a>
+                    <a href="buscarAtencionMedica.jspjsp"></a>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
+                <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">store</i>
+                    <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Administrar Atenciones</p>
-                  <h3 class="card-title" href="./buscarAtencionMedica.jsp"><a href="./buscarAtencionMedica.jsp">Entrar</a></h3>
+                  <p class="card-category">Cantidad Examenes</p>
+                  <h3 class="card-title">1</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -168,22 +167,6 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Administrar Examenes</p>
-                  <h3 class="card-title"><a href="./administrarExamenes.jsp">Entra</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            
           </div>
           
       <footer class="footer">

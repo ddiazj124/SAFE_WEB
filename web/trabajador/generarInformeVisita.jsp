@@ -58,7 +58,7 @@
         <ul class="nav">
           <li class="nav-item active  ">
             <a class="nav-link" href="./menuTrabajador.jsp">
-              <i class="material-icons">dashboard</i>x
+              <i class="material-icons">dashboard</i>
               <p>Inicio</p>
             </a>
           </li>
@@ -99,7 +99,16 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Mis Controles M&eacute;dicos</a>
+                <table>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                        </td>
+                        <td>
+                            <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                        </td>
+                    </tr>
+                </table>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -128,17 +137,22 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
-            
+          <div class="row" id="imprimir">
+                                      <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                <p class="card-title">MIS CONTROLES MEDICOS</p>
 <section>
       <table id="tblCapacitaciones" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
-                        <th bgcolor="#D4E6F1" style="width: 60px;"><b>Rut M&eacute;dico</b></th>
-                        <th bgcolor="#D4E6F1" style="width: 70px;"><b>Motivo Consulta</b></th>
-			<th bgcolor="#D4E6F1" style="width: 200px;"><b>Observaciones</b></th>
-			<th bgcolor="#D4E6F1" style="width: 100px;"><b>Receta</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 60px;"><b>Rut M&eacute;dico</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 70px;"><b>Motivo Consulta</b></th>
+			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 200px;"><b>Observaciones</b></th>
+			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 100px;"><b>Receta</b></th>
                     </tr>
                 </thead>
                 <%
@@ -152,34 +166,21 @@
                 
                 <tbody>
                     <tr>
-                        <td class="text-center"><%= visitaMed.getFecha_visita() %></td>
-                        <td class="text-center"><%= visitaMed.getRut_trabajador() %></td>
-                        <td class="text-center"><%= visitaMed.getMotivo_consulta() %></td>
-                        <td class="text-center"><%= visitaMed.getObservaciones() %></td>
-                        <td class="text-center"><%= visitaMed.getReceta() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getFecha_visita() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getRut_trabajador() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getMotivo_consulta() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getObservaciones() %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getReceta() %></td>
                         </td>
                         <%}%>
                     </tr>
                 </tbody>
             </table>
     </section>
-          </div>        
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <table>
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">Excel</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-info btn-lg">PDF</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+          </div>
+              </div><!--fin card-->
+          </div>
         </div>
-    </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -199,7 +200,7 @@
           </div>
         </div>
       </footer>
-    </div>
+    </div><!--fin-->
   </div>
   <!--   Core JS Files   -->
   <script src="../customcss/js/core/jquery.min.js" type="text/javascript"></script>
@@ -214,6 +215,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -236,6 +238,41 @@
                      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                      window.location.href = uri + base64(format(template, ctx))
                 };
+    </script>
+    
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.text(200,50,"CONTROLES MEDICOS REALIZADOS");
+            pdf.text(200,750,"- Empresas SAFE -");
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('MisVisitasMedicas.pdf');
+                }, margins
+            );
+        }
     </script>
 </body>
 

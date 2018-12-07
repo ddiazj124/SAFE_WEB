@@ -3,17 +3,14 @@
     Created on : 22-oct-2018, 11:26:46
     Author     : Diego
 --%>
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entidades.Visita_Med"%>
 <%@page import="Entidades.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../customcss/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -159,16 +156,16 @@
                                 ID
                               </th>
                               <th>
-                                Rut Medico
+                                NOMBRE MEDICO
                               </th>
                               <th>
-                                Rut Trabajador
+                                NOMBRE TRABAJADOR
                               </th>
                               <th>
-                                Motivo Consulta
+                                MOTIVO CONSULTA
                               </th>
                               <th>
-                                Fecha Visita
+                                FECHA VISITA
                               </th>
                               <th>
                                 
@@ -178,8 +175,20 @@
                           <c:forEach items="${ListarVisitasX}" var="atm">
                               <tr>
                               <td>${atm.id_visita}</td>
-                              <td>${atm.rut_medico}</td>
-                              <td>${atm.rut_trabajador}</td>
+                              <td>
+                                  <c:forEach items="${Lmedicos}" var="lm">
+                                        <c:if test="${lm.rut_medico == atm.rut_medico}">
+                                               ${lm.nombre}
+                                    </c:if>
+                                  </c:forEach>
+                              </td>
+                              <td>
+                                  <c:forEach items="${datosTrabajador}" var="t">
+                                <c:if test="${t.rut_trabajador == atm.rut_trabajador}">
+                                            ${t.nombre} ${t.apellido}
+                                </c:if>
+                            </c:forEach>
+                              </td>
                               <td>${atm.motivo_consulta}</td>
                               <td>${atm.fecha_visita}
                               </td>

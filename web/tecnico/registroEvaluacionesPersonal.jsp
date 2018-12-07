@@ -2,13 +2,23 @@
     Document   : registroEvaluacionesPersonal
     Created on : 21-oct-2018, 21:11:56
     Author     : Diego
---%>
+--%><%@page import="Entidades.Usuario"%>
+
 rv
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 4:
+                %>
 <jsp:include page="../ServMostrarRegistroEvaluacionesPersonal" flush="true"></jsp:include>
 <!DOCTYPE html>
 <html lang="es">
@@ -269,3 +279,12 @@ rv
 
 </html>
 
+<%
+                break;
+                default :
+                    response.sendRedirect("../index.jsp");   
+                break;
+            }
+            
+        }
+        %>

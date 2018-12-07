@@ -5,6 +5,14 @@
 --%>
 
 
+<%@page import="Entidades.Evaluacion"%>
+<%@page import="DAO.DAOEvaluacion"%>
+<%@page import="Entidades.EvaluacionTerreno"%>
+<%@page import="DAO.DAOEvaluacionTerreno"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="VO.CapacitacionVO"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.CapacitacionDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +33,7 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
+  
 </head>
 
 <body class="">
@@ -91,8 +100,17 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuCliente.jsp">Inicio</a>
+          <div class="navbar-wrapper">            
+            <table>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                    </td>
+                    <td>
+                        <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                    </td>
+                </tr>
+            </table>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -121,57 +139,52 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="row" id="imprimir">
               <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Visualizar Visitas</p>
-                  <h3 class="card-title"><a id="re" href="./listarAtenciones.jsp">Entrar</a>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="./registroAtenciones.jsp"></a>
-                  </div>
-                </div>
+                <p class="card-title">EVALUACIONES</p>
+ <section>
+      <table id="tblCapacitaciones" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">ID</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">T&Iacute;TULO</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">FECHA</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">DESCRIPCI&Oacute;N</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">RUT T&Eacute;CNICO</th>
+                        <th bgcolor="#D4E6F1" class="text-center text-dark">RUT INGENIERO</th>
+                    </tr>
+                </thead>
+                <%
+                    DAOEvaluacion             dao             = new DAOEvaluacion();
+                    List<Evaluacion>        list            = dao.TraerEvaluacionesTecnico("1-9");
+                    Iterator<Evaluacion>    iter            = list.iterator();
+                    Evaluacion              evaluacion  = null;
+                    while (iter.hasNext()) {
+                            evaluacion = iter.next();
+                %>
+                <tbody>
+                    <tr>
+                        <td class="text-center text-dark"><%= evaluacion.getId_ev() %></td>
+                        <td class="text-center text-dark"><%= evaluacion.getTitulo() %></td>
+                        <td class="text-center text-dark"><%= evaluacion.getFecha_eval() %></td>
+                        <td class="text-center text-dark"><%= evaluacion.getDescripcion() %></td>
+                        <td class="text-center text-dark"><%= evaluacion.getRut_tecnico() %></td>
+                        <td class="text-center text-dark"><%= evaluacion.getRut_ingeniero() %></td>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Visualizar Evaluaciones</p>
-                  <h3 class="card-title" href="./listarEvaluaciones.jsp"><a href="./listarEvaluaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Visualizar Capacitaciones</p>
-                  <h3 class="card-title"><a href="./listarCapacitaciones.jsp">Entrar</a></h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+              </div><!--fin card-->
           </div>
-          
+        </div>
+
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -206,6 +219,7 @@
   <script src="../customcss/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../customcss/demo/demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
@@ -213,7 +227,57 @@
 
     });
   </script>
+        <script type="text/javascript">
+        function exportTableToExcel() {                
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+
+                    var table = 'tblReporte';
+                    var name = 'nombre_hoja_calculo';
+
+                    if (!table.nodeType) table = document.getElementById('tblCapacitaciones')
+                     var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                     window.location.href = uri + base64(format(template, ctx))
+                };
+                
+    </script>
+
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.text(200,50,"CAPACITACIONES REALIZADAS");
+            pdf.text(200,750,"- Empresas SAFE -");
+            source = $('#imprimir')[0];
+
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+            };
+        
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+
+            pdf.fromHTML(
+                source, 
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, 
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    pdf.save('Capacitaciones.pdf');
+                }, margins
+            );
+        }
+</script>
 </body>
 
 </html>
-
