@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,6 +29,40 @@
 </head>
 
 <body class="">
+            <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        String nombreUsuario = u.getNombre_usuario();
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+    %>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
@@ -86,7 +121,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuTrabajador.jsp">Inicio - Trabajador</a>
+            <p><% out.println("Bienvenido "+nombreUsuario);%></p>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -207,6 +242,11 @@
 
     });
   </script>
+                          <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>
