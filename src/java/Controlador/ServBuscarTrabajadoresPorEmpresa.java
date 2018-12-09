@@ -27,38 +27,35 @@ import javax.servlet.http.HttpSession;
  *
  * @author Diego
  */
-@WebServlet(name = "ServBuscarEvaluacion", urlPatterns = {"/ServBuscarEvaluacion"})
-public class ServBuscarEvaluacion extends HttpServlet {
+@WebServlet(name = "ServBuscarTrabajadoresPorEmpresa", urlPatterns = {"/ServBuscarTrabajadoresPorEmpresa"})
+public class ServBuscarTrabajadoresPorEmpresa extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         PrintWriter out = response.getWriter();
-        List<EvaluacionLiteVO> ListaEvaluacionLite = new ArrayList();
+        List<TrabajadoresLiteVO> TrabajadoresLiteVO = new ArrayList();
         
-        String idEmpresaCmb = request.getParameter("idEmpresaCmb");
-        String idEmpresaCmbX = idEmpresaCmb;
-        HttpSession session = request.getSession();        
-        String tmp = "";
+        String idCapacitacionCmb = request.getParameter("idCapacitacionCmb");
+        
+        HttpSession session = request.getSession(); 
         
         try{
             EvaluacionDAO dao = new EvaluacionDAO();
             EvaluacionLiteVO eva = new EvaluacionLiteVO();
            
-            ListaEvaluacionLite = dao.listLite(idEmpresaCmb);
+            ListaTrabajadoresLite = dao.listLite(idCapacitacionCmb);
             String salida = "";
-            String id = "";
-            String titulo = "";
-            request.setAttribute("listaEva", ListaEvaluacionLite);
-            for (EvaluacionLiteVO evaluacionLiteVO : ListaEvaluacionLite) {
-                salida = "<option value=" + String.valueOf(evaluacionLiteVO.getId()) + "> "
-                        + evaluacionLiteVO.getTitulo()+ "</option>";
-                //salida2 = evaluacionLiteVO.getTitulo();
+           
+            request.setAttribute("ListaTrabajadoresLite", ListaTrabajadoresLite);
+            for (TrabajadoresLiteVO tra : ListaTrabajadoresLite) {
+                salida = salida + "<option value=" + String.valueOf(tra.getRut()) + "> "
+                        + tra.getNombre()+ " " + tra.getApellido() + "</option>" + "</br>";                
             }
             
-            session.setAttribute("ListaEvaluacionLite", ListaEvaluacionLite);
-            session.setAttribute("idEmpresaCmbX", idEmpresaCmbX);
+            //session.setAttribute("ListaEvaluacionLite", ListaEvaluacionLite);
+            //session.setAttribute("idEmpresaCmbX", idEmpresaCmbX);
             out.println(salida);
             //response.sendRedirect("./medico/administrarAtenciones.jsp");
         }catch(Exception e)

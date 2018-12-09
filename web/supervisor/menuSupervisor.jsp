@@ -32,8 +32,7 @@
                 </div>
               
                 <span class="logout-spn" >
-                  <a href="#" style="color:#fff;">CERRAR</a>  
-
+                    <a href="../index.jsp" style="color:#fff;">CERRAR</a> 
                 </span>
             </div>
         </div>

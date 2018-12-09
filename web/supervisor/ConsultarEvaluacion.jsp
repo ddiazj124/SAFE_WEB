@@ -157,26 +157,15 @@
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3>Seleccione Evaluación Finalizada</h3>
+                <h3>Seleccione Evaluación</h3>
                 <br>
                 <div class="form-group">
                     <label class="control-label">Evaluación</label>
                     <select id="idEvaluacion" name="idEvaluacion" class="form-control form-control-lg">
-                        <option value="-1">Seleccione</option>
-                        <%
-                            List<EvaluacionLiteVO> lista   = (List<EvaluacionLiteVO>)request.getAttribute("listaEva");
-                            Iterator<EvaluacionLiteVO> ite = lista.iterator();
-                            
-                            while(ite.hasNext()){
-                                    EvaluacionLiteVO eva = ite.next();
-                        %>
-                        <tr>
-                        <option value=" <%= eva.getId() %> "><%= eva.getTitulo()%></option>                           
-                        </tr>
-                       <%}%>
+                        <option value="-1">Seleccione</option>                        
                     </select>
                 </div>
-                <button disabled="true" id="siguiente1" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+                <button disabled="true" id="siguiente2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
     </div>
@@ -187,15 +176,8 @@
                 <a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>
                 <div id="toPDF">
                     <h3>Resultado Evaluación</h3>                
-                    <br>
-                    Estimado Supervisor,
-                    <br>
-                    el resultado de la evaluación: &nbsp;<input size="40" maxlength="40" readonly="true" style="border: white" type="text" id="capacitacionSeleccionada" />&nbsp;,
-                    <br>
-                    es:
-                    <br> 
-                    <textarea rows="10" cols="100" id="trabajadoresLista2" readonly="true">                                    
-                    </textarea>
+                    </br>
+                    <textarea id="evaBusqueda" class="form-control" rows="20" ></textarea>
                 </div>
             </div>
         </div>
@@ -214,12 +196,14 @@
             
             var idEmpresaCmb          = $('#idEmpresa').val();
             
-            $.post('../ServBuscarEvaluacion', {
+            $.post('../ServBuscarEvaluacionPorEmpresa', {
                  idEmpresaCmb     : idEmpresaCmb
-            }, function(data) {
-                //alert(responseText);--trae la data
+            }, function(data) {                
+                document.getElementById('idEvaluacion').innerHTML = "";
+                document.getElementById('idEvaluacion').innerHTML = 
+                        "<option value=\'-1\'>Seleccione</option>" + data;
                 
-        });
+            });
        }       
     }); 
     
@@ -231,46 +215,39 @@
           $('#siguiente2').attr('disabled', false);
           //document.getElementById('siguiente1').disabled = "false"; 
        }       
-    });  
-    
-    /*    
-    $('#siguiente1').click(function(){         
-        var capacitacionSeleccionada = $('select[name="idcapacitacion"] option:selected').text();
-        document.getElementById('capacitacionSeleccionada').value = capacitacionSeleccionada;
-        consultarAsistencia();     
-    });      
-    */   
-    
-    function consultarAsistencia() {                    
-        var idcapacitacion          = $('#idcapacitacion').val();
-        //alert("idcapacitacion: " + idcapacitacion );  
-        $.post('../ServBuscarAsistencia', {
-                 idcapacitacion     : idcapacitacion
-            }, function(responseText) {
-                        
-            //alert(responseText);
-            document.getElementById('trabajadoresLista1').value = responseText;  
-            document.getElementById('trabajadoresLista2').value = responseText;
-        });
-    };
+    }); 
+        
+    $('#siguiente2').click(function(){         
+        var idEvaluacion          = $('#idEvaluacion').val();
+        console.log('## idEvaluacion: ' + idEvaluacion);
+        
+        $.post('../ServBuscarEvaluacionPorId', {
+             idEvaluacion     : idEvaluacion
+        }, function(data) { 
+            console.log(data);
+            document.getElementById('evaBusqueda').innerHTML = "";
+            document.getElementById('evaBusqueda').innerHTML = data;
+
+        });     
+    }); 
     
     function genPDF() {
         var doc = new jsPDF();
-        var lista = document.getElementById('trabajadoresLista1').value;
+        //var lista = document.getElementById('trabajadoresLista1').value;
         
         doc.setFontSize(22);
-        doc.text(45, 20, 'Lista de Asistencia');
+        doc.text(45, 20, 'Consulta de Evaluación:');
 
-        doc.setFontSize(16);
-        doc.text(45, 30, 'Capacitación: ' + document.getElementById('capacitacionSeleccionada').value);
-        
         doc.setFontSize(10);
-        doc.text(20, 50, lista);  
+        doc.text(20, 40, document.getElementById('evaBusqueda').value);
+        
+        //doc.setFontSize(10);
+        //doc.text(20, 50, lista);  
         
         var imgData = '../customcss/img/LOGO.png';
         doc.addImage(imgData, 'JPEG', 20, 10, 20, 20);
         
-        doc.save('Lista_Asistencia.pdf');
+        doc.save('Consulta_Evaluacion.pdf');
     };
     
     function pageLoad() {                    
