@@ -38,6 +38,40 @@
 </head>
 
 <body class="">
+            <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        String nombreUsuario = u.getNombre_usuario();
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+    %>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
@@ -106,6 +140,7 @@
                     </tr>
                 </table>
           </div>
+            <p><% out.println("Bienvenido "+nombreUsuario);%></p>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -266,6 +301,11 @@
             );
         }
 </script>
+                        <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>

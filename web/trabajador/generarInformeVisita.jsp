@@ -42,6 +42,40 @@
 </head>
 
 <body class="">
+            <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        String nombreUsuario = u.getNombre_usuario();
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+    %>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
@@ -110,6 +144,7 @@
                     </tr>
                 </table>
           </div>
+            <p><% out.println("Bienvenido "+nombreUsuario);%></p>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -149,7 +184,7 @@
                 <thead>
                     <tr>
                         <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 80px;"><b>Fecha Visita</b></th>
-                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 60px;"><b>Rut M&eacute;dico</b></th>
+                        <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 60px;"><b>M&eacute;dico</b></th>
                         <th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 70px;"><b>Motivo Consulta</b></th>
 			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 200px;"><b>Observaciones</b></th>
 			<th class="text-center text-dark" bgcolor="#D4E6F1" style="width: 100px;"><b>Receta</b></th>
@@ -157,17 +192,25 @@
                 </thead>
                 <%
                     DAOVisita_Med             dao             = new DAOVisita_Med();
-                    ArrayList<Visita_Med>        list            = dao.TraerTodos();
+                    ArrayList<Visita_Med>        list            = dao.TraerTodosAsc();
                     Iterator<Visita_Med>    iter            =list.iterator();
                     Visita_Med              visitaMed  = null;
+                    
+                    String fecha = new String();
+                    
+                    
                     while (iter.hasNext()) {
                             visitaMed = iter.next();
+                            
+                        fecha = visitaMed.getFecha_visita();
+                        String[] partes = fecha.split(" ");
+                        fecha = partes[0];
                 %>
                 
                 <tbody>
                     <tr>
-                        <td class="text-center text-dark"><%= visitaMed.getFecha_visita() %></td>
-                        <td class="text-center text-dark"><%= visitaMed.getRut_trabajador() %></td>
+                        <td class="text-center text-dark"><%= fecha %></td>
+                        <td class="text-center text-dark"><%= visitaMed.getRut_medico() %></td>
                         <td class="text-center text-dark"><%= visitaMed.getMotivo_consulta() %></td>
                         <td class="text-center text-dark"><%= visitaMed.getObservaciones() %></td>
                         <td class="text-center text-dark"><%= visitaMed.getReceta() %></td>
@@ -274,6 +317,11 @@
             );
         }
     </script>
+                            <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>

@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Entidades.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="VO.CapacitacionVO"%>
 <%@page import="java.util.List"%>
@@ -33,6 +34,40 @@
 </head>
 
 <body class="">
+        <%
+        HttpSession z = request.getSession(true);
+        Usuario u = (Usuario)z.getAttribute("datosUsuario");
+        String nombreUsuario = u.getNombre_usuario();
+        if(u==null){
+            response.sendRedirect("../index.jsp");
+        }else{
+            switch(u.getId_perfil()){
+                case 1:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 7:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 3:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 4:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 5:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 6:
+                    response.sendRedirect("../index.jsp");   
+                break;
+                
+                case 2:
+    %>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
@@ -62,25 +97,25 @@
           <li class="nav-item ">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
+              <p>Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Examenes</p>
+              <p>Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./listarEvaluaciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Evaluaciones En Terreno</p>
+              <p>Evaluaciones En Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./listarCapacitaciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Capacitaciones</p>
+              <p>Capacitaciones</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -96,18 +131,19 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
-          <div class="navbar-wrapper">            
+          <div class="navbar-wrapper">
             <table>
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-info btn-lg" onClick="exportTableToExcel()">Excel</button>
+                        <button type="button" class="btn btn-info btn-mg" onClick="exportTableToExcel()">Excel</button>
                     </td>
                     <td>
-                        <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-lg">PDF</a>
+                        <a href="javascript:pruebaDivAPdf()" class="btn btn-info btn-mg">PDF</a>
                     </td>
                 </tr>
             </table>
           </div>
+            <p><% out.println("Bienvenido "+nombreUsuario);%></p>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -274,6 +310,11 @@
             );
         }
 </script>
+                    <%
+                break;
+            }
+        }
+        %>
 </body>
 
 </html>

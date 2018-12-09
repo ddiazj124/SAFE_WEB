@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,6 +29,12 @@
 </head>
 
 <body class="">
+<%         
+    HttpSession z = request.getSession(true);
+    Usuario u = (Usuario)z.getAttribute("datosUsuario");
+    String nombreUsuario = u.getNombre_usuario();
+
+%>
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./customcss/img/sidebar-1.jpg">
       <!--
@@ -57,19 +64,19 @@
           <li class="nav-item ">
             <a class="nav-link" href="./listarAtenciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Atenciones Medicas</p>
+              <p>Atenciones Medicas</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Examenes</p>
+              <p>Examenes</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./listarEvaluaciones.jsp">
               <i class="material-icons">content_paste</i>
-              <p>Visualizar Evaluaciones En Terreno</p>
+              <p>Evaluaciones En Terreno</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -91,9 +98,7 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="./menuCliente.jsp">Inicio</a>
-          </div>
+          <p><% out.println("Bienvenido "+nombreUsuario);%></p>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -213,6 +218,7 @@
 
     });
   </script>
+
 </body>
 
 </html>
