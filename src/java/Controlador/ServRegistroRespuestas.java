@@ -41,8 +41,9 @@ public class ServRegistroRespuestas extends HttpServlet {
             
             for (int i = 0; i < num; i++) {
                 String respuesta = request.getParameter("txtRespuesta"+i);
+                String respuesta1 = ConvertidorUTF.convertFromUTF8(respuesta);
                 int id_pregunta = Integer.parseInt(request.getParameter("idPregunta"+i));
-                Respuesta r = new Respuesta(0, id_pregunta, respuesta);
+                Respuesta r = new Respuesta(0, id_pregunta, respuesta1);
                 dr.Insertar(r);
             }
             

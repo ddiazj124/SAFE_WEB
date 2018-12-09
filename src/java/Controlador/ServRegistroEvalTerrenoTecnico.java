@@ -53,6 +53,10 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             String descripcion = request.getParameter("txtDescripcion");
             int estado_eval = 1;
             
+            //Convertidor
+            String titulo1 = ConvertidorUTF.convertFromUTF8(titulo);
+            String descripcion1 = ConvertidorUTF.convertFromUTF8(descripcion);
+            
             //Recuperar Correo del Uusario
             Usuario u = (Usuario)session.getAttribute("datosUsuarioCorreo");
             String correo = u.getCorreo_electronico();
@@ -66,7 +70,7 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             }
             String rut_ingeniero = request.getParameter("ddlIngeniero");
             
-            Evaluacion ev = new Evaluacion(id_eval, titulo, rut_empresa, fecha_eval, descripcion, estado_eval,rut_tecnico,rut_ingeniero);
+            Evaluacion ev = new Evaluacion(id_eval, titulo1, rut_empresa, fecha_eval, descripcion1, estado_eval,rut_tecnico,rut_ingeniero);
             DAOEvaluacion dev = new DAOEvaluacion();
             dev.Insertar(ev);
             
@@ -75,7 +79,10 @@ public class ServRegistroEvalTerrenoTecnico extends HttpServlet {
             int id_tipo = 1;
             id_eval = dev.TraerMaximo();
             
-            EvaluacionTerreno et = new EvaluacionTerreno(0, descripcion, id_tipo, id_eval);
+            //Convertidor
+            String descripcion_Terreno1 = ConvertidorUTF.convertFromUTF8(descripcion_Terreno);
+            
+            EvaluacionTerreno et = new EvaluacionTerreno(0, descripcion_Terreno1, id_tipo, id_eval);
             DAOEvaluacionTerreno det = new DAOEvaluacionTerreno();
             
             det.Insertar(et);
