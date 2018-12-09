@@ -145,7 +145,7 @@
                         <div class="form-group row">
                           <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Médico</label>
                             <div class="col-sm-10">                            
-                                <select id="rutMedico" class="form-control form-control-lg">
+                                <select id="rutMedico" class="form-control form-control-lg">                                      
                                 <%
                                     MedicoDAO           daoMedico    = new MedicoDAO();
                                     List<MedicoVO>      listMedico   = daoMedico.listar();
@@ -225,7 +225,7 @@
                         <div class="form-group row">
                           <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Médico</label>
                             <div class="col-sm-10">                            
-                                <select id="rutMedicoEditar" class="form-control form-control-lg">
+                                <select id="rutMedicoEditar" class="form-control form-control-lg">                                    
                                 <%
                                     MedicoDAO           daoMedico2    = new MedicoDAO();
                                     List<MedicoVO>      listMedico2   = daoMedico2.listar();
@@ -386,7 +386,7 @@
                 </div>
               </div>
             </div>
-            
+             
             <script type="text/javascript">
                 //SETIAMOS EL MODAL DE EDICION 
                 var table = document.getElementById('tblVisitasMedicas'),rIndex;
@@ -418,6 +418,22 @@
                 }; 
                 //FIN
                 
+                $('#rutMedico').change(function() {
+                    //validar por web service
+                    var rutMedico         = $('#rutMedico').val();
+                    $.post('../ServVerificarMedico', {
+                             rutMedico        : rutMedico
+                    }, function(data) {
+                        //alert('data: ' + data);
+                        if(data = 'CERTIFICADO'){
+                            alert('doctor Certificado');
+                        }
+                        else if(data = 'NO_CERTIFICADO'){
+                            alert('doctor no Certificado');                           
+                        }
+                    });
+                });
+                
                 function editarVisitaMedica() {
                     var idVisitaMedicaEditar    = $('#idVisitaMedicaEditar').val();
                     var rutMedicoEditar         = $('#rutMedicoEditar').val();
@@ -439,11 +455,11 @@
                     });
                 };
                 
-                function agregarVisitaMedica() {   
-                    var rutMedico         = $('#rutMedico').val();
-                    var rutTrabajador     = $('#rutTrabajador').val();
-                    var motivoConsulta    = $('#motivoConsulta').val();
-                    var fechaVisita       = $('#fechaVisita').val();
+                function agregarVisitaMedica() {  
+                    var rutMedico       = $('#rutMedico').val();
+                    var rutTrabajador   = $('#rutTrabajador').val();
+                    var motivoConsulta  = $('#motivoConsulta').val();
+                    var fechaVisita     = $('#fechaVisita').val();
 
                     $.post('../ServAgregarVisitaMedica', {
                              rutMedico        : rutMedico
@@ -452,10 +468,7 @@
                             ,fechaVisita      : fechaVisita
                     }, function(responseText) {
                         location.reload();
-                        //alert(responseText); 
-                        //$('#modCapacitacionModificada2').style.display = "block";                       
-                            //$('#tabla').html(responseText);
-                    });
+                    });                    
                 };
                 
                 function eliminarVisitaMedica() {                     
@@ -512,7 +525,8 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery-latest.js" type="text/javascript"></script>   
         <!-- FIN -->
-    
+        
+        
          
 </body>
 
