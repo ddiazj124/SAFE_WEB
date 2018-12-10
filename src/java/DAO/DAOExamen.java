@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class DAOExamen {
  
     private static String sql_selectAll = "SELECT * FROM EXAMEN";
+    private static String sql_insert = "INSERT INTO EXAMEN(id_examen,observacion,resultado,fecha_visita,id_visita) VALUES(S_EXAMEN.nextval,?,?,?,?)";
     private static String sql_selectAllAsc = "SELECT * FROM EXAMEN order by id_examen";
     private static String sql_buscarExamen = "SELECT * FROM EXAMEN WHERE ID_EXAMEN = ?";
     private static String TraerTodoExamenX = "SELECT E.* FROM EXAMEN E INNER JOIN VISITA_MED VM ON VM.ID_VISITA = E.ID_VISITA INNER JOIN MEDICO M ON M.RUT_MEDICO = VM.RUT_MEDICO WHERE M.RUT_MEDICO = ?";
@@ -36,11 +37,12 @@ public class DAOExamen {
         try {
             PreparedStatement ps;
             
-            ps = objConn.getConn().prepareStatement(sql_insertarProcedimiento);
-            ps.setString(1, e.getResultado());
-            ps.setString(2, e.getObservacion());
-            ps.setInt(3, e.getId_visita());
-            ps.setString(4, e.getFecha_visita());
+            ps = objConn.getConn().prepareStatement(sql_insert);
+            
+            ps.setString(1, e.getObservacion());
+            ps.setString(2, e.getResultado());
+            ps.setString(3, e.getFecha_visita());
+            ps.setInt(4, e.getId_visita());
             
             if(ps.executeUpdate()>0){
                 return true;

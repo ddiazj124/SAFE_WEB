@@ -28,7 +28,6 @@
   
 </head>
 <body class="">
-    <jsp:include page="../SevLogin" flush="true"></jsp:include>
         <%
         HttpSession z = request.getSession(true);
         Usuario u = (Usuario)z.getAttribute("datosUsuario");

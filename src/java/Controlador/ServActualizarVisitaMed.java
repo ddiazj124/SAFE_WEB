@@ -78,11 +78,13 @@ public class ServActualizarVisitaMed extends HttpServlet {
             vism.ActualizarVisitaMedX(visi);
             if(Integer.parseInt(estado) == 2){
                 Entidades.Email em = new Entidades.Email();
-                String texto = "Se ha confirmado la visita medica número: 1."
-                        + " Para mayor información revisar en la pagina web el panel de administración."
+                String texto = "Se ha confirmado la visita medica número: 1.\n"
+                        + "Para mayor información revisar en la pagina web el panel de administración.\n"
                         + "Saluda atte. Safe.";
                 Email.enviarConGMail(correo, "Confirmación visita medica número: "+ id_visita, texto);
                 Email.enviarConGMail("se.calquin@alumnos.duoc.cl", "Confirmación visita medica número: "+id_visita, texto);
+                Email.enviarConGMail("diego.safe.supervisor@gmail.com", "Confirmación visita medica número: "+id_visita, texto);
+ 
             }
                 
             

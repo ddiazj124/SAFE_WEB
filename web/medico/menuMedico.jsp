@@ -92,6 +92,12 @@
               <p>Lista de Examenes</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarExamenMed.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Examen</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>

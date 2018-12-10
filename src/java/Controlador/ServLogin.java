@@ -152,7 +152,7 @@ public class ServLogin extends HttpServlet {
                         ArrayList<Examen> Lexam = daoExam.TraerExamenMedXRut(med.getRut_medico());
                         ArrayList<Trabajador> ListTrab = t.TraerTodos();
                         
-                        session.setAttribute("datosTrabajador", ListTrab);
+                        //session.setAttribute("datosTrabajador", ListTrab);
                         session.setAttribute("Lmedicos", Lmedicos);
                         session.setAttribute("ListarVisitasX", Listvis);
                         session.setAttribute("ListarExamX", Lexam);
