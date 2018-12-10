@@ -5,9 +5,6 @@
  */
 package Controlador;
 
-import DAO.DAOVisita_Med;
-import Entidades.Email;
-import Entidades.Visita_Med;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Sebastian
  */
-@WebServlet(name = "ServActualizarVisitaMed", urlPatterns = {"/ServActualizarVisitaMed"})
-public class ServActualizarVisitaMed extends HttpServlet {
+@WebServlet(name = "ServInsertarExamenMed", urlPatterns = {"/ServInsertarExamenMed"})
+public class ServInsertarExamenMed extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,6 +44,7 @@ public class ServActualizarVisitaMed extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
     }
 
     /**
@@ -61,36 +59,6 @@ public class ServActualizarVisitaMed extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String id_visita = request.getParameter("txtId");
-        id_visita = id_visita.trim();
-        String estado = request.getParameter("cmbEstado");
-        String correo = request.getParameter("txtcorreo");
-        //String id_visita = request.getParameter("txtId");
-        String motivo_consulta = request.getParameter("txtMotivoConsulta");
-        String observaciones = request.getParameter("txtObservaciones");
-        String diagnostico = request.getParameter("txtDiagnostico");
-        String receta = request.getParameter("txtReceta");
-        
-        try {
-            DAOVisita_Med vism = new DAOVisita_Med();
-            int otroid = Integer.parseInt(id_visita);
-            Visita_Med visi = new Visita_Med(otroid, motivo_consulta, observaciones, diagnostico, Integer.parseInt(estado), receta);
-            vism.ActualizarVisitaMedX(visi);
-            if(Integer.parseInt(estado) == 2){
-                Entidades.Email em = new Entidades.Email();
-                String texto = "Se ha confirmado la visita medica número: 1."
-                        + " Para mayor información revisar en la pagina web el panel de administración."
-                        + "Saluda atte. Safe.";
-                Email.enviarConGMail(correo, "Confirmación visita medica número: "+ id_visita, texto);
-                Email.enviarConGMail("se.calquin@alumnos.duoc.cl", "Confirmación visita medica número: "+id_visita, texto);
-            }
-                
-            
-            
-            response.sendRedirect("medico/listarAtenciones.jsp");
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
         
     }
 

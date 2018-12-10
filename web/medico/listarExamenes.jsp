@@ -92,6 +92,12 @@
               <p>Lista de Examenes</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarExamenMed.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Examen</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
@@ -182,7 +188,7 @@
                               <td>
                                   <form action="../SevEditarExamen" method="POST">
                                       <input class="btn btn-primary" type="submit" value="Editar"/>
-                                      <input type="hidden"name="btnidVisita" id="btnidVisita" value="${exam.id_examen}"/>
+                                      <input type="hidden" name="btnidVisita" id="btnidVisita" value="${exam.id_examen}"/>
                                   </form>
                               </td>
                               </tr>

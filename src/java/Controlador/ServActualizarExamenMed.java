@@ -59,16 +59,17 @@ public class ServActualizarExamenMed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String id = request.getParameter("txtID");
+        id = id.trim();
         String observacion = request.getParameter("txtObservacion");
         String resultado = request.getParameter("txtResultado");
         
         try {
             DAOExamen exam = new DAOExamen();
+            int idexa = Integer.parseInt(id);
             
             
-            
-            Examen e = new Examen(1, observacion, resultado);
+            Examen e = new Examen(idexa, observacion, resultado);
             DAOExamen dao = new DAOExamen();
         
             dao.ActualizarExamenMedX(e);

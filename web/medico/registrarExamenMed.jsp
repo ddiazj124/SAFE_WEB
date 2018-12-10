@@ -3,7 +3,7 @@
     Created on : 30-11-2018, 14:08:46
     Author     : Sebastian
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Entidades.Examen"%>
 <%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -28,6 +28,7 @@
   
 </head>
 <body class="">
+    <jsp:include page="../SevLogin" flush="true"></jsp:include>
         <%
         HttpSession z = request.getSession(true);
         Usuario u = (Usuario)z.getAttribute("datosUsuario");
@@ -89,13 +90,13 @@
               <p>Lista Atenciones Medicas</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="listarExamenes.jsp">
               <i class="material-icons">content_paste</i>
               <p>Lista de Examenes</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="registrarExamenMed.jsp">
               <i class="material-icons">content_paste</i>
               <p>Registrar Examen</p>
@@ -150,31 +151,27 @@
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title">Administrar Examen</h4>
-                  <p class="card-category"><%out.print(u.getNombre_usuario().toUpperCase() + ", acá podrás editar los examenes medicos."); %></p>
+                  <p class="card-category"><%out.print(u.getNombre_usuario().toUpperCase() + ", acá podrás crear un examen medico."); %></p>
                 </div>
                 <div class="card-body">
-                    <%if(examen != null){%>
-                    <form action="../ServActualizarExamenMed" method="POST">
+                    <form action="../ServInsertarExamenMed" method="POST">
                     <div class="row">
                     </div>    
                     <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">NÚMERO DE EXAMEN</label>
-                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_examen());%>"/>
-                          <input type="hidden" name="txtID" id="txtID" value="<%out.println(examen.getId_examen());%>"/>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
                           <label class="bmd-label-floating">NÚMERO DE VISITA ASOCIADA</label>
-                          <input type="text" class="form-control" disabled value="<%out.println(examen.getId_visita());%>"/>
+                          <select class="form-control" name="cmbVisitaMed">
+                              <c:forEach items="${ListarVisitasX}" var="vm">
+                                <option value="${vm.id_visita}">${vm.id_visita}</option>
+                            </c:forEach>
+                          </select>
                         </div>
                       </div>  
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">FECHA DE LA VISITA</label>
-                          <input type="text" name="txtFecha" id="txtFecha" class="form-control" disabled value="<%out.println(examen.getFecha_visita());%>"/>
+                          <input type="date" name="txtFecha" id="txtFecha" class="form-control"/>
                         </div>
                       </div>
                     </div>
@@ -182,7 +179,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label class="bmd-label-floating">OBSERVACION</label>
-                              <textarea class="form-control" rows="4" cols="50" id="txtObservacion" name="txtObservacion" required><%out.println(examen.getObservacion());%></textarea>
+                              <textarea class="form-control" rows="4" cols="50" id="txtObservacion" name="txtObservacion" required ></textarea>
                             </div>
                         </div>
                     </div>    
@@ -190,22 +187,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label class="bmd-label-floating">RESULTADO</label>
-                              <textarea class="form-control" rows="4" cols="50" id="txtResultado" name="txtResultado" required><%out.println(examen.getResultado());%></textarea>
+                              <textarea class="form-control" rows="4" cols="50" id="txtResultado" name="txtResultado" required ></textarea>
                             </div>
                         </div>
                     </div>      
-                    <button type="submit" class="btn btn-primary pull-right">Actualizar Examen Medico</button>
+                    <button type="submit" class="btn btn-primary pull-right">Registrar Examen Medico</button>
                     <div class="clearfix"></div>
                   </form>
-                  <%}else{%>
-                    <div class="alert alert-danger">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <i class="material-icons">close</i>
-                                </button>
-                                <span>
-                            <b> Advertencia - </b> No has seleccionado ningúna visita medica!</span>
-                    </div>
-                  <%}%>
                 </div>
               </div>
             </div>
