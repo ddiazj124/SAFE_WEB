@@ -23,6 +23,15 @@ public class Examen {
         this.id_examen = id_examen;
     }
 
+    public Examen(String observacion, String resultado, String fecha_visita, int id_visita) {
+        this.observacion = observacion;
+        this.resultado = resultado;
+        this.fecha_visita = fecha_visita;
+        this.id_visita = id_visita;
+    }
+    
+    
+
     public Examen(int id_examen, String observacion, String resultado) {
         this.id_examen = id_examen;
         this.observacion = observacion;

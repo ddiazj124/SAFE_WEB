@@ -5,6 +5,8 @@
  */
 package Controlador;
 
+import DAO.DAOExamen;
+import Entidades.Examen;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -58,6 +60,28 @@ public class ServInsertarExamenMed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String idexamen = request.getParameter("cmbVisitaMed");
+        idexamen = idexamen.trim();
+        
+        String fechaVisita = request.getParameter("txtFecha");
+        String observacion = request.getParameter("txtObservacion");
+        String resultado = request.getParameter("txtResultado");
+        
+        
+        try {
+            int id = Integer.parseInt(idexamen);
+            
+            DAOExamen dao = new DAOExamen();
+            
+            Examen ex = new Examen(observacion, resultado, fechaVisita, id);
+            
+            dao.Insertar(ex);
+            
+            response.sendRedirect("medico/registrarExamenMed.jsp");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         
         
     }
