@@ -25,6 +25,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../customcss/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -39,6 +40,16 @@
   <link href="../customcss/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../customcss/demo/demo.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 </head>
 
 <body class="">
@@ -149,7 +160,7 @@
                         <div class="col-md-5">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fecha</label>
-                          <input type="text" name="txtFecha" required="true" class="form-control" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>">
+                          <input type="date" name="txtFecha" required="true" value="<%out.println(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));%>" id="datepicker">
                         </div>
                       </div>
                     </div>
@@ -173,6 +184,7 @@
                         </div>
                       </div>
                     </div>
+                        
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">

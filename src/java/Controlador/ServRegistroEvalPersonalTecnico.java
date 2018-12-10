@@ -91,7 +91,11 @@ public class ServRegistroEvalPersonalTecnico extends HttpServlet {
             String titulo = request.getParameter("txtTitulo");
             String rut_empresa = request.getParameter("ddlEmpresa");
             String rut_trabajador = request.getParameter("ddlTrabajador");
-            String fecha_eval = request.getParameter("txtFecha");
+            String fecha_eval1 = request.getParameter("txtFecha");
+            String ano = fecha_eval1.substring(0,4);
+            String mes = fecha_eval1.substring(5,7);
+            String dia = fecha_eval1.substring(8,10);
+            String fecha_eval = dia+"/"+mes+"/"+ano;
             String descripcion = request.getParameter("txtDescripcion");
             int estado_eval = 1;
             
