@@ -5,8 +5,6 @@
  */
 package Controlador;
 
-import DAO.DAORespuesta;
-import Entidades.Respuesta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Diego
+ * @author Sebastian
  */
-@WebServlet(name = "ServRegistroRespuestas", urlPatterns = {"/ServRegistroRespuestas"})
-public class ServRegistroRespuestas extends HttpServlet {
+@WebServlet(name = "ServInsertarExamenMed", urlPatterns = {"/ServInsertarExamenMed"})
+public class ServInsertarExamenMed extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,30 +29,7 @@ public class ServRegistroRespuestas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try{
-            int id_eval = Integer.parseInt(request.getParameter("id_ev"));
-            int num = Integer.parseInt(request.getParameter("num"));
-            DAORespuesta dr = new DAORespuesta();
-            
-            for (int i = 0; i < num; i++) {
-                String respuesta = request.getParameter("txtRespuesta"+i);
-                String respuesta1 = ConvertidorUTF.convertFromUTF8(respuesta);
-                int id_pregunta = Integer.parseInt(request.getParameter("idPregunta"+i));
-                Respuesta r = new Respuesta(0, id_pregunta, respuesta1);
-                dr.Insertar(r);
-            }
-            
-            dr.update(id_eval);
-            response.sendRedirect("./tecnico/registroExitoso.jsp");
-        }catch(Exception e)
-        {
-            response.sendRedirect("./tecnico/registroFallidoT.jsp");
-        }
-        
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -68,7 +43,8 @@ public class ServRegistroRespuestas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
     }
 
     /**
@@ -82,7 +58,8 @@ public class ServRegistroRespuestas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
     }
 
     /**

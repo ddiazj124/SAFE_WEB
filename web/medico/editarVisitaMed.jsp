@@ -95,6 +95,12 @@
               <p>Lista de Examenes</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarExamenMed.jsp">
+              <i class="material-icons">content_paste</i>
+              <p>Registrar Examen</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="../index.jsp">
               <i class="material-icons">content_paste</i>
@@ -166,7 +172,8 @@
                         <div class="form-group">
                           <label class="bmd-label-floating">ID</label>
                           <input type="text" name="txtVisitaMedID" id="txtVisitaMedID" class="form-control" disabled value="<% out.print(visita.getId_visita());%>"/>
-                          <input type="hidden" name="txtId" id="txtId" value="<% out.print(visita.getId_visita());%>"/>
+                          <input type="hidden" name="txtId" id="txtId" value="<%out.println(visita.getId_visita());%>"/>
+                           
                         </div>
                       </div>
                       <div class="col-md-3">
@@ -221,7 +228,9 @@
                               <textarea class="form-control" rows="4" cols="50" id="" id="txtReceta" name="txtReceta" required><%out.println(visita.getReceta());%></textarea>
                             </div>
                         </div>
-                    </div>   
+                    </div>
+                    <input type="hidden" name="txtcorreo" id="txtcorreo" value="${u.correo_electronico}"/>
+                    
                     <button type="submit" class="btn btn-primary pull-right">Actualizar Visita Medica</button>
                     <div class="clearfix"></div>
                   </form>

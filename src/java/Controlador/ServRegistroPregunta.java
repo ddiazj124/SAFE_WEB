@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package Controlador;
-
 import DAO.DAOPregunta;
 import Entidades.Pregunta;
+import com.itextpdf.text.pdf.ByteBuffer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,10 +38,12 @@ public class ServRegistroPregunta extends HttpServlet {
             
             //Evaluacion;
             int id_eval = Integer.parseInt(request.getParameter("ddlEvaluacion"));
+            
             String pregunta = request.getParameter("txtPregunta");
+            String pregunta1 = ConvertidorUTF.convertFromUTF8(pregunta);
             int ponderacion = 1;
             
-            Pregunta pr = new Pregunta(0,id_eval,pregunta,ponderacion);
+            Pregunta pr = new Pregunta(0,id_eval,pregunta1,ponderacion);
             DAOPregunta pre = new DAOPregunta();
             pre.Insertar(pr);
             
@@ -53,6 +55,7 @@ public class ServRegistroPregunta extends HttpServlet {
         }
     }
 
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

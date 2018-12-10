@@ -37,14 +37,14 @@ public class ServResponderPreguntas extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String respuesta = request.getParameter("txtRespuesta");
-            
+            String respuesta1 = ConvertidorUTF.convertFromUTF8(respuesta);
             //FECHA
             //String fecha_eval = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
             
             //DAO
             DAORespuesta dao = new DAORespuesta();            
             //Recuperar con sesion el valor de la evaluacion
-            Respuesta resp = new Respuesta(0,23,respuesta);
+            Respuesta resp = new Respuesta(0,23,respuesta1);
             
             //Repetir n cantidad de veces
             dao.Insertar(resp);

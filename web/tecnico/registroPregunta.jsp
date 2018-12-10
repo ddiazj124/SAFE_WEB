@@ -12,7 +12,7 @@
 <html lang="es">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
   <link rel="apple-touch-icon" sizes="76x76" href="../customcss/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../customcss/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
