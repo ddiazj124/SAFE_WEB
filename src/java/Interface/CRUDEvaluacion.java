@@ -22,4 +22,9 @@ public interface CRUDEvaluacion {
     
     public int getEvaPer(int id);
     public int getEvaTer(int id);
+    
+    public List<EvaluacionLiteVO> listLiteProcesadaPersona(String rutEmpresa);
+    public List<EvaluacionLiteVO> listLiteProcesadaTerreno(String rutEmpresa);    
+    
+    public boolean finalizarEvaluacion(int id);
 }

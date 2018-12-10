@@ -1,4 +1,3 @@
-<%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 ﻿﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,11 +14,7 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
-<body> 
-    <%
-        HttpSession z = request.getSession(true);
-        Usuario u = (Usuario)z.getAttribute("datosUsuario");
-    %>    
+<body>      
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -37,8 +32,7 @@
                 </div>
               
                 <span class="logout-spn" >
-                  <a href="#" style="color:#fff;">CERRAR</a>  
-
+                    <a href="../index.jsp" style="color:#fff;">CERRAR</a> 
                 </span>
             </div>
         </div>
@@ -47,21 +41,21 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">                 
                     <li>
-                        <a href="CompletarEvaluacionesEnTerreno.jsp"><i class="fa fa-table "></i>Completar Evaluaciones en Terreno<span class="badge"></span></a>
+                        <a href="EvaluacionesTerrenoIng.jsp"><i class="fa fa-table "></i>Evaluciones en Terreno<span class="badge"></span></a>
                     </li>
                     <li>
-                        <a href="CompletarEvaluacionesAPersonas.jsp"><i class="fa fa-edit "></i>Completar Evaluaciones a Personas<span class="badge"></span></a>
+                        <a href="EvaluacionesPersonasIng.jsp"><i class="fa fa-edit "></i>Evaluaciones de Personas<span class="badge"></span></a>
                     </li>                    
                 </ul>
             </div>
+
         </nav>
-        
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>Ingeniero: <%out.println(u.getNombre_usuario());%></h2>   
+                     <h2>Ingeniero</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -73,22 +67,22 @@
                 
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="CompletarEvaluacionesEnTerreno.jsp" >
+                           <a href="EvaluacionesTerrenoIng.jsp" >
                         <i class="fa fa-comments-o fa-5x"></i>
-                      <h4>Completar Evaluaciones en Terreno</h4>
+                      <h4>Evaluaciones en Terreno</h4>
                       </a>
                       </div>
                 </div> 
-                
+                  
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="CompletarEvaluacionesAPersonas.jsp" >
+                           <a href="EvaluacionesPersonasIng.jsp" >
                         <i class="fa fa-user fa-5x"></i>
-                      <h4>Completar Evaluaciones a Personas</h4>
+                      <h4>Evaluaciones de Personas</h4>
                       </a>
                       </div>
-                </div>
-                
+                </div>        
+               
             </div> 
                   
     </div>
@@ -96,7 +90,7 @@
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
-    <div class="footer"> 
+    <div class="footer">
       
     
             <div class="row">

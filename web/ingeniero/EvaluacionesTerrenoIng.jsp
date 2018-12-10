@@ -20,7 +20,7 @@
     
 <head>
     <meta charset="utf-8" />    
-    <title>COMPLETAR EVALUACIONES</title>     
+    <title>CONSULTA DE EVALUACIÓN EN TERRENO</title>     
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -94,11 +94,7 @@
     </style> 
 </head>
 
-<body >
-    <%
-        HttpSession z = request.getSession(true);
-        Usuario u = (Usuario)z.getAttribute("datosUsuario");
-    %> 
+<body >     
     <div class="preloader" id="wait">
         <img src="img/loading.gif" width="80" height="80" alt="" style="position: fixed; top: 50%; left: 50%; " />
     </div>
@@ -107,18 +103,13 @@
             <button id="btnMenu"
                   type="submit" 
                   class="btn btn-lg"                                
-                  href="menuSupervisor.jsp"
+                  href="menuIngeniero.jsp"
                   >
                   Menú
-          </button>  
-       </a> 
+          </button> 
+       </a>      
         <div class="container" >
-            <h3>Ingeniero: <%out.println(u.getNombre_usuario());%>
-            </h3>
-        </div>     
-            
-        <div class="container" >
-            <h1>Completar Evaluaciones en Terreno</h1>    
+            <h1>Consulta de Evaluación en Terreno Procesada</h1>    
             
     <div class="container">
 <div class="stepwizard">
@@ -133,16 +124,12 @@
         </div>
         <div class="stepwizard-step">
             <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-            <p>Trabajadores</p>
+            <p>Información</p>
         </div>
         <div class="stepwizard-step">
             <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-            <p>Observaciones</p>
-        </div>
-        <div class="stepwizard-step">
-            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-            <p>Resúmen</p>
-        </div>
+            <p>Observación</p>
+        </div>        
     </div>
 </div>
 <form id="formAsistencia" role="form">
@@ -156,8 +143,11 @@
                     <select id="idEmpresa" name="idEmpresa" class="form-control form-control-lg">
                         <option value="-1">Seleccione</option>
                         <%
+                                HttpSession z = request.getSession(true);
+                                Usuario u = (Usuario)z.getAttribute("datosUsuario");
+                                
                                 EmpresaDAO                  dao     = new EmpresaDAO();
-                                List<EmpresaVO>             list    = dao.listar();
+                                List<EmpresaVO>             list    = dao.empresasEvalTerrenoPorUsuario(u.getNombre_usuario());
                                 Iterator<EmpresaVO>         iter    = list.iterator();
                                 EmpresaVO                   vo      = null;
                                 while (iter.hasNext()) {
@@ -171,7 +161,7 @@
             </div>
         </div>
     </div>    
-    
+   
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12">
@@ -187,53 +177,32 @@
             </div>
         </div>
     </div>
-                    
+                     
     <div class="row setup-content" id="step-3">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3>Trabajadores</h3>
-                <br>
-                <div class="form-group">
-                    <select id="idTrabajadores" name="idTrabajadores" class="form-control form-control-lg">
-                        <option value="-1">Seleccione</option>                        
-                    </select>
-                </div>
-                <button disabled="true" id="siguiente3" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+                <div id="toPDF">
+                    <h3>Información Evaluación</h3>                
+                    </br>
+                    <textarea style="border-color: transparent" readonly="true" id="evaBusqueda" class="form-control" rows="12" ></textarea>
+                </div
+                </br></br>
+                <button id="siguiente3" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
     </div>
-                   
+                    
     <div class="row setup-content" id="step-4">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3>Observaciones</h3>
-                <br>
-                <div class="form-group">
-                    <select id="idObservaciones" name="idObservaciones" class="form-control form-control-lg">
-                        <option value="-1">Seleccione</option>                        
-                    </select>
-                </div>
-                <button disabled="true" id="siguiente4" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-        </div>
-    </div>
-                     
-    <div class="row setup-content" id="step-5">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>
+                <!--<a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>-->
                 <div id="toPDF">
-                    <h3>Resultado Evaluación</h3>                
-                    <br>
-                    Estimado Supervisor,
-                    <br>
-                    el resultado de la evaluación: &nbsp;<input size="40" maxlength="40" readonly="true" style="border: white" type="text" id="capacitacionSeleccionada" />&nbsp;,
-                    <br>
-                    es:
-                    <br> 
-                    <textarea rows="10" cols="100" id="trabajadoresLista2" readonly="true">                                    
-                    </textarea>
+                    <h3>Agregar Observación</h3>                
+                    </br>
+                    <textarea style="background-color: #efebe9" id="observacion" class="form-control" rows="10" ></textarea>
                 </div>
+                </br>
+                <button id="finalizar" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Finalizar</button>
             </div>
         </div>
     </div>
@@ -249,72 +218,82 @@
         if(idEmpresaSelect !== -1){  
             $('#siguiente1').attr('disabled', false);
             
-            var idEmpresaCmb          = $('#idEmpresa').val();
+            var idEmpresaCmb = $('#idEmpresa').val();
             
-            $.post('../ServBuscarEvaluacion_rutEmpresa_rutIngeniero', {
+            $.post('../ServBuscarEvaTerrenoProcesadasPorEmpresa', {
                  idEmpresaCmb     : idEmpresaCmb
-                 //rut_ingeniero : rut_ingeniero
-            }, function(data) {
-                //document.getElementById('idEvaluacion').innerHTML = data;
+            }, function(data) {                
+                document.getElementById('idEvaluacion').innerHTML = "";
+                document.getElementById('idEvaluacion').innerHTML = 
+                        "<option value=\'-1\'>Seleccione</option>" + data;
+                
             });
        }       
     }); 
     
     $('#idEvaluacion').change(function(){
-       var idEvaluacion = document.getElementById('idEvaluacion');;
+       var idEvaluacion = document.getElementById('idEvaluacion');
        var idEvaluacionSelect = idEvaluacion.options[idEvaluacion.selectedIndex].value;
                      
        if(idEvaluacionSelect !== -1){  
           $('#siguiente2').attr('disabled', false);
-          
-          var idCapacitacionCmb = $('#idEvaluacion').val();
-          //alert(idCapacitacionCmb);
-          $.post('../ServBuscarTrabajadoresPorEmpresa', {
-                 idCapacitacionCmb     : idCapacitacionCmb
-            }, function(data) {
-                document.getElementById('idTrabajadores').innerHTML = data;
-            });
+          //document.getElementById('siguiente1').disabled = "false"; 
        }       
-    });  
+    }); 
+        
+    $('#siguiente2').click(function(){         
+        var idEvaluacion          = $('#idEvaluacion').val();
+        //console.log('## idEvaluacion: ' + idEvaluacion);
+        
+        $.post('../ServBuscarEvaluacionPorId', {
+             idEvaluacion     : idEvaluacion
+        }, function(data) { 
+            //console.log(data);
+            document.getElementById('evaBusqueda').innerHTML = "";
+            document.getElementById('evaBusqueda').innerHTML = data;
+
+        });     
+    });
     
-    /*    
-    $('#siguiente1').click(function(){         
-        var capacitacionSeleccionada = $('select[name="idcapacitacion"] option:selected').text();
-        document.getElementById('capacitacionSeleccionada').value = capacitacionSeleccionada;
-        consultarAsistencia();     
-    });      
-    */   
-    
-    function consultarAsistencia() {                    
-        var idcapacitacion          = $('#idcapacitacion').val();
-        //alert("idcapacitacion: " + idcapacitacion );  
-        $.post('../ServBuscarAsistencia', {
-                 idcapacitacion     : idcapacitacion
-            }, function(responseText) {
-                        
-            //alert(responseText);
-            document.getElementById('trabajadoresLista1').value = responseText;  
-            document.getElementById('trabajadoresLista2').value = responseText;
-        });
-    };
+    $('#finalizar').click(function(){         
+        var observacion     = document.getElementById('observacion').value;
+        var idEvaluacion    = $('#idEvaluacion').val();
+        console.log('## observacion: ' + observacion + "\n" 
+                    + "## idEvaluacion: " + idEvaluacion);
+        
+        $.post('../ServGrabarObservacion', {
+             observacion    : observacion,
+             idEvaluacion   : idEvaluacion
+        }, function(data) {
+            alert('Evaluación finalizada!');  
+            genPDF();
+            location.reload();
+        }); 
+    });
     
     function genPDF() {
         var doc = new jsPDF();
-        var lista = document.getElementById('trabajadoresLista1').value;
+        //var lista = document.getElementById('trabajadoresLista1').value;
         
         doc.setFontSize(22);
-        doc.text(45, 20, 'Lista de Asistencia');
-
-        doc.setFontSize(16);
-        doc.text(45, 30, 'Capacitación: ' + document.getElementById('capacitacionSeleccionada').value);
+        doc.text(45, 20, 'Evaluación Finalizada :');
+        
+        doc.setFontSize(12);
+        doc.text(20, 40, "OBSERVACION:");
         
         doc.setFontSize(10);
-        doc.text(20, 50, lista);  
+        doc.text(20, 50, document.getElementById('observacion').value);
+        
+        doc.setFontSize(10);
+        doc.text(20, 90, document.getElementById('evaBusqueda').value);
+        
+        //doc.setFontSize(10);
+        //doc.text(20, 50, lista);  
         
         var imgData = '../customcss/img/LOGO.png';
         doc.addImage(imgData, 'JPEG', 20, 10, 20, 20);
         
-        doc.save('Lista_Asistencia.pdf');
+        doc.save('Consulta_Evaluacion.pdf');
     };
     
     function pageLoad() {                    

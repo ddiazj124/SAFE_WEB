@@ -222,6 +222,82 @@ public class EvaluacionDAO implements CRUDEvaluacion{
         }
         return salida;
     }
+
+    @Override
+    public List<EvaluacionLiteVO> listLiteProcesadaPersona(String rutEmpresa) {
+        PreparedStatement pst;
+        List<EvaluacionLiteVO> listado = new ArrayList();
+        String sql =    " SELECT " +
+                        "    EVA.ID_EV   AS ID_EV " +
+                        "  , EVA.TITULO  AS TITULO " +
+                        " FROM EVALUACION EVA  " +
+                        " INNER JOIN EVAL_PERS PER ON EVA.ID_EV = PER.ID_EVALUACION " +
+                        " WHERE EVA.RUT_EMPRESA = ? " +
+                        " AND EVA.EVALUACION_ESTADO_ID = 2 " +
+                        " ORDER BY EVA.ID_EV DESC ";
+        try {
+            pst = objConn.getConn().prepareStatement(sql);
+            pst.setString(1, rutEmpresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                EvaluacionLiteVO vo = new EvaluacionLiteVO();
+                vo.setId(rs.getInt("ID_EV"));
+                vo.setTitulo(rs.getString("TITULO"));                
+                listado.add(vo);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar Evaluaciones procesadas");
+        }
+        return listado;
+    }
+
+    @Override
+    public boolean finalizarEvaluacion(int id) {
+        PreparedStatement pst;
+        String sql =    " UPDATE EVALUACION " +
+                        " SET EVALUACION_ESTADO_ID = 3 " +
+                        " WHERE ID_EV = ? ";
+        try {
+            pst = objConn.getConn().prepareStatement(sql);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println("error al actualizar evaluación");
+        }
+        return true;
+    }
+
+    @Override
+    public List<EvaluacionLiteVO> listLiteProcesadaTerreno(String rutEmpresa) {
+        PreparedStatement pst;
+        List<EvaluacionLiteVO> listado = new ArrayList();
+        String sql =    " SELECT " +
+                        "    EVA.ID_EV   AS ID_EV " +
+                        "  , EVA.TITULO  AS TITULO " +
+                        " FROM EVALUACION EVA  " +
+                        " INNER JOIN EVAL_TERRENO TER ON EVA.ID_EV = TER.ID_EVALUACION " +
+                        " WHERE EVA.RUT_EMPRESA = ? " +
+                        " AND EVA.EVALUACION_ESTADO_ID = 2 " +
+                        " ORDER BY EVA.ID_EV DESC ";
+        try {
+            pst = objConn.getConn().prepareStatement(sql);
+            pst.setString(1, rutEmpresa);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                EvaluacionLiteVO vo = new EvaluacionLiteVO();
+                vo.setId(rs.getInt("ID_EV"));
+                vo.setTitulo(rs.getString("TITULO"));                
+                listado.add(vo);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar Evaluaciones en Terreno procesadas");
+        }
+        return listado;
+    }
       
     
 }

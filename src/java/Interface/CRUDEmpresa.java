@@ -11,4 +11,8 @@ public interface CRUDEmpresa {
     public boolean edit(EmpresaVO emp);
     public boolean delete(int id);
     
+    public List<EmpresaVO> empresasEvalPersonaPorUsuario(String usuario);
+    public List<EmpresaVO> empresasEvalTerrenoPorUsuario(String usuario);
+    
+    
 }

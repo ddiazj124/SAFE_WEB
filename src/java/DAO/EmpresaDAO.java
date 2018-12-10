@@ -67,5 +67,63 @@ public class EmpresaDAO implements CRUDEmpresa{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<EmpresaVO> empresasEvalPersonaPorUsuario(String usuario) {
+        List<EmpresaVO> listado = new ArrayList();
+        String sql =    " SELECT " +
+                        "  EVA.RUT_EMPRESA  AS RUT_EMPRESA" +
+                        " ,EMP.RAZON_SOCIAL AS RAZON_SOCIAL" +
+                        " FROM EVALUACION EVA " +
+                        " INNER JOIN EVAL_PERS PER ON EVA.ID_EV = PER.ID_EVALUACION " +
+                        " INNER JOIN INGENIERO ING ON EVA.RUT_INGENIERO = ING.RUT_INGENIERO " +
+                        " INNER JOIN EMPRESA   EMP ON EVA.RUT_EMPRESA   = EMP.RUT_EMPRESA " +
+                        " WHERE ING.NOMBRE_USUARIO = ?";
+        try {
+            con = cn.getConn();
+            ps  = con.prepareStatement(sql);
+            ps.setString(1, usuario);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                EmpresaVO vo = new EmpresaVO();
+                vo.setRut_empresa(rs.getString("RUT_EMPRESA"));
+                vo.setRazon_social(rs.getString("RAZON_SOCIAL"));
+                listado.add(vo);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar las Empresas por usuario");
+        }
+        return listado;
+    }
+
+    @Override
+    public List<EmpresaVO> empresasEvalTerrenoPorUsuario(String usuario) {
+        List<EmpresaVO> listado = new ArrayList();
+        String sql =    " SELECT " +
+                        "  EVA.RUT_EMPRESA  AS RUT_EMPRESA" +
+                        " ,EMP.RAZON_SOCIAL AS RAZON_SOCIAL" +
+                        " FROM EVALUACION EVA " +
+                        " INNER JOIN EVAL_TERRENO TER ON EVA.ID_EV         = TER.ID_EVALUACION " +
+                        " INNER JOIN INGENIERO    ING ON EVA.RUT_INGENIERO = ING.RUT_INGENIERO " +
+                        " INNER JOIN EMPRESA      EMP ON EVA.RUT_EMPRESA   = EMP.RUT_EMPRESA " +
+                        " WHERE ING.NOMBRE_USUARIO = ?";
+        try {
+            con = cn.getConn();
+            ps  = con.prepareStatement(sql);
+            ps.setString(1, usuario);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                EmpresaVO vo = new EmpresaVO();
+                vo.setRut_empresa(rs.getString("RUT_EMPRESA"));
+                vo.setRazon_social(rs.getString("RAZON_SOCIAL"));
+                listado.add(vo);
+            }
+            return listado;
+        } catch (Exception e) {
+            System.out.println("error al listar las Empresas por usuario");
+        }
+        return listado;
+    }
+
     
 }
