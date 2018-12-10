@@ -78,6 +78,7 @@
                     <tr>
                         <th bgcolor="#D4E6F1" class="text-center">ID</th>
                         <th bgcolor="#D4E6F1" class="text-center">RUT MEDICO</th>
+                        <th bgcolor="#D4E6F1" class="text-center">NOMBRE MEDICO</th>
                         <th bgcolor="#D4E6F1" class="text-center">RUT TRABAJADOR</th>
                         <th bgcolor="#D4E6F1" class="text-center">MOTIVO CONSULTA</th>
                         <!--<th bgcolor="#D4E6F1" class="text-center">OBSERVACIONES</th>-->
@@ -101,6 +102,7 @@
                     <tr>
                         <td class="text-center"><%= visitaMedicaVO.getId_visita()%></td>
                         <td class="text-center"><%= visitaMedicaVO.getRut_medico()%></td>
+                        <td class="text-center"><%= visitaMedicaVO.getNombre_medico()%></td>
                         <td class="text-center"><%= visitaMedicaVO.getRut_trabajador() %></td>
                         <td class="text-center"><%= visitaMedicaVO.getMotivo_consulta()%></td>
                         <!--<td class="text-center"><%= visitaMedicaVO.getObservaciones() %></td>-->
@@ -160,7 +162,7 @@
                             </div> 
                         </div>
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Trabajador</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Trabajador</label>
                             <div class="col-sm-10">                            
                                 <select id="rutTrabajador" class="form-control form-control-lg">
                                 <%
@@ -171,7 +173,10 @@
                                     while (iterTrabajador.hasNext()) {
                                             trabajador = iterTrabajador.next();                           
                                 %>  
-                                    <option value="<%= trabajador.getRut_trabajador() %>" ><%= trabajador.getRut_trabajador() %></option>
+                                    <option value="<%= trabajador.getRut_trabajador() %>" >
+                                        <%= trabajador.getRut_trabajador() %>
+                                         - <%= trabajador.getNombre() %> <%= trabajador.getApellido() %>
+                                    </option>
                                 <%}%>
                                 </select>                            
                             </div> 
@@ -234,13 +239,16 @@
                                     while (iterMedico2.hasNext()) {
                                             medicoVO2 = iterMedico2.next();                           
                                 %>  
-                                    <option vaue="<%= medicoVO2.getRut_medico() %>" ><%= medicoVO2.getRut_medico() %></option>
+                                    <option vaue="<%= medicoVO2.getRut_medico() %>" >
+                                        <%= medicoVO2.getRut_medico() %>
+                                                                                
+                                    </option>
                                 <%}%>
                                 </select>                            
                             </div> 
                         </div>
                         <div class="form-group row">
-                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Rut Trabajador</label>
+                          <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg" >Trabajador</label>
                             <div class="col-sm-10">                            
                                 <select id="rutTrabajadorEditar" class="form-control form-control-lg">
                                 <%
@@ -251,7 +259,10 @@
                                     while (iterTrabajador2.hasNext()) {
                                             trabajador2 = iterTrabajador2.next();                           
                                 %>  
-                                    <option value="<%=  trabajador2.getRut_trabajador() %>"><%= trabajador2.getRut_trabajador() %></option>
+                                    <option value="<%=  trabajador2.getRut_trabajador() %>">
+                                        <%= trabajador2.getRut_trabajador() %>
+                                         - <%= trabajador2.getNombre() %> <%= trabajador2.getApellido() %>                                         
+                                    </option>
                                 <%}%>
                                 </select>                            
                             </div> 
@@ -394,10 +405,10 @@
                     table.rows[i].onclick = function(){
                         rIndex = this.rowIndex; 
                         document.getElementById('idVisitaMedicaEditar').value       = this.cells[0].innerHTML;
-                        document.getElementById('rutMedicoEditar').selectedIndex    = this.cells[1].innerHTML;
-                        document.getElementById('rutTrabajadorEditar').value        = this.cells[2].innerHTML;
-                        document.getElementById('motivoConsultaEditar').value       = this.cells[3].innerHTML;
-                        document.getElementById('fechaVisitaEditar').value          = this.cells[4].innerHTML;
+                        document.getElementById('rutMedicoEditar').value            = this.cells[1].innerHTML;
+                        document.getElementById('rutTrabajadorEditar').value        = this.cells[3].innerHTML;
+                        document.getElementById('motivoConsultaEditar').value       = this.cells[4].innerHTML;
+                        document.getElementById('fechaVisitaEditar').value          = this.cells[5].innerHTML;
                     };
                 }
                 //FIN
@@ -447,7 +458,7 @@
                             ,rutTrabajadorEditar    : rutTrabajadorEditar
                             ,motivoConsultaEditar   : motivoConsultaEditar
                             ,fechaVisitaEditar      : fechaVisitaEditar
-                    }, function(responseText) {
+                    }, function(responseText) {                        
                         location.reload();
                         //alert(responseText); 
                         //$('#modCapacitacionModificada2').style.display = "block";                       
@@ -459,7 +470,7 @@
                     var rutMedico       = $('#rutMedico').val();
                     var rutTrabajador   = $('#rutTrabajador').val();
                     var motivoConsulta  = $('#motivoConsulta').val();
-                    var fechaVisita     = $('#fechaVisita').val();
+                    var fechaVisita     = $('#fechaVisita').val();                    
 
                     $.post('../ServAgregarVisitaMedica', {
                              rutMedico        : rutMedico
@@ -467,6 +478,7 @@
                             ,motivoConsulta   : motivoConsulta
                             ,fechaVisita      : fechaVisita
                     }, function(responseText) {
+                        alert('Email enviado al doctor exitosamente!');
                         location.reload();
                     });                    
                 };

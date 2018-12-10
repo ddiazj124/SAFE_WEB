@@ -1,10 +1,11 @@
 package Controlador;
 
-import DAO.EmailDAO;
-import DAO.MedicoDAO;
-import DAO.VisitaMedicaDAO;
-import Entidades.Email;
-import VO.VisitaMedicaVO;
+import DAO.AsistenciaDAO;
+import DAO.CapacitacionDAO;
+import DAO.PlanAnualEmpresaDAO;
+import VO.AsistenciaVO;
+import VO.CapacitacionVO;
+import VO.PlanAnualEmpresaVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ServAgregarVisitaMedica", urlPatterns = {"/ServAgregarVisitaMedica"})
-public class ServAgregarVisitaMedica extends HttpServlet {
+@WebServlet(name = "ServGrabarPlanAnualEmpresa", urlPatterns = {"/ServGrabarPlanAnualEmpresa"})
+public class ServGrabarPlanAnualEmpresa extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,35 +56,20 @@ public class ServAgregarVisitaMedica extends HttpServlet {
         PrintWriter out = response.getWriter();
         Boolean salida = false;
         
-        String rutMedico        = request.getParameter("rutMedico");
-        String rutTrabajador    = request.getParameter("rutTrabajador");
-        String motivoConsulta   = request.getParameter("motivoConsulta");
-        String fechaVisita      = request.getParameter("fechaVisita");
+        String Empresa      = request.getParameter("Empresa");
+        String Plan         = request.getParameter("Plan");
+        String Capacitacion = request.getParameter("Capacitacion");
                          
         try{             
-            VisitaMedicaDAO dao = new VisitaMedicaDAO();
-            VisitaMedicaVO  vo  = new VisitaMedicaVO();
-            
-            vo.setRut_medico(rutMedico);
-            vo.setRut_trabajador(rutTrabajador);
-            vo.setMotivo_consulta(motivoConsulta);
-            vo.setFecha_visita(Date.valueOf(fechaVisita));
+            PlanAnualEmpresaDAO dao = new PlanAnualEmpresaDAO();            
+            PlanAnualEmpresaVO  vo          = new PlanAnualEmpresaVO();            
+            /*
+            vo.setRut_empresa(Integer.parseInt(idcapacitacion));
+            vo.setId_plan_anual(Date.valueOf(fechaAsistencia));
+            vo.setId_capacitacion(lugar);
             
             salida = dao.add(vo);           
-            
-            EmailDAO emailDao = new EmailDAO();
-            //String asunto, String cuerpo, String destinatario            
-            String asunto       = "VISITA MEDICA AGENDADA" ;
-            String cuerpo       = "DATOS VISITA MÉDICA: " + "\n" + "\n" +
-                                  "RUT MEDICO: " + rutMedico + "\n" +
-                                  "MOTIVO CONSULTA: " + motivoConsulta + "\n" +
-                                  "FECHA VISITA: " + fechaVisita + "\n" +
-                                  "RUT TRABAJADOR: " + rutTrabajador;
-            MedicoDAO medicoDao = new MedicoDAO();
-            String destinatario = "";
-            destinatario = medicoDao.getCorreoPorRut(rutMedico);            
-            
-            emailDao.enviarConGMail(asunto, cuerpo, destinatario);
+            */
             //HttpSession session = request.getSession();
             
             //session.setAttribute("capacitacionEdit", vo);            

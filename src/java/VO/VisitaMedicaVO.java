@@ -5,7 +5,9 @@ import java.sql.Date;
 public class VisitaMedicaVO {
 private int     id_visita;
 private String  rut_medico;
+private String  nombre_medico;
 private String  rut_trabajador;
+private String  nombre_trabajador;
 private String  motivo_consulta;
 private String  observaciones;
 private String  diagnostico;
@@ -17,11 +19,15 @@ private String  receta;
     public VisitaMedicaVO() {
     }
 
-    public VisitaMedicaVO(int id_visita, String rut_medico, String rut_trabajador, String motivo_consulta, String observaciones
-                            , String diagnostico, Date fecha_visita, int estado,String estado_descripcion, String receta) {
+    public VisitaMedicaVO(int id_visita, String rut_medico, String  nombre_medico,String rut_trabajador, 
+                            String nombre_trabajador ,String motivo_consulta, String observaciones
+                            , String diagnostico, Date fecha_visita, int estado,String estado_descripcion, 
+                            String receta) {
         this.id_visita          = id_visita;
         this.rut_medico         = rut_medico;
+        this.nombre_medico      = nombre_medico;
         this.rut_trabajador     = rut_trabajador;
+        this.nombre_trabajador  = nombre_trabajador;
         this.motivo_consulta    = motivo_consulta;
         this.observaciones      = observaciones;
         this.diagnostico        = diagnostico;
@@ -110,6 +116,18 @@ private String  receta;
     public void setReceta(String receta) {
         this.receta = receta;
     }
+public String getNombre_medico() {
+        return nombre_medico;
+    }
 
-    
+    public void setNombre_medico(String nombre_medico) {
+        this.nombre_medico = nombre_medico;
+    }
+    public String getNombre_trabajador() {
+        return nombre_trabajador;
+    }
+
+    public void setNombre_trabajador(String nombre_trabajador) {
+        this.nombre_trabajador = nombre_trabajador;
+    }
 }

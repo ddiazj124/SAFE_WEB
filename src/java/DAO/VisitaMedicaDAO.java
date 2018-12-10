@@ -21,19 +21,22 @@ public class VisitaMedicaDAO implements CRUDVisitaMedica{
         PreparedStatement ps;
         List<VisitaMedicaVO> listado = new ArrayList();
         String sql =    " SELECT " +
-                        "      VM.ID_VISITA       AS ID_VISITA " +
-                        "    , VM.RUT_MEDICO      AS RUT_MEDICO " +
-                        "    , VM.RUT_TRABAJADOR  AS RUT_TRABAJADOR " +
-                        "    , VM.MOTIVO_CONSULTA AS MOTIVO_CONSULTA " +
-                        "    , VM.OBSERVACIONES   AS OBSERVACIONES " +
-                        "    , VM.DIAGNOSTICO     AS DIAGNOSTICO " +
-                        "    , VM.FECHA_VISITA    AS FECHA_VISITA " +
-                        "    , VM.ESTADO          AS ESTADO " +
-                        "    , VE.DESCRIPCION     AS ESTADO_DESCRIPCION " +
-                        "    , VM.RECETA          AS RECETA " +
+                        "      VM.ID_VISITA                     AS ID_VISITA " +
+                        "    , VM.RUT_MEDICO                    AS RUT_MEDICO " +
+                        "    , MED.NOMBRE||' '||MED.APELLIDO    AS NOMBRE_MEDICO " +
+                        "    , VM.RUT_TRABAJADOR                AS RUT_TRABAJADOR " +
+                        "    , TRA.NOMBRE||' '||TRA.APELLIDO    AS NOMBRE_TRABAJADOR " +
+                        "    , VM.MOTIVO_CONSULTA               AS MOTIVO_CONSULTA " +
+                        "    , VM.OBSERVACIONES                 AS OBSERVACIONES " +
+                        "    , VM.DIAGNOSTICO                   AS DIAGNOSTICO " +
+                        "    , VM.FECHA_VISITA                  AS FECHA_VISITA " +
+                        "    , VM.ESTADO                        AS ESTADO " +
+                        "    , VE.DESCRIPCION                   AS ESTADO_DESCRIPCION " +
+                        "    , VM.RECETA                        AS RECETA " +
                         " FROM        VISITA_MED          VM " +
-                        " INNER JOIN  VISITA_MED_ESTADO   VE " +
-                        " ON VM.ESTADO = VE.ID " +
+                        " INNER JOIN  VISITA_MED_ESTADO   VE  ON VM.ESTADO        = VE.ID " +
+                        " INNER JOIN  MEDICO              MED ON VM.RUT_MEDICO     = MED.RUT_MEDICO " +
+                        " INNER JOIN  TRABAJADOR          TRA ON VM.RUT_TRABAJADOR = TRA.RUT_TRABAJADOR " +
                         " ORDER BY ID_VISITA DESC ";
         try {
             ps = objConn.getConn().prepareStatement(sql);
@@ -42,7 +45,9 @@ public class VisitaMedicaDAO implements CRUDVisitaMedica{
                 VisitaMedicaVO visitaVO = new VisitaMedicaVO();
                 visitaVO.setId_visita(rs.getInt("ID_VISITA"));
                 visitaVO.setRut_medico(rs.getString("RUT_MEDICO"));
+                visitaVO.setNombre_medico(rs.getString("NOMBRE_MEDICO"));
                 visitaVO.setRut_trabajador(rs.getString("RUT_TRABAJADOR"));
+                visitaVO.setNombre_trabajador(rs.getString("NOMBRE_TRABAJADOR"));
                 visitaVO.setMotivo_consulta(rs.getString("MOTIVO_CONSULTA"));
                 visitaVO.setObservaciones(rs.getString("OBSERVACIONES"));
                 visitaVO.setDiagnostico(rs.getString("DIAGNOSTICO"));

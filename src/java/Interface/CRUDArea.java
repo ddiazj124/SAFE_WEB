@@ -10,4 +10,5 @@ public interface CRUDArea {
     public boolean edit(Area are);
     public boolean delete(int id);
     
+    public String getCorreoPorRut(String rutMedico);
 }

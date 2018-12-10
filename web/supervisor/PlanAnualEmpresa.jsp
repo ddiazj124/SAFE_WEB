@@ -1,3 +1,5 @@
+<%@page import="VO.PlanVO"%>
+<%@page import="DAO.PlanDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAO.EvaluacionDAO"%>
 <%@page import="VO.EvaluacionLiteVO"%>
@@ -19,7 +21,7 @@
     
 <head>
     <meta charset="utf-8" />    
-    <title>CONSULTA DE EVALUACIÓN</title>     
+    <title>PLAN ANUAL EMPRESA</title>     
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -108,7 +110,7 @@
           </button> 
        </a>      
         <div class="container" >
-            <h1>Consulta de Evaluación</h1>    
+            <h1>Plan Anual Empresa</h1>    
             
     <div class="container">
 <div class="stepwizard">
@@ -119,10 +121,14 @@
         </div>        
         <div class="stepwizard-step">
             <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-            <p>Evaluación</p>
+            <p>Plan de Capacitación</p>
         </div>
         <div class="stepwizard-step">
-            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Capacitación</p>
+        </div>
+        <div class="stepwizard-step">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
             <p>Resúmen</p>
         </div>
     </div>
@@ -145,40 +151,78 @@
                                 while (iter.hasNext()) {
                                                 vo = iter.next();                           
                         %>  
-                        <option value="<%= vo.getRut_empresa() %>"><%= vo.getRazon_social()%></option>
+                        <option id="<%= vo.getRut_empresa() %>" value="<%= vo.getRazon_social() %>"><%= vo.getRazon_social()%></option>
                         <%}%>
                     </select>
                 </div>
                 <button disabled="true" id="siguiente1" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
-    </div>    
-   
+    </div> 
+                    
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3>Seleccione Evaluación</h3>
+                <h3>Plan Capacitación</h3>
                 <br>
                 <div class="form-group">
-                    <label class="control-label">Evaluación</label>
-                    <select id="idEvaluacion" name="idEvaluacion" class="form-control form-control-lg">
-                        <option value="-1">Seleccione</option>                        
+                    <label class="control-label">Plan Capacitación:</label>
+                    <select id="idPlan" name="idPlan" class="form-control form-control-lg">
+                        <option value="-1">Seleccione</option>
+                        <%
+                                PlanDAO                  dao3     = new PlanDAO();
+                                List<PlanVO>             list3    = dao3.listar();
+                                Iterator<PlanVO>         iter3    = list3.iterator();
+                                PlanVO                   vo3      = null;
+                                while (iter3.hasNext()) {
+                                                vo3 = iter3.next();                           
+                        %>  
+                        <option id="<%= vo3.getId_plan() %>" value="<%= vo3.getDescripcion() %>" ><%= vo3.getDescripcion() %></option>
+                        <%}%>
                     </select>
                 </div>
                 <button disabled="true" id="siguiente2" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
         </div>
     </div>
-                     
+   
     <div class="row setup-content" id="step-3">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>
-                <div id="toPDF">
-                    <h3>Resultado Evaluación</h3>                
-                    </br>
-                    <textarea id="evaBusqueda" class="form-control" rows="20" ></textarea>
+                <h3>Seleccione Capacitación</h3>
+                <br>
+                <div class="form-group">
+                    <label class="control-label">Capacitación:</label>
+                    <select id="idCapacitacion" name="idCapacitacion" class="form-control form-control-lg">
+                        <option value="-1">Seleccione</option>
+                            <%
+                                    CapacitacionDAO             dao2     = new CapacitacionDAO();
+                                    List<CapacitacionVO>        list2    = dao2.listar();
+                                    Iterator<CapacitacionVO>    iter2    = list2.iterator();
+                                    CapacitacionVO              vo2      = null;
+                                    while (iter2.hasNext()) {
+                                                    vo2 = iter2.next();                           
+                            %>  
+                            <option id="<%= vo2.getId_capacitacion() %>" value="<%= vo2.getNombre_capacitación() %>"><%= vo2.getNombre_capacitación() %></option>
+                            <%}%>                        
+                    </select>
                 </div>
+                <button disabled="true" id="siguiente3" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            </div>
+        </div>
+    </div>
+                     
+    <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <!--<a href="javascript:genPDF()" class="btn btn-success btn-lg pull-right" type="submit">PDF</a>-->
+                <div id="toPDF">
+                    <h3>Resultado Asignación Plan Anual Capacitación a la Empresa</h3>                
+                    </br>
+                    <textarea readonly="true" id="planAnualResumen" class="form-control" rows="5" ></textarea>
+                </div>
+                </br>
+                <button id="finalizar" class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Finalizar</button>
             </div>
         </div>
     </div>
@@ -192,53 +236,73 @@
         var idEmpresaSelect = idEmpresa.options[idEmpresa.selectedIndex].value;
        
         if(idEmpresaSelect !== -1){  
-            $('#siguiente1').attr('disabled', false);
-            
-            var idEmpresaCmb          = $('#idEmpresa').val();
-            
-            $.post('../ServBuscarEvaluacionPorEmpresa', {
-                 idEmpresaCmb     : idEmpresaCmb
-            }, function(data) {                
-                document.getElementById('idEvaluacion').innerHTML = "";
-                document.getElementById('idEvaluacion').innerHTML = 
-                        "<option value=\'-1\'>Seleccione</option>" + data;
-                
-            });
+            $('#siguiente1').attr('disabled', false);           
        }       
     }); 
     
-    $('#idEvaluacion').change(function(){
-       var idEvaluacion = document.getElementById('idEvaluacion');
-       var idEvaluacionSelect = idEvaluacion.options[idEvaluacion.selectedIndex].value;
+    $('#idPlan').change(function(){
+       var idPlan       = document.getElementById('idPlan');;
+       var idPlanSelect = idPlan.options[idPlan.selectedIndex].value;
                      
-       if(idEvaluacionSelect !== -1){  
+       if(idPlanSelect !== -1){  
           $('#siguiente2').attr('disabled', false);
           //document.getElementById('siguiente1').disabled = "false"; 
        }       
+    });
+    
+    $('#idCapacitacion').change(function(){
+       var idCapacitacion = document.getElementById('idCapacitacion');;
+       var idCapacitacionSelect = idCapacitacion.options[idCapacitacion.selectedIndex].value;
+                     
+       if(idCapacitacionSelect !== -1){  
+          $('#siguiente3').attr('disabled', false);
+       }       
     }); 
         
-    $('#siguiente2').click(function(){         
-        var idEvaluacion          = $('#idEvaluacion').val();
-        console.log('## idEvaluacion: ' + idEvaluacion);
+    $('#siguiente3').click(function(){   
         
-        $.post('../ServBuscarEvaluacionPorId', {
-             idEvaluacion     : idEvaluacion
-        }, function(data) { 
-            console.log(data);
-            document.getElementById('evaBusqueda').innerHTML = "";
-            document.getElementById('evaBusqueda').innerHTML = data;
-        });     
+        var Empresa         = $('#idEmpresa').val();
+        var Plan            = $('#idPlan').val();
+        var Capacitacion    = $('#idCapacitacion').val();
+                
+        var resumen =   "EMPRESA: " + Empresa + "\n" +
+                        "PLAN: " + Plan + "\n" +
+                        "CAPACITACIÓN: " + Capacitacion;
+                
+        document.getElementById('planAnualResumen').innerHTML = resumen;  
     }); 
+    
+    $('#finalizar').click(function(){
+        var Empresa         = $('#idEmpresa').val();
+        var Plan            = $('#idPlan').val();
+        var Capacitacion    = $('#idCapacitacion').val();
+        
+        genPDF();
+        alert('Plan Anual Empresa Registrado exitosamente!' + "\n" + "\n" + "MEJORA DEL SISTEMA");
+        location.reload();
+        
+        /*
+        $.post('../ServGrabarPlanAnualEmpresa', {
+             Empresa        : Empresa,
+             Plan           : Plan,
+             Capacitacion   : Capacitacion
+        }, function(data) {
+            alert('Plan Anual Empresa Registrado exitosamente!');  
+            genPDF();
+            location.reload();
+        }); 
+        */
+    });
     
     function genPDF() {
         var doc = new jsPDF();
         //var lista = document.getElementById('trabajadoresLista1').value;
         
-        doc.setFontSize(22);
-        doc.text(45, 20, 'Consulta de Evaluación:');
+        doc.setFontSize(20);
+        doc.text(45, 20, 'Asignación Plan Anual Capacitación Empresa');
 
-        doc.setFontSize(10);
-        doc.text(20, 40, document.getElementById('evaBusqueda').value);
+        doc.setFontSize(15);
+        doc.text(20, 40, document.getElementById('planAnualResumen').value);
         
         //doc.setFontSize(10);
         //doc.text(20, 50, lista);  

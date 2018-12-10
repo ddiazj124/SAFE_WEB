@@ -23,14 +23,14 @@ public class MedicoDAO implements CRUDArea{
     public List listar() {
         List<MedicoVO> listado = new ArrayList();
         String sql =    " SELECT " +
-                        "      ME.RUT_MEDICO    AS RUT_MEDICO " +
-                        "    , ME.ID_PERFIL     AS ID_PERFIL " +
-                        "    , PE.NOMBRE_PERFIL AS NOMBRE_PERFIL " +
-                        "    , ME.NOMBRE        AS NOMBRE " +
-                        "    , ME.APELLIDO      AS APELLIDO " +
-                        "    , ME.CORREO        AS CORREO " +
-                        "FROM MEDICO ME INNER JOIN PERFIL PE " +
-                        "ON ME.ID_PERFIL = PE.ID_PERFIL";
+                        "      ME.RUT_MEDICO                AS RUT_MEDICO " +
+                        "    , ME.ID_PERFIL                 AS ID_PERFIL " +
+                        "    , PE.NOMBRE_PERFIL             AS NOMBRE_PERFIL " +
+                        "    , ME.NOMBRE||' '||ME.APELLIDO  AS NOMBRE " +
+                       // "    , ME.APELLIDO      AS APELLIDO " +
+                        "    , ME.CORREO                    AS CORREO " +
+                        " FROM MEDICO ME " +
+                        " INNER JOIN PERFIL PE ON ME.ID_PERFIL = PE.ID_PERFIL";
         try {
             con = cn.getConn();
             ps  = con.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class MedicoDAO implements CRUDArea{
                 medicoVO.setId_perfil(rs.getInt("ID_PERFIL"));
                 medicoVO.setPerfil_descripcion(rs.getString("NOMBRE_PERFIL"));
                 medicoVO.setNombre(rs.getString("NOMBRE"));
-                medicoVO.setApellido(rs.getString("APELLIDO"));
+                //medicoVO.setApellido(rs.getString("APELLIDO"));
                 medicoVO.setCorreo(rs.getString("CORREO"));
                 listado.add(medicoVO);
             }
@@ -70,6 +70,27 @@ public class MedicoDAO implements CRUDArea{
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getCorreoPorRut(String rutMedico) {
+        String sql      =    " SELECT CORREO FROM MEDICO WHERE RUT_MEDICO = ? ";
+        String salida   = "";
+        try {
+            con = cn.getConn();
+            ps  = con.prepareStatement(sql);
+            ps.setString(1, rutMedico);
+            rs  = ps.executeQuery();
+            while (rs.next()) {
+                MedicoVO medicoVO = new MedicoVO();
+                medicoVO.setCorreo(rs.getString("CORREO"));
+                salida = medicoVO.getCorreo();
+            }
+            return salida;
+        } catch (Exception e) {
+            System.out.println("error al listar el correo del médico");
+        }
+        return salida; 
     }
 
     
